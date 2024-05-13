@@ -50,6 +50,9 @@ public class playerControl : MonoBehaviour
             jumpCount++;
             playerVelocity.y = jumpSpeed;
         }
+
+        playerVelocity.y -= gravity * Time.deltaTime;   
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 
     void Sprint()
