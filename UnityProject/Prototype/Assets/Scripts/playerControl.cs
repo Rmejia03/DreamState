@@ -13,6 +13,9 @@ public class playerControl : MonoBehaviour
     [SerializeField] int sprintMod;
     [SerializeField] int speed;
     [SerializeField] int HP;
+    [SerializeField] float shootRate;
+    [SerializeField] int shootDamage;
+    [SerializeField] int shootDistance;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -28,6 +31,7 @@ public class playerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         Movement();
     }
 
@@ -65,5 +69,27 @@ public class playerControl : MonoBehaviour
         {
             speed /= sprintMod; 
         }
+    }
+
+    IEnumerator Shoot()
+    {
+        isShooting = true;
+        RaycastHit hit;
+
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance))
+        {
+            Debug.Log(hit);
+
+            //IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+            //if(hit.transform != transform && dmg != null)
+           // {
+            //    dmg.takeDamage(shootDamage);
+            //}
+
+        }
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+       
     }
 }
