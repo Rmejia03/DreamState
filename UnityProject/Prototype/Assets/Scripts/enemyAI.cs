@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPOS;
     [SerializeField] GameObject bullet;
-
+    [SerializeField] Color enemyType;
     [SerializeField] int HP;
     [SerializeField] float shootRate;
 
@@ -35,6 +35,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 StartCoroutine(shoot());
             }
+            i
         }
     }
 
@@ -78,7 +79,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         model.material.color= Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        model.material.color = enemyType;
     }
 
 }
