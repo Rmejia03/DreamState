@@ -75,7 +75,7 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemyCount += amount;
-
+        goalCount.text = enemyCount.ToString();
         if(enemyCount <= 0)
         {
             statePause();

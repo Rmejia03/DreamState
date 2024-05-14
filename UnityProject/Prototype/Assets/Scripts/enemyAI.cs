@@ -11,12 +11,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPOS;
     [SerializeField] GameObject bullet;
-    [SerializeField] Color enemyType;
+    [SerializeField] Material enemyType;
     [SerializeField] int HP;
     [SerializeField] float shootRate;
 
     bool isShooting;
     bool playerInRange;
+
 
 
     // Start is called before the first frame update
@@ -35,7 +36,6 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 StartCoroutine(shoot());
             }
-            i
         }
     }
 
@@ -79,7 +79,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         model.material.color= Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = enemyType;
+        model.material.color = enemyType.color;
     }
 
 }
