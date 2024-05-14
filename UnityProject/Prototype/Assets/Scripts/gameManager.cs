@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     public Image HPBar;
 
     public bool isPaused;
+    int enemyCount;
 
     // Start is called before the first frame update
     void Awake()
@@ -70,14 +71,16 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    public void updateGameGoal()
+    public void updateGameGoal(int amount)
     {
-        //if()
-        //{
-           // statePause();
-           // menuActive = menuWin;
-           // menuActive.SetActive(isPaused);
-       // }
+        enemyCount += amount;
+
+        if(enemyCount <= 0)
+        {
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(isPaused);
+        }
     }
 
     public void youLost()
