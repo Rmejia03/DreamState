@@ -12,17 +12,22 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] TMP_Text goalCount;
 
     public GameObject player;
     public playerControl playerScript;
 
+    public GameObject flashDamage;
+    public Image HPBar;
+
     public bool isPaused;
+    int enemyCount;
 
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player"); 
         playerScript = player.GetComponent<playerControl>();
     }
 
@@ -67,14 +72,16 @@ public class gameManager : MonoBehaviour
         menuActive = null;
     }
 
-    public void updateGameGoal()
+    public void updateGameGoal(int amount)
     {
-        //if()
-        //{
-           // statePause();
-           // menuActive = menuWin;
-           // menuActive.SetActive(isPaused);
-       // }
+        enemyCount += amount;
+        goalCount.text = enemyCount.ToString();
+        if(enemyCount <= 0)
+        {
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(isPaused);
+        }
     }
 
     public void youLost()

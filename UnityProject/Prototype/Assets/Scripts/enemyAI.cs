@@ -5,33 +5,37 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] Transform shootPOS;
     [SerializeField] GameObject bullet;
+    [SerializeField] Material enemyType;
 
     [SerializeField] int HP;
     [SerializeField] float shootRate;
-
     bool isShooting;
     bool playerInRange;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //gameManager.instance.GameGoal(1);
+        gameManager.instance.updateGameGoal(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(gameManager.instance.player.transform.position);
-        if (!isShooting)
+        if (playerInRange)
         {
-            StartCoroutine(shoot());
+            agent.SetDestination(gameManager.instance.player.transform.position);
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
         }
     }
 
@@ -66,7 +70,8 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(hitFlash());
         if (HP <= 0) 
         {
-            //Destroy(gameObject); gameManager.instance.GameGoal(-1); 
+            Destroy(gameObject); 
+            gameManager.instance.updateGameGoal(-1); 
         }
     }
 
@@ -74,7 +79,7 @@ public class EnemyAI : MonoBehaviour
     {
         model.material.color= Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        model.material.color = enemyType.color;
     }
 
 }
