@@ -25,6 +25,8 @@ public class playerControl : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        updatePlayerUI();
+        StartCoroutine(flashScreen());
 
     }
 
@@ -103,11 +105,26 @@ public class playerControl : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-        HP -= amount; 
+        HP -= amount;
+        HPOrig = HP;
+        updatePlayerUI();
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
             gameManager.instance.youLost();
         }
     }
+
+    IEnumerator flashScreen()
+    {
+        gameManager.instance.flashDamage.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.flashDamage.SetActive(false);
+    }
+
+    void updatePlayerUI()
+    {
+        gameManager.instance.HPBar.fillAmount = (float)HP / HPOrig;
+    }
+
 }

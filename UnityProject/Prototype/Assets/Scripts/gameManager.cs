@@ -16,6 +16,9 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerControl playerScript;
 
+    public GameObject flashDamage;
+    public Image HPBar;
+
     public bool isPaused;
 
     // Start is called before the first frame update
