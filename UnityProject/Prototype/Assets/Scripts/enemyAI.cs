@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IDamage
 {
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
@@ -28,10 +28,14 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(gameManager.instance.player.transform.position);
-        if (!isShooting)
+        if (playerInRange)
         {
-            StartCoroutine(shoot());
+            agent.SetDestination(gameManager.instance.player.transform.position);
+
+            if (!isShooting)
+            {
+                StartCoroutine(shoot());
+            }
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class playerControl : MonoBehaviour
+public class playerControl : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
     [SerializeField] int gravity;
@@ -32,6 +32,7 @@ public class playerControl : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+
         Movement();
     }
 
@@ -48,6 +49,11 @@ public class playerControl : MonoBehaviour
         moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
                         (Input.GetAxis("Vertical") * transform.forward);
         controller.Move(moveDirection * speed * Time.deltaTime);
+
+        if(Input.GetButton("Fire1") && !isShooting)
+        {
+            StartCoroutine(Shoot());
+        }
 
         if(Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
@@ -71,6 +77,8 @@ public class playerControl : MonoBehaviour
         }
     }
 
+
+
     IEnumerator Shoot()
     {
         isShooting = true;
@@ -80,16 +88,26 @@ public class playerControl : MonoBehaviour
         {
             Debug.Log(hit);
 
-            //IDamage dmg = hit.collider.GetComponent<IDamage>();
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            //if(hit.transform != transform && dmg != null)
-           // {
-            //    dmg.takeDamage(shootDamage);
-            //}
+            if(hit.transform != transform && dmg != null)
+            {
+                dmg.takeDamage(shootDamage);
+            }
 
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
        
+    }
+
+    public void takeDamage(int amount)
+    {
+        HP -= amount; 
+
+        if(HP <= 0)
+        {
+            gameManager.instance.youLost();
+        }
     }
 }
