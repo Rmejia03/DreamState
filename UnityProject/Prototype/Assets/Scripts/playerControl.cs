@@ -25,7 +25,7 @@ public class playerControl : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        updatePlayerUI();
+        updatePlayerUI(); 
         StartCoroutine(flashScreen());
 
     }
