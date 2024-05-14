@@ -25,9 +25,8 @@ public class playerControl : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        HPOrig = HP;
         updatePlayerUI(); 
-        StartCoroutine(flashScreen());
-
     }
 
     // Update is called once per frame
@@ -106,8 +105,9 @@ public class playerControl : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-        HPOrig = HP;
         updatePlayerUI();
+        StartCoroutine(flashScreen());
+
 
         if (HP <= 0)
         {
