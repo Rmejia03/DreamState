@@ -10,9 +10,13 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuLose;
 
     public GameObject player;
     public playerControl playerScript;
+
+    public bool isPaused;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,7 +29,58 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if(menuActive == null)
+            {
+                statePause();
+
+                menuActive = menuPause;
+                menuActive.SetActive(isPaused);
+            }
+
+            else if(menuActive == menuPause)
+            {
+                stateUnpause();
+            }
+        }
     }
 
+    public void statePause()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = 0;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
+    public void stateUnpause()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = 1;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        menuActive.SetActive(isPaused);
+        menuActive = null;
+    }
+
+    public void updateGameGoal()
+    {
+        //if()
+        //{
+           // statePause();
+           // menuActive = menuWin;
+           // menuActive.SetActive(isPaused);
+       // }
+    }
+
+    public void youLost()
+    {
+        statePause();
+        menuActive = menuLose;
+        menuActive.SetActive(isPaused);
+    }
 }
