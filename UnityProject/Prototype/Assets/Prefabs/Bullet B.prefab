@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5104563172443815125}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.037, y: 1.021, z: 30.792}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: -1639377542866444151}
-  damage: 1
+  damage: 3
   speed: 20
   destroyTime: 3
 --- !u!33 &3786593435504019386
@@ -127,22 +127,22 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.6314181
+    widthMultiplier: 0.49283558
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2.7625191
-        outSlope: 2.7625191
+        inSlope: 5.384681
+        outSlope: 5.384681
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.22029376
+        outWeight: 0.13480589
       - serializedVersion: 3
-        time: 0.47416282
-        value: 0.47525185
+        time: 0.49280906
+        value: 0.8753376
         inSlope: 0.03871252
         outSlope: 0.03871252
         tangentMode: 0
@@ -152,19 +152,19 @@ TrailRenderer:
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -3.2795882
-        outSlope: -3.2795882
+        inSlope: -5.314752
+        outSlope: -5.314752
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.28865072
+        inWeight: 0.14477101
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.61320746, g: 0.9262771, b: 1, a: 1}
-      key1: {r: 0.61320746, g: 0.9262771, b: 1, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 0, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

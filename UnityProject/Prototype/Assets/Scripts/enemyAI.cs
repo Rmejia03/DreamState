@@ -12,9 +12,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPOS;
     [SerializeField] GameObject bullet;
     [SerializeField] Material enemyType;
+
     [SerializeField] int HP;
     [SerializeField] float shootRate;
-
     bool isShooting;
     bool playerInRange;
 
