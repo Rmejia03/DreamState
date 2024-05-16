@@ -67,7 +67,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= damage;
         agent.SetDestination(gameManager.instance.player.transform.position);
+
         StartCoroutine(hitFlash());
+
         if (HP <= 0) 
         {
             Destroy(gameObject); 
@@ -77,9 +79,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     IEnumerator hitFlash()
     {
-        model.material.color= Color.red;
+        model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = enemyType.color;
     }
-
 }

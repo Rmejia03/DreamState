@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-//test 1
+
 public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
@@ -76,7 +76,8 @@ public class gameManager : MonoBehaviour
     {
         enemyCount += amount;
         goalCount.text = enemyCount.ToString();
-        if(enemyCount <= 0)
+
+        if (enemyCount <= 0)
         {
             statePause();
             menuActive = menuWin;
