@@ -18,12 +18,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool isShooting;
     bool playerInRange;
 
+    int HPOrigin;
 
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager.instance.updateGameGoal(1);
+        HPOrigin = HP;
+        UpdateEnemyUI();
     }
 
     // Update is called once per frame
@@ -66,6 +69,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void takeDamage(int damage)
     {
         HP -= damage;
+        UpdateEnemyUI();
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         StartCoroutine(hitFlash());
@@ -82,5 +86,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = enemyType.color;
+    }
+
+    //Enemy HP
+    void UpdateEnemyUI()
+    {
+        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrigin;
     }
 }

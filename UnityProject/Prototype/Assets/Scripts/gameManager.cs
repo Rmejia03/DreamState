@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject flashDamage;
     public Image HPBar;
+    public Image enemyHPBar;
 
     public bool isPaused;
     int enemyCount;
