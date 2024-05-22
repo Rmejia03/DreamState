@@ -6,6 +6,7 @@ using TMPro;
 
 public class gameManager : MonoBehaviour
 {
+    //Test
     public static gameManager instance;
 
     [SerializeField] GameObject menuActive;
