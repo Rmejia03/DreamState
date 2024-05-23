@@ -12,28 +12,39 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int sprintMod;
     [SerializeField] int speed;
     [SerializeField] int HP;
+    [SerializeField] float shield;
+    [SerializeField] float regenRate;
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
+
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
     int jumpCount;
     int HPOrig;
+    float shieldOrig;
     bool isShooting;
+    bool isRegen;
     // Start is called before the first frame update
     void Start()
     {
         HPOrig = HP;
-        updatePlayerUI(); 
+        shieldOrig = shield;
+
+        updateHPBarUI(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+		//Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+		if (shield < shieldOrig && HPOrig == HP && !isRegen)
+		{
+			StartCoroutine(RegenShield());
+		}
 
-        Movement();
+		Movement();
     }
 
     void Movement()
@@ -77,8 +88,6 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
-
-
     IEnumerator Shoot()
     {
         isShooting = true;
@@ -103,27 +112,60 @@ public class playerControl : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
-        HP -= amount;
-        updatePlayerUI();
-        StartCoroutine(flashScreen());
-
-
+        if (shield <= 0)
+        {
+            HP -= amount;
+            updateHPBarUI();
+            StartCoroutine(flashScreen());
+        }
+        else
+        {
+            shield -= amount;
+            updateShieldUI();
+            StartCoroutine(flashShield());
+		}
+        
         if (HP <= 0)
         {
             gameManager.instance.youLost();
         }
     }
 
-    IEnumerator flashScreen()
+	IEnumerator flashScreen()
+	{
+		gameManager.instance.flashDamage.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		gameManager.instance.flashDamage.SetActive(false);
+	}
+    
+	IEnumerator flashShield()
+	{
+		gameManager.instance.flashShield.SetActive(true);
+		yield return new WaitForSeconds(0.1f);
+		gameManager.instance.flashShield.SetActive(false);
+	}
+    
+    IEnumerator RegenShield()
     {
-        gameManager.instance.flashDamage.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        gameManager.instance.flashDamage.SetActive(false);
-    }
+        isRegen = true;
+        if (shield < shieldOrig)
+        {
+            yield return new WaitForSeconds(5);
+            shield += regenRate;
+            updateShieldUI();
+            shield = Mathf.Clamp(shield, 0, shieldOrig);
+        }
+        isRegen=false;
+	}
 
-    void updatePlayerUI()
-    {
-        gameManager.instance.HPBar.fillAmount = (float)HP / HPOrig;
-    }
+	void updateHPBarUI()
+	{
+		gameManager.instance.HPBar.fillAmount = (float)HP / HPOrig;
+	}
+
+	void updateShieldUI()
+	{
+		gameManager.instance.shieldBar.fillAmount = shield / shieldOrig;
+	}
 
 }

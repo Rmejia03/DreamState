@@ -18,8 +18,10 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerControl playerScript;
 
+    public GameObject flashShield;
     public GameObject flashDamage;
     public Image HPBar;
+    public Image shieldBar;
     public Image enemyHPBar;
 
     public bool isPaused;
