@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Material enemyType;
     [SerializeField] Animator animate;
     [SerializeField] Transform headPosition;
+    [SerializeField] Transform[] patrolPoints;
     
     
     [SerializeField] int HP;
@@ -24,27 +25,43 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int roamDistance;
     [SerializeField] int roamTimer;
     [SerializeField] bool isMelee;
+    [SerializeField] float patrolSpeed;
+    [SerializeField] int patrolDelay;
 
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
     float angleToPlayer;
     float stoppingDistanceOrigin;
+    bool isPatrolling;
+    bool hasPatrolPoints;
+
 
     Vector3 startingPosition;
     Vector3 playerDirection;
 
     int HPOrigin;
-
+    int currentPatrolPoint = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         gameManager.instance.updateGameGoal(1);
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
         UpdateEnemyUI();
+        if(patrolPoints != null && patrolPoints.Length > 0)
+        {
+            hasPatrolPoints = true;
+            StartCoroutine(Patrol());
+        }
+        else
+        {
+            hasPatrolPoints = false;
+            StartCoroutine(Roam());
+        }
     }
 
     // Update is called once per frame
@@ -52,11 +69,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         float animateSpeed = agent.velocity.normalized.magnitude;
         animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
-        if(playerInRange && !CanSeePlayer())
+        if (playerInRange && !CanSeePlayer())
         {
             StartCoroutine(Roam());
         }
-        else if(!playerInRange)
+        else if (!playerInRange)
         {
             StartCoroutine(Roam());
         }
@@ -76,6 +93,28 @@ public class EnemyAI : MonoBehaviour, IDamage
             NavMesh.SamplePosition(randomPosition, out hit, roamDistance, 1);
             agent.SetDestination(hit.position);
             destinationChosen = false;
+        }
+    }
+
+    IEnumerator Patrol()
+    {
+        isPatrolling = true;
+        agent.stoppingDistance = 0;
+        while(true)
+        {
+            Vector3 targetPosition = patrolPoints[currentPatrolPoint].position;
+            agent.SetDestination(targetPosition);
+
+            while(agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(patrolDelay);
+
+            currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
+            yield return null;
+
         }
     }
 
