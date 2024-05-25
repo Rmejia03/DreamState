@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPOS;
     [SerializeField] GameObject bullet;
     [SerializeField] Material enemyType;
-    //[SerializeField] Animator animate;
+    [SerializeField] Animator animate;
     [SerializeField] Transform headPosition;
     
     
@@ -20,10 +20,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int animateSpeedTransition;
     [SerializeField] int ViewAngle;
     [SerializeField] int faceTargetSpeed;
-    [SerializeField] float shootRate;
+    [SerializeField] float attackRate;
     [SerializeField] int roamDistance;
     [SerializeField] int roamTimer;
-    bool isShooting;
+    [SerializeField] bool isMelee;
+
+    bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
     float angleToPlayer;
@@ -48,8 +50,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        //float animateSpeed = agent.velocity.normalized.magnitude;
-        //animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
+        float animateSpeed = agent.velocity.normalized.magnitude;
+        animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
         if(playerInRange && !CanSeePlayer())
         {
             StartCoroutine(Roam());
@@ -91,9 +93,9 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
-                if(!isShooting)
+                if(!isAttacking)
                 {
-                    StartCoroutine(shoot());
+                    StartCoroutine(attack());
                 }
                 if(agent.remainingDistance <= agent.stoppingDistance)
                 {
@@ -128,13 +130,20 @@ public class EnemyAI : MonoBehaviour, IDamage
             playerInRange = false;
         }
     }
-
-    IEnumerator shoot()
+    
+    IEnumerator attack()
     {
-        isShooting = true;
-        Instantiate(bullet, shootPOS.position, transform.rotation);
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
+        isAttacking = true;
+        if (isMelee)
+        {
+
+        }
+        else
+        {
+            Instantiate(bullet, shootPOS.position, transform.rotation);
+        }
+        yield return new WaitForSeconds(attackRate);
+        isAttacking = false;
     }
 
     public void takeDamage(int damage)
