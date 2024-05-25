@@ -93,13 +93,17 @@ public class EnemyAI : MonoBehaviour, IDamage
             {
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
-                if(!isAttacking)
+                if(!isAttacking )
                 {
                     StartCoroutine(attack());
                 }
                 if(agent.remainingDistance <= agent.stoppingDistance)
                 {
                     FaceTarget();
+                    //if (isMelee)
+                    //{
+                    //    StartCoroutine(attack());
+                    // }
                 }
                 return true;
             }
@@ -134,7 +138,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator attack()
     {
         isAttacking = true;
-
+        animate.SetTrigger("Attack");
         Instantiate(bullet, shootPOS.position, transform.rotation);
         yield return new WaitForSeconds(attackRate);
         isAttacking = false;
