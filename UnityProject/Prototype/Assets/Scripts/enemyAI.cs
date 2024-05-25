@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             StartCoroutine(Roam());
         }
     }
-
+    
     //Roaming Enemy
     IEnumerator Roam()
     {
@@ -134,14 +134,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator attack()
     {
         isAttacking = true;
-        if (isMelee)
-        {
 
-        }
-        else
-        {
-            Instantiate(bullet, shootPOS.position, transform.rotation);
-        }
+        Instantiate(bullet, shootPOS.position, transform.rotation);
         yield return new WaitForSeconds(attackRate);
         isAttacking = false;
     }
