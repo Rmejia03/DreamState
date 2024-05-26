@@ -168,4 +168,16 @@ public class playerControl : MonoBehaviour, IDamage
 		gameManager.instance.shieldBar.fillAmount = shield / shieldOrig;
 	}
 
+    public void spawnPlayer()
+    {
+        HP = HPOrig; 
+        shield = shieldOrig;
+
+        updateHPBarUI();
+        updateShieldUI();
+
+        controller.enabled = false;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+    }
 }

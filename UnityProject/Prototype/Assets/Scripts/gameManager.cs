@@ -16,7 +16,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text goalCount;
 
     public GameObject playerSpawnPos;
-    public GameObject checpointPopup;
+    public GameObject checkpointPopup;
     public GameObject player;
     public playerControl playerScript;
 
@@ -35,6 +35,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player"); 
         playerScript = player.GetComponent<playerControl>();
+        playerSpawnPos = GameObject.FindWithTag("player spawn pos");
     }
 
     // Update is called once per frame
