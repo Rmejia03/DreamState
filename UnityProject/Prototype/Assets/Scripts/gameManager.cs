@@ -15,6 +15,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text goalCount;
 
+    public GameObject playerSpawnPos;
+    public GameObject checpointPopup;
     public GameObject player;
     public playerControl playerScript;
 
