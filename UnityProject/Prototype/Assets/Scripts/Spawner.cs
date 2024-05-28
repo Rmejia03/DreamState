@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 
-public class Spawner : MonoBehaviour
+public class spawner : MonoBehaviour
 {
-    [SerializeField] GameObject spawnObject;
+    [SerializeField] GameObject objectToSpawn;
     [SerializeField] int numToSpawn;
     [SerializeField] int spawnTimer;
-    [SerializeField] Transform[] spawnPosition;
+    [SerializeField] Transform[] spawnPos;
 
     int spawnCount;
-    bool isSpawn;
+    bool isSpawning;
     bool startSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,26 +23,30 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(startSpawn && !isSpawn && spawnCount < numToSpawn)
-        {
+        if(startSpawn && !isSpawning && spawnCount < numToSpawn) 
+        { 
             StartCoroutine(spawn());
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            startSpawn = true;  
+            startSpawn = true;
         }
     }
 
     IEnumerator spawn()
     {
-        isSpawn = true;
-        int arrayPosition = Random.Range(0, spawnPosition.Length);
-        Instantiate(spawnObject, spawnPosition[arrayPosition].position, spawnPosition[arrayPosition].rotation);
+        isSpawning = true;
+
+        int arrayPosition = Random.Range(0, spawnPos.Length);
+
+        Instantiate(objectToSpawn, spawnPos[arrayPosition].position, spawnPos[arrayPosition].rotation);
+        spawnCount++;
+
         yield return new WaitForSeconds(spawnTimer);
-        isSpawn = false;
+        isSpawning = false;
     }
 }

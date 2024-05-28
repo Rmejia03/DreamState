@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Crawler : MonoBehaviour, //IDamage
+public class Crawler : MonoBehaviour //IDamage
 {
     //[SerializeField] Animator animator;
     //[SerializeField] NavMeshAgent agent;
