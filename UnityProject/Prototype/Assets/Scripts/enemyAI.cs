@@ -51,7 +51,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
         UpdateEnemyUI();
-        if(patrolPoints != null && patrolPoints.Length > 0)
+
+        if (patrolPoints != null && patrolPoints.Length > 0)
         {
             hasPatrolPoints = true;
             StartCoroutine(Patrol());
@@ -61,13 +62,14 @@ public class EnemyAI : MonoBehaviour, IDamage
             hasPatrolPoints = false;
             StartCoroutine(Roam());
         }
+      
     }
 
     // Update is called once per frame
     void Update()
     {
-        float animateSpeed = agent.velocity.normalized.magnitude;
-        animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
+       float animateSpeed = agent.velocity.normalized.magnitude;
+       animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
         if (playerInRange && !CanSeePlayer())
         {
             StartCoroutine(Roam());
@@ -76,6 +78,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             StartCoroutine(Roam());
         }
+     
     }
     
     //Roaming Enemy
@@ -178,6 +181,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            agent.stoppingDistance = 0;
         }
     }
     

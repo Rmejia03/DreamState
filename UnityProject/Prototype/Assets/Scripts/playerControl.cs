@@ -41,7 +41,7 @@ public class playerControl : MonoBehaviour, IDamage
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
-            //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
             if (shield < shieldOrig && HPOrig == HP && !isRegen)
             {
                 StartCoroutine(RegenShield());
