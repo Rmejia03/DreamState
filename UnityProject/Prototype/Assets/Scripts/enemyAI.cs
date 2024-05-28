@@ -46,8 +46,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        
-        gameManager.instance.updateGameGoal(1);
+       
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
@@ -86,12 +85,16 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             destinationChosen = true;
             agent.stoppingDistance = 0;
+
             yield return new WaitForSeconds(roamTimer);
+
             Vector3 randomPosition = Random.insideUnitSphere * roamDistance;
             randomPosition += startingPosition;
+
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPosition, out hit, roamDistance, 1);
             agent.SetDestination(hit.position);
+
             destinationChosen = false;
         }
     }
@@ -123,15 +126,19 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         playerDirection = gameManager.instance.player.transform.position - headPosition.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, playerDirection.y + 1, playerDirection.z), transform.forward);
+
         Debug.Log(angleToPlayer);
         Debug.DrawRay(headPosition.position, playerDirection);
+
         RaycastHit hit;
+
         if(Physics.Raycast(headPosition.position, playerDirection, out hit))
         {
             if(hit.collider.CompareTag("Player") && angleToPlayer <= ViewAngle)
             {
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
+
                 if(!isAttacking )
                 {
                     StartCoroutine(attack());
@@ -178,7 +185,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         isAttacking = true;
         animate.SetTrigger("Attack");
+
         Instantiate(bullet, shootPOS.position, transform.rotation);
+
         yield return new WaitForSeconds(attackRate);
         isAttacking = false;
     }
