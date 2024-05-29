@@ -27,6 +27,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] bool isMelee;
     [SerializeField] float patrolSpeed;
     [SerializeField] int patrolDelay;
+    [SerializeField] float meleeRange;
+    [SerializeField] int meleeDamage;
+    [SerializeField] int meleeAnimDur;
 
     bool isAttacking;
     bool playerInRange;
@@ -35,7 +38,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     float stoppingDistanceOrigin;
     bool isPatrolling;
     bool hasPatrolPoints;
-
+    
 
     Vector3 startingPosition;
     Vector3 playerDirection;
@@ -70,11 +73,26 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
        float animateSpeed = agent.velocity.normalized.magnitude;
        animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
-        if (playerInRange && !CanSeePlayer())
+        //if (playerInRange && !CanSeePlayer())
+        //{
+        //    StartCoroutine(Roam());
+        //}
+        //else if (!playerInRange)
+        //{
+        //    StartCoroutine(Roam());
+        //}
+        if(playerInRange && !isAttacking && CanSeePlayer())
         {
-            StartCoroutine(Roam());
+            float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
+
+            if(distanceToPlayer <= meleeRange)
+            {
+                StartCoroutine(MeleeAttack());
+            }
+            else
+                agent.SetDestination(gameManager.instance.player.transform.position);
         }
-        else if (!playerInRange)
+        else if(!playerInRange)
         {
             StartCoroutine(Roam());
         }
@@ -102,6 +120,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
+    //Patrolling enemy 
     IEnumerator Patrol()
     {
         isPatrolling = true;
@@ -124,6 +143,8 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
+    
+
     //See player within range
     bool CanSeePlayer()
     {
@@ -142,23 +163,29 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
-                if(!isAttacking )
-                {
-                    StartCoroutine(attack());
-                }
-                if(agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    FaceTarget();
-                    //if (isMelee)
-                    //{
-                    //    StartCoroutine(attack());
-                    // }
-                }
+                //if(!isAttacking )
+                //{
+                //    StartCoroutine(MeleeAttack());
+                //}
+                //if(agent.remainingDistance <= agent.stoppingDistance)
+                //{
+                //    FaceTarget();
+                //    if (isMelee)
+                //    {
+                //        StartCoroutine(attack());
+                //    }
+                //}
                 return true;
             }
         }
         agent.stoppingDistance = 0;
         return false;
+    }
+    
+    //Check if in melee range
+    bool IsInRangeForMelee()
+    {
+        return Vector3.Distance(transform.position, gameManager.instance.player.transform.position) <= meleeRange;
     }
 
     //Rotation To Face Player
@@ -185,15 +212,35 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
     
-    IEnumerator attack()
+    //IEnumerator attack()
+    //{
+    //    isAttacking = true;
+    //    animate.SetTrigger("Attack");
+
+    //    Instantiate(bullet, shootPOS.position, transform.rotation);
+
+    //    yield return new WaitForSeconds(attackRate);
+    //    isAttacking = false;
+    //}
+
+    public void meleeHit()
     {
-        isAttacking = true;
-        animate.SetTrigger("Attack");
+        if (IsInRangeForMelee())
+        {
+            gameManager.instance.player.GetComponent<IDamage>().takeDamage(meleeDamage);
+        }
+    }
+    IEnumerator MeleeAttack()
+    {
+        if (!isAttacking)
+        {
+            isAttacking = true;
+            animate.SetTrigger("Attack");
 
-        Instantiate(bullet, shootPOS.position, transform.rotation);
-
-        yield return new WaitForSeconds(attackRate);
-        isAttacking = false;
+            yield return new WaitForSeconds(meleeAnimDur);            
+            
+            isAttacking = false;
+        }
     }
 
     public void takeDamage(int damage)
