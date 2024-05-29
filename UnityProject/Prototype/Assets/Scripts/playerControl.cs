@@ -42,6 +42,7 @@ public class playerControl : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        float animateSpeed = agent.velocity.normalized.magnitude;
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
