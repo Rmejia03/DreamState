@@ -53,8 +53,8 @@ public class EnemyAI : MonoBehaviour, IDamage
        
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
-        HPOrigin = HP;
-        UpdateEnemyUI();
+        //HPOrigin = HP;
+        //UpdateEnemyUI();
 
         if (patrolPoints != null && patrolPoints.Length > 0)
         {
@@ -168,6 +168,11 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
+                if(agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    FaceTarget();
+                }
+
                 //if(!isAttacking )
                 //{
                 //    StartCoroutine(MeleeAttack());
@@ -222,11 +227,15 @@ public class EnemyAI : MonoBehaviour, IDamage
         isAttacking = true;
         animate.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(attackRate);
+        createBullet();
 
-        Instantiate(bullet, shootPOS.position, transform.rotation);
-        
+        yield return new WaitForSeconds(attackRate);
         isAttacking = false;
+    }
+
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPOS.position, shootPOS.rotation);
     }
 
     public void meleeHit()
@@ -252,14 +261,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void takeDamage(int damage)
     {
         HP -= damage;
-        UpdateEnemyUI();
+        //UpdateEnemyUI();
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         StartCoroutine(hitFlash());
 
         if (HP <= 0) 
         {
-            gameManager.instance.updateGameGoal(-1); 
+            //gameManager.instance.updateGameGoal(-1); 
             Destroy(gameObject); 
         }
     }
