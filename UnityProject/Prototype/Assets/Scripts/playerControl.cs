@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class playerControl : MonoBehaviour, IDamage
 {
+    [SerializeField] Animator animate;
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] Renderer model;
     [SerializeField] CharacterController controller;
     [SerializeField] int gravity;
     [SerializeField] int jumpSpeed;
