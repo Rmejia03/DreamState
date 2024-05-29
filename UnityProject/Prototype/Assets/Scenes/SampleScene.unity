@@ -4283,7 +4283,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 524757613958744119, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305169416386267674, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: enemyType
+      value: 
+      objectReference: {fileID: 2100000, guid: 85d037db6b0bf5f498fa77926edb2a1c, type: 2}
+    - target: {fileID: 5161354755352867984, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8660257
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161354755352867984, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161354755352867984, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.49999964
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161354755352867984, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000000018626451
+      objectReference: {fileID: 0}
+    - target: {fileID: 5161354755352867984, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 5576066505913247413, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
       propertyPath: m_Name
@@ -4328,6 +4352,14 @@ PrefabInstance:
     - target: {fileID: 5889844990948148351, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102636023206704951, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6236151037387670266, guid: 94d69b0a9a5cdb74e9bc9a02fa9dc209, type: 3}
+      propertyPath: m_Radius
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
