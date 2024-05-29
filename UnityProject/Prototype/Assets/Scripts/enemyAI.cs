@@ -30,6 +30,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] float meleeRange;
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeAnimDur;
+    [SerializeField] int shootRange;
 
     bool isAttacking;
     bool playerInRange;
@@ -85,9 +86,13 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
-            if(distanceToPlayer <= meleeRange)
+            if(isMelee && distanceToPlayer <= meleeRange)
             {
                 StartCoroutine(MeleeAttack());
+            }
+            else if(!isMelee && distanceToPlayer <= shootRange)
+            {
+                StartCoroutine(Shoot());
             }
             else
                 agent.SetDestination(gameManager.instance.player.transform.position);
@@ -211,17 +216,18 @@ public class EnemyAI : MonoBehaviour, IDamage
             agent.stoppingDistance = 0;
         }
     }
-    
-    //IEnumerator attack()
-    //{
-    //    isAttacking = true;
-    //    animate.SetTrigger("Attack");
 
-    //    Instantiate(bullet, shootPOS.position, transform.rotation);
+    IEnumerator Shoot()
+    {
+        isAttacking = true;
+        animate.SetTrigger("Attack");
 
-    //    yield return new WaitForSeconds(attackRate);
-    //    isAttacking = false;
-    //}
+        yield return new WaitForSeconds(attackRate);
+
+        Instantiate(bullet, shootPOS.position, transform.rotation);
+        
+        isAttacking = false;
+    }
 
     public void meleeHit()
     {
