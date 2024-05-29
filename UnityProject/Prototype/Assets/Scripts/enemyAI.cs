@@ -168,18 +168,18 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
-                if (!isAttacking)
-                {
-                    StartCoroutine(MeleeAttack());
-                }
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    FaceTarget();
-                    if (isMelee)
-                    {
-                        StartCoroutine(attack());
-                    }
-                }
+                //if(!isAttacking )
+                //{
+                //    StartCoroutine(MeleeAttack());
+                //}
+                //if(agent.remainingDistance <= agent.stoppingDistance)
+                //{
+                //    FaceTarget();
+                //    if (isMelee)
+                //    {
+                //        StartCoroutine(attack());
+                //    }
+                //}
                 return true;
             }
         }
