@@ -9,6 +9,7 @@ using static UnityEditor.Progress;
 public class playerControl : MonoBehaviour, IDamage
 {
     [Header("Player Info")]
+    //[SerializeField] Animator animate;
     [SerializeField] CharacterController controller;
 
     [Header("Health/Shield")]
@@ -65,9 +66,9 @@ public class playerControl : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (controller != null)
+        if (agent != null)
         {
-            float animateSpeed = controller.velocity.normalized.magnitude;
+            float animateSpeed = agent.velocity.normalized.magnitude;
         }
        
         //Prevents hit damage on pause
