@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91be2f6c3132c9347948127964cf149e, type: 3}
   m_Name: M1918 stats
   m_EditorClassIdentifier: 
+  itemName: 
   itemModel: {fileID: 5571641588984482722, guid: c303a18f1cbdd4156b139b9e5b35d6a9, type: 3}
   itemSound: {fileID: 0}
   healthAmt: 0
   shieldAmt: 0
+  isStackable: 0
+  maxStackSize: 0
   vol: 0
   icon: {fileID: 0}
   hitEffect: {fileID: 0}
-  weaponDmg: 1
+  weaponDmg: 7
   weaponDistance: 196
   weaponSpeed: 0.01
-  ammoCur: 25
-  ammoMax: 25
+  ammoCur: 90
+  ammoMax: 90
