@@ -262,7 +262,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (!isAttacking)
         {
             isAttacking = true;
-            animate.SetTrigger("Attack");
+            animate.SetTrigger("MAttack");
 
             yield return new WaitForSeconds(meleeAnimDur);            
             
