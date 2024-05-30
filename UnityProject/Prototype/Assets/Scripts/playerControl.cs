@@ -75,7 +75,7 @@ public class playerControl : MonoBehaviour, IDamage
         if (!gameManager.instance.isPaused)
         {
             //Debug.Log("i can move");
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * weaponDistance, Color.red);
             if (shield < shieldOrig && HPOrig == HP && !isRegen)
             {
                 StartCoroutine(RegenShield());
@@ -316,3 +316,4 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 }
+

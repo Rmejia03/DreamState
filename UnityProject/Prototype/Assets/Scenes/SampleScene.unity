@@ -3739,10 +3739,10 @@ MonoBehaviour:
   shootPOS: {fileID: 1595849433}
   bullet: {fileID: 5104563172443815125, guid: 1932c248694104c49a990a5a9106d0b2, type: 3}
   shootRange: 0
+  isMelee: 0
   meleeRange: 0
   meleeDamage: 0
   meleeAnimDur: 0
-  isMelee: 0
   roamDistance: 10
   roamTimer: 0
   patrolPoints: []
@@ -3928,6 +3928,21 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 495742790577714018}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &36377838232613758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849753025625811396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -45.41, y: 0.2, z: 49.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &81812819852564326
 GameObject:
@@ -4118,6 +4133,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &849753025625811396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 36377838232613758}
+  - component: {fileID: 3976369397529984220}
+  - component: {fileID: 3976369397529984219}
+  - component: {fileID: 1209798896735406097}
+  m_Layer: 0
+  m_Name: Sword pickup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &866923556877094069
 Transform:
   m_ObjectHideFlags: 0
@@ -4196,6 +4230,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3728870440576448251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1209798896735406097
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849753025625811396}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 49c61f7d98b36a6438e5deb41f0f7207, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1383556448032127645
 GameObject:
   m_ObjectHideFlags: 0
@@ -5054,6 +5130,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!33 &3976369397529984219
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849753025625811396}
+  m_Mesh: {fileID: -2490357807671972370, guid: d00dec123be83b445adbe6c8f3f02f41, type: 3}
+--- !u!114 &3976369397529984220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849753025625811396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6228ee0a52a354db9c479e945c1835, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4074881414321752673
 Transform:
   m_ObjectHideFlags: 0
@@ -5492,18 +5588,18 @@ MonoBehaviour:
   enemyType: {fileID: 2100000, guid: 85d037db6b0bf5f498fa77926edb2a1c, type: 2}
   animate: {fileID: 1645090387645724970}
   headPosition: {fileID: 1532535372254834242}
-  HP: 10
+  HP: 5
   animateSpeedTransition: 5
   ViewAngle: 90
-  faceTargetSpeed: 5
+  faceTargetSpeed: 3
   attackRate: 0.5
   shootPOS: {fileID: 6060885742464348625}
   bullet: {fileID: 5104563172443815125, guid: 0a5121cd40bc1704f92f5bbf81275dc3, type: 3}
   shootRange: 20
+  isMelee: 0
   meleeRange: 0
   meleeDamage: 0
   meleeAnimDur: 0
-  isMelee: 0
   roamDistance: 10
   roamTimer: 2
   patrolPoints: []
@@ -6483,3 +6579,4 @@ SceneRoots:
   - {fileID: 2755309783907339198}
   - {fileID: 1803763732}
   - {fileID: 241108403248225965}
+  - {fileID: 36377838232613758}
