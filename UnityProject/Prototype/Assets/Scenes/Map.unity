@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2302,8 +2302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ec58a6f64371349a638384bff8ab76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 8554468299868323879, guid: 4399ac882fd69034884cc73e8774516c, type: 3}
-  numToSpawn: 6
+  objectToSpawn: {fileID: 900666416543486369, guid: efb175cd0f04ddb45a25dc692ed9893b, type: 3}
+  numToSpawn: 3
   spawnTimer: 1
   spawnPos:
   - {fileID: 1460940437}
@@ -9109,7 +9109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ec58a6f64371349a638384bff8ab76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 2614779791548851787, guid: 1dd6afb858a8f8040948c597a5a000b4, type: 3}
+  objectToSpawn: {fileID: 2614779791548851787, guid: a573031ba0b98984792bc1d4c0a99a89, type: 3}
   numToSpawn: 4
   spawnTimer: 1
   spawnPos:
@@ -14262,7 +14262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 3489029417760967168, guid: 3bc387a6916aadc4d98350674b84b219, type: 3}
-  numToSpawn: 7
+  numToSpawn: 4
   spawnTimer: 1
   spawnPos:
   - {fileID: 269768207}

@@ -41,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3668359584660689915, guid: 984a0c76179a4bc4dac2bc3c762dffee, type: 3}
       propertyPath: m_Name
-      value: SkeletonBlackAxe
+      value: FinalSkeletonBlackAxe
       objectReference: {fileID: 0}
     - target: {fileID: 3668359584660689915, guid: 984a0c76179a4bc4dac2bc3c762dffee, type: 3}
       propertyPath: m_TagString
@@ -162,7 +162,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   shootRange: 0
   isMelee: 1
-  meleeRange: 10
+  meleeRange: 2
   meleeDamage: 5
   meleeAnimDur: 3
   roamDistance: 15
