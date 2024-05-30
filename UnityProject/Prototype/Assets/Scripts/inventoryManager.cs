@@ -20,11 +20,11 @@ public class inventoryManager : MonoBehaviour
 
     public void RemoveItem(itemStats item)
     {
-        if(inventory.Contains(item))
+        if (inventory.Contains(item))
         {
             inventory.Remove(item);
 
-            if(selectedItem >= inventory.Count)
+            if (selectedItem >= inventory.Count)
             {
                 selectedItem = inventory.Count - 1;
             }
@@ -33,7 +33,7 @@ public class inventoryManager : MonoBehaviour
 
     public itemStats GetSelectedItem()
     {
-        if(inventory.Count > 0)
+        if (inventory.Count > 0)
         {
             return inventory[selectedItem];
         }
@@ -50,7 +50,7 @@ public class inventoryManager : MonoBehaviour
 
     public void SelectPreviousItem()
     {
-        if(selectedItem > 0)
+        if (selectedItem > 0)
         {
             selectedItem--;
         }

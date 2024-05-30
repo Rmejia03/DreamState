@@ -38,8 +38,6 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] GameObject itemModels;
     public inventoryManager inventoryManager;
 
-    public KeyCode useItemKey = KeyCode.E;
-
     Vector3 moveDirection;
     Vector3 playerVelocity;
     int jumpCount;
@@ -68,7 +66,7 @@ public class playerControl : MonoBehaviour, IDamage
         {
             float animateSpeed = controller.velocity.normalized.magnitude;
         }
-       
+
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
@@ -310,20 +308,25 @@ public class playerControl : MonoBehaviour, IDamage
 
     void useItem()
     {
-        if(Input.GetKeyDown(useItemKey))
+        if (Input.GetButtonDown("Use"))
         {
             itemStats selectedItem = inventoryManager.GetSelectedItem();
-
-            if(inventoryManager.IsHealingItemSelected())
+            if (selectedItem != null)
             {
-                healPlayer(selectedItem.healthAmt);
-                inventoryManager.RemoveItem(selectedItem);
+                if (inventoryManager.IsHealingItemSelected())
+                {
+                    healPlayer(selectedItem.healthAmt);
+                    inventoryManager.RemoveItem(selectedItem);
+                    changeItem();
+                }
+                else if (inventoryManager.IsShieldItemSelected())
+                {
+                    shieldPlayer(selectedItem.shieldAmt);
+                    inventoryManager.RemoveItem(selectedItem);
+                    changeItem();
+                }
             }
-            else if (inventoryManager.IsShieldItemSelected())
-            {
-                shieldPlayer(selectedItem.shieldAmt);
-                inventoryManager.RemoveItem(selectedItem);
-            }
+            
         }
     }
 
@@ -331,7 +334,7 @@ public class playerControl : MonoBehaviour, IDamage
     {
         itemStats selectedItem = inventoryManager.GetSelectedItem();
 
-        if(selectedItem != null)
+        if (selectedItem != null)
         {
             weaponDamage = selectedItem.weaponDmg;
             weaponDistance = selectedItem.weaponDistance;
@@ -339,16 +342,22 @@ public class playerControl : MonoBehaviour, IDamage
 
             itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
             itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
-        }    
+        }
+        else if (selectedItem == null)
+        {
+            itemModels.GetComponent<MeshFilter>().sharedMesh = null;
+            itemModels.GetComponent<MeshRenderer>().sharedMaterial = null;
+        }
+
     }
 
-    void healPlayer(int amount)
+    public void healPlayer(int amount)
     {
         HP = Mathf.Min(HPOrig, HP + amount);
         updateHPBarUI();
     }
 
-    void shieldPlayer(int amount)
+    public void shieldPlayer(int amount)
     {
         shield = Mathf.Min(shieldOrig, shield + amount);
         updateShieldUI();
