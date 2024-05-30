@@ -15,6 +15,7 @@ public class itemStats : ScriptableObject
     public int healthAmt;
     public int shieldAmt;
     public bool isStackable;
+    public bool isKey;
     public int maxStackSize;
     [Range(0, 1)] public float vol;
     public Image icon;

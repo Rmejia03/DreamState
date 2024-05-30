@@ -330,7 +330,7 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
-    void changeItem()
+    public void changeItem()
     {
         itemStats selectedItem = inventoryManager.GetSelectedItem();
 

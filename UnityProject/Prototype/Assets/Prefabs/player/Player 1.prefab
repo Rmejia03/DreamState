@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4189292659149215551}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.7071079}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -39.2, y: 1, z: 50.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -68,7 +68,6 @@ MonoBehaviour:
   meleeAniDuration: 0
   itemModels: {fileID: 8032224175699769456}
   inventoryManager: {fileID: 6958294958634175169}
-  useItemKey: 101
 --- !u!114 &6958294958634175169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +83,8 @@ MonoBehaviour:
   inventory: []
   selectedItem: 0
   healingItem: {fileID: 11400000, guid: da7fa122d8df6464b9d0206a3ed3df21, type: 2}
-  shieldItem: {fileID: 0}
+  shieldItem: {fileID: 11400000, guid: 7ea43f17a575c5f4bb36f7c1b24b2b03, type: 2}
+  key01Item: {fileID: 11400000, guid: 8a94407ea6b122e4b8f590a10625d801, type: 2}
 --- !u!143 &230856606696684026
 CharacterController:
   m_ObjectHideFlags: 0

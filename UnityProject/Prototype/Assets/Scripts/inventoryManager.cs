@@ -11,6 +11,7 @@ public class inventoryManager : MonoBehaviour
 
     public itemStats healingItem;
     public itemStats shieldItem;
+    public itemStats key01Item;
 
     public void AddItem(itemStats item)
     {
@@ -60,6 +61,7 @@ public class inventoryManager : MonoBehaviour
     {
         return inventory[selectedItem] != null && inventory[selectedItem].itemName == healingItem.itemName;
     }
+
 
     public bool IsShieldItemSelected()
     {
