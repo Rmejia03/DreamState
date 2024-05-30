@@ -350,7 +350,7 @@ public class playerControl : MonoBehaviour, IDamage
 
     void shieldPlayer(int amount)
     {
-        shield = Mathf.Min(HPOrig, HP + amount);
+        shield = Mathf.Min(shieldOrig, shield + amount);
         updateShieldUI();
     }
 }
