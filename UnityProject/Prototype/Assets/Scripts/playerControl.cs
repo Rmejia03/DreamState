@@ -38,7 +38,7 @@ public class playerControl : MonoBehaviour, IDamage
 
     [Header("weapons")]
     [SerializeField] List<weaponStats> weaponList = new List<weaponStats>();
-    [SerializeField] GameObject weaponModel;
+    [SerializeField] GameObject weaponModels;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -282,8 +282,8 @@ public class playerControl : MonoBehaviour, IDamage
         weaponDistance = weapon.weaponDistance;
         weaponRate = weapon.weaponSpeed;
 
-        weaponModel.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
-        weaponModel.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+        weaponModels.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        weaponModels.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
     void selectWeapon()
@@ -306,8 +306,8 @@ public class playerControl : MonoBehaviour, IDamage
         weaponDistance = weaponList[selectedWeapon].weaponDistance;
         weaponRate = weaponList[selectedWeapon].weaponSpeed;
 
-        weaponModel.GetComponent<MeshFilter>().sharedMesh = weaponList[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
-        weaponModel.GetComponent<MeshRenderer>().sharedMaterial = weaponList[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+        weaponModels.GetComponent<MeshFilter>().sharedMesh = weaponList[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        weaponModels.GetComponent<MeshRenderer>().sharedMaterial = weaponList[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
     void UpdateAnimation()
     {

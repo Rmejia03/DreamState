@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd63924c8e1235c479bdc0ef1ea85c48, type: 3}
+  m_Name: M1 stats
+  m_EditorClassIdentifier: 
+  weaponModel: {fileID: 4698201593948852689, guid: 185ce04d44da342739f0bef843698e6c, type: 3}
+  weaponDmg: 1
+  weaponDistance: 500
+  weaponSpeed: 0.5
+  ammoCur: 0
+  ammoMax: 25
+  hitEffect: {fileID: 0}
+  weaponSound: {fileID: 0}
+  weaponVol: 0
+  icon: {fileID: 0}
