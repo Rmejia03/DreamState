@@ -42,10 +42,15 @@ public class playerControl : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        float animateSpeed = agent.velocity.normalized.magnitude;
+        if (agent != null)
+        {
+            float animateSpeed = agent.velocity.normalized.magnitude;
+        }
+       
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
+            Debug.Log("i can move");
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
             if (shield < shieldOrig && HPOrig == HP && !isRegen)
             {
