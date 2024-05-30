@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class playerControl : MonoBehaviour, IDamage
 {
@@ -36,7 +35,6 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int meleeAniDuration;
 
     [Header("items")]
-    //[SerializeField] List<itemStats> inventory = new List<itemStats>();
     [SerializeField] GameObject itemModels;
     public inventoryManager inventoryManager;
 
@@ -66,11 +64,7 @@ public class playerControl : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (agent != null)
-        {
-            float animateSpeed = agent.velocity.normalized.magnitude;
-        }
-       
+        
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
@@ -200,10 +194,6 @@ public class playerControl : MonoBehaviour, IDamage
 
     //    }
     //}
-
-
-
-
 
     public void takeDamage(int amount)
     {

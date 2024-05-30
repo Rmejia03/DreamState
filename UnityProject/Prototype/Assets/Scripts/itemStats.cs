@@ -14,6 +14,8 @@ public class itemStats : ScriptableObject
     public AudioClip itemSound;
     public int healthAmt;
     public int shieldAmt;
+    public bool isStackable;
+    public int maxStackSize;
     [Range(0, 1)] public float vol;
     public Image icon;
     public ParticleSystem hitEffect;
