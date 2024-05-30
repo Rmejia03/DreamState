@@ -319,6 +319,11 @@ public class playerControl : MonoBehaviour, IDamage
                 healPlayer(selectedItem.healthAmt);
                 inventoryManager.RemoveItem(selectedItem);
             }
+            else if (inventoryManager.IsShieldItemSelected())
+            {
+                shieldPlayer(selectedItem.shieldAmt);
+                inventoryManager.RemoveItem(selectedItem);
+            }
         }
     }
 
@@ -341,6 +346,12 @@ public class playerControl : MonoBehaviour, IDamage
     {
         HP = Mathf.Min(HPOrig, HP + amount);
         updateHPBarUI();
+    }
+
+    void shieldPlayer(int amount)
+    {
+        shield = Mathf.Min(HPOrig, HP + amount);
+        updateShieldUI();
     }
 }
 

@@ -8,7 +8,9 @@ public class inventoryManager : MonoBehaviour
     [Header("items")]
     [SerializeField] List<itemStats> inventory = new List<itemStats>();
     public int selectedItem;
+
     public itemStats healingItem;
+    public itemStats shieldItem;
 
     public void AddItem(itemStats item)
     {
@@ -57,5 +59,10 @@ public class inventoryManager : MonoBehaviour
     public bool IsHealingItemSelected()
     {
         return inventory[selectedItem] != null && inventory[selectedItem].itemName == healingItem.itemName;
+    }
+
+    public bool IsShieldItemSelected()
+    {
+        return inventory[selectedItem] != null && inventory[selectedItem].itemName == shieldItem.itemName;
     }
 }
