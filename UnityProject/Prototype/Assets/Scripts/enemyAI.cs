@@ -7,30 +7,37 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour, IDamage
 {
+    [Header("Enemy Info")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
-    [SerializeField] Transform shootPOS;
-    [SerializeField] GameObject bullet;
     [SerializeField] Material enemyType;
     [SerializeField] Animator animate;
     [SerializeField] Transform headPosition;
-    [SerializeField] Transform[] patrolPoints;
-    
-    
     [SerializeField] int HP;
     [SerializeField] int animateSpeedTransition;
     [SerializeField] int ViewAngle;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] float attackRate;
-    [SerializeField] int roamDistance;
-    [SerializeField] int roamTimer;
-    [SerializeField] bool isMelee;
-    [SerializeField] float patrolSpeed;
-    [SerializeField] int patrolDelay;
+
+    [Header("Range Attack")]
+    [SerializeField] Transform shootPOS;
+    [SerializeField] GameObject bullet;
+    [SerializeField] int shootRange;
+
+    [Header("Melee Attack")]
     [SerializeField] float meleeRange;
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeAnimDur;
-    [SerializeField] int shootRange;
+    [SerializeField] bool isMelee;
+
+    [Header("Roam")]
+    [SerializeField] int roamDistance;
+    [SerializeField] int roamTimer;
+
+    [Header("Patrol")]
+    [SerializeField] Transform[] patrolPoints;
+    [SerializeField] float patrolSpeed;
+    [SerializeField] int patrolDelay;
 
     bool isAttacking;
     bool playerInRange;
@@ -82,7 +89,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         //{
         //    StartCoroutine(Roam());
         //}
-        if(playerInRange && !isAttacking && CanSeePlayer())
+        /*if(playerInRange && !isAttacking && CanSeePlayer())
         {
             float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
@@ -96,6 +103,11 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
             else
                 agent.SetDestination(gameManager.instance.player.transform.position);
+        }*/
+
+        if(playerInRange && !CanSeePlayer())
+        {
+            StartCoroutine(Roam());
         }
         else if(!playerInRange)
         {
@@ -168,23 +180,23 @@ public class EnemyAI : MonoBehaviour, IDamage
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
-                if(agent.remainingDistance <= agent.stoppingDistance)
+                float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
+
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     FaceTarget();
                 }
 
-                //if(!isAttacking )
-                //{
-                //    StartCoroutine(MeleeAttack());
-                //}
-                //if(agent.remainingDistance <= agent.stoppingDistance)
-                //{
-                //    FaceTarget();
-                //    if (isMelee)
-                //    {
-                //        StartCoroutine(attack());
-                //    }
-                //}
+                if (isMelee && !isAttacking && distanceToPlayer <= meleeRange)
+                {
+                    StartCoroutine(MeleeAttack());
+                }
+
+                else if (!isMelee && !isAttacking)
+                {
+                    StartCoroutine(Shoot());
+                }
+               
                 return true;
             }
         }
