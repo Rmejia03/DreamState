@@ -9,8 +9,6 @@ public class playerControl : MonoBehaviour, IDamage
 {
     [Header("Player Info")]
     //[SerializeField] Animator animate;
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] Renderer model;
     [SerializeField] CharacterController controller;
  
     [Header("Health/Shield")]
@@ -66,9 +64,9 @@ public class playerControl : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (agent != null)
+        if (controller != null)
         {
-            float animateSpeed = agent.velocity.normalized.magnitude;
+            float animateSpeed = controller.velocity.normalized.magnitude;
         }
        
         //Prevents hit damage on pause
