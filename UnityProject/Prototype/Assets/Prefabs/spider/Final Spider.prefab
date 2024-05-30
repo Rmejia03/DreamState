@@ -370,7 +370,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 7675526049170152281}
   model: {fileID: 350132700842183223}
-  enemyType: {fileID: 2100000, guid: 85d037db6b0bf5f498fa77926edb2a1c, type: 2}
   animate: {fileID: 2888796308579380748}
   headPosition: {fileID: 9088116882669163258}
   HP: 10
@@ -380,7 +379,7 @@ MonoBehaviour:
   attackRate: 0.5
   shootPOS: {fileID: 8240148283386481803}
   bullet: {fileID: 5104563172443815125, guid: 0a5121cd40bc1704f92f5bbf81275dc3, type: 3}
-  shootRange: 100
+  shootRange: 500
   isMelee: 0
   meleeRange: 0
   meleeDamage: 0

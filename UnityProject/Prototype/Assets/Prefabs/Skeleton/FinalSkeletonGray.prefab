@@ -1016,14 +1016,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 3904690927085854288}
   model: {fileID: 7592297392263836580}
-  enemyType: {fileID: 0}
   animate: {fileID: 1523526661438722957}
   headPosition: {fileID: 2056919902052540839}
-  HP: 25
+  HP: 15
   animateSpeedTransition: 5
   ViewAngle: 90
   faceTargetSpeed: 5
-  attackRate: 5
+  attackRate: 2
   shootPOS: {fileID: 4055737205776906168}
   bullet: {fileID: 6224127807286536596}
   shootRange: 1

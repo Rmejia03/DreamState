@@ -363,7 +363,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 8078329712480119855}
   model: {fileID: 3383079573873950173}
-  enemyType: {fileID: 0}
   animate: {fileID: 3272018145003314304}
   headPosition: {fileID: 2455092723451146161}
   HP: 25
@@ -375,7 +374,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   shootRange: 0
   isMelee: 1
-  meleeRange: 2
+  meleeRange: 5
   meleeDamage: 3
   meleeAnimDur: 3
   roamDistance: 15

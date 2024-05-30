@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 3982133631985293569, guid: adf317cfb2d5bf84b9497fcb7e813dbf, type: 3}
   numToSpawn: 2
-  spawnTimer: 3
+  spawnTimer: 10
   spawnPos:
   - {fileID: 1441275654}
   - {fileID: 1654807223}
@@ -892,6 +892,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2349193273844333973, guid: 299a66eb5850bda4b913d980050768bc, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349193273844333973, guid: 299a66eb5850bda4b913d980050768bc, type: 3}
+      propertyPath: jumpSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2349193273844333973, guid: 299a66eb5850bda4b913d980050768bc, type: 3}
       propertyPath: weaponRate
       value: 0
@@ -2303,7 +2311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 900666416543486369, guid: efb175cd0f04ddb45a25dc692ed9893b, type: 3}
-  numToSpawn: 3
+  numToSpawn: 5
   spawnTimer: 1
   spawnPos:
   - {fileID: 1460940437}
@@ -9110,7 +9118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 2614779791548851787, guid: a573031ba0b98984792bc1d4c0a99a89, type: 3}
-  numToSpawn: 4
+  numToSpawn: 5
   spawnTimer: 1
   spawnPos:
   - {fileID: 1922106909}
@@ -14262,7 +14270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 3489029417760967168, guid: 3bc387a6916aadc4d98350674b84b219, type: 3}
-  numToSpawn: 4
+  numToSpawn: 6
   spawnTimer: 1
   spawnPos:
   - {fileID: 269768207}

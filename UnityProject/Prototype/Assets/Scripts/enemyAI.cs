@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("Enemy Info")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
-    [SerializeField] Material enemyType;
+    //[SerializeField] Material enemyType;
     [SerializeField] Animator animate;
     [SerializeField] Transform headPosition;
     [SerializeField] int HP;
