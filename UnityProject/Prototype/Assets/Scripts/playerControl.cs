@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class playerControl : MonoBehaviour, IDamage
 {
     [Header("Player Info")]
-    [SerializeField] Animator animate;
+    //[SerializeField] Animator animate;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] CharacterController controller;
@@ -74,16 +74,19 @@ public class playerControl : MonoBehaviour, IDamage
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
-            //Debug.Log("i can move");
+            //Debug.Log("i can move);
+
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * weaponDistance, Color.red);
+
             if (shield < shieldOrig && HPOrig == HP && !isRegen)
             {
                 StartCoroutine(RegenShield());
             }
 
             Movement();
+            selectWeapon();
 
-           if(!isMeleeing && Input.GetButtonDown("Fire1"))
+           /*if(!isMeleeing && Input.GetButtonDown("Fire1"))
             {
                 StartCoroutine(Shoot());
 
@@ -91,9 +94,9 @@ public class playerControl : MonoBehaviour, IDamage
             else
             {
                 Debug.Log(!isMeleeing + " " + Input.GetButtonDown("Fire1"));
-            }
+            }*/
 
-            UpdateAnimation();
+            //UpdateAnimation();
         }
     }
 
@@ -309,12 +312,6 @@ public class playerControl : MonoBehaviour, IDamage
         weaponModels.GetComponent<MeshFilter>().sharedMesh = weaponList[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
         weaponModels.GetComponent<MeshRenderer>().sharedMaterial = weaponList[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
-    void UpdateAnimation()
-    {
-        if(moveDirection.magnitude > 0)
-        {
-            animate.SetTrigger("Move");
-        }
-    }
+
 }
 

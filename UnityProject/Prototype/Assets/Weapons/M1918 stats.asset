@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd63924c8e1235c479bdc0ef1ea85c48, type: 3}
   m_Name: M1918 stats
   m_EditorClassIdentifier: 
-  weaponModel: {fileID: 0}
+  weaponModel: {fileID: 5571641588984482722, guid: c303a18f1cbdd4156b139b9e5b35d6a9, type: 3}
   weaponDmg: 1
-  weaponDistance: 1
-  weaponSpeed: 0.01
-  ammoCur: 0
-  ammoMax: 0
+  weaponDistance: 125
+  weaponSpeed: 1
+  ammoCur: 25
+  ammoMax: 25
   hitEffect: {fileID: 0}
   weaponSound: {fileID: 0}
   weaponVol: 0
