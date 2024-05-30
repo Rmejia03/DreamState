@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class weaponPickup : MonoBehaviour
+public class itemPickup : MonoBehaviour
 {
-    [SerializeField] weaponStats weapon;
+    [SerializeField] itemStats item;
 
     // Start is called before the first frame update
     void Start()
     {
-        weapon.ammoCur = weapon.ammoMax;
+        item.ammoCur = item.ammoMax;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.getWeaponStats(weapon);
+            gameManager.instance.playerScript.getItemStats(item);
             Destroy(gameObject);
         }
     }

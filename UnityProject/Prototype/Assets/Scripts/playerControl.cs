@@ -12,7 +12,8 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] CharacterController controller;
- 
+    //[SerializeField] List<itemInfo> inventory = new List<itemInfo>();
+
     [Header("Health/Shield")]
     [SerializeField] int HP;
     [SerializeField] float shield;
@@ -37,14 +38,14 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int meleeAniDuration;
 
     [Header("weapons")]
-    [SerializeField] List<weaponStats> weaponList = new List<weaponStats>();
-    [SerializeField] GameObject weaponModels;
+    [SerializeField] List<itemStats> inventory = new List<itemStats>();
+    [SerializeField] GameObject itemModels;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
     int jumpCount;
     int HPOrig;
-    int selectedWeapon;
+    int selectedItem;
     float shieldOrig;
     bool isShooting;
     bool isMeleeing;
@@ -84,7 +85,7 @@ public class playerControl : MonoBehaviour, IDamage
             }
 
             Movement();
-            selectWeapon();
+            selectItem();
 
            /*if(!isMeleeing && Input.GetButtonDown("Fire1"))
             {
@@ -275,42 +276,42 @@ public class playerControl : MonoBehaviour, IDamage
         controller.enabled = true;
     }
 
-    public void getWeaponStats(weaponStats weapon)
+    public void getItemStats(itemStats item)
     {
-        weaponList.Add(weapon);
+        inventory.Add(item);
 
-        selectedWeapon = weaponList.Count - 1;
+        selectedItem = inventory.Count - 1;
 
-        weaponDamage = weapon.weaponDmg;
-        weaponDistance = weapon.weaponDistance;
-        weaponRate = weapon.weaponSpeed;
+        weaponDamage = item.weaponDmg;
+        weaponDistance = item.weaponDistance;
+        weaponRate = item.weaponSpeed;
 
-        weaponModels.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
-        weaponModels.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+        itemModels.GetComponent<MeshFilter>().sharedMesh = item.itemModel.GetComponent<MeshFilter>().sharedMesh;
+        itemModels.GetComponent<MeshRenderer>().sharedMaterial = item.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
-    void selectWeapon()
+    void selectItem()
     {
-        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedWeapon < weaponList.Count - 1)
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedItem < inventory.Count - 1)
         {
-            selectedWeapon++;
-            changeWeapon();
+            selectedItem++;
+            changeItem();
         }
-        if(Input.GetAxis("Mouse ScrollWheel") < 0 && selectedWeapon > 0)
+        if(Input.GetAxis("Mouse ScrollWheel") < 0 && selectedItem > 0)
         {
-            selectedWeapon--;
-            changeWeapon();
+            selectedItem--;
+            changeItem();
         }
     }
 
-    void changeWeapon()
+    void changeItem()
     {
-        weaponDamage = weaponList[selectedWeapon].weaponDmg;
-        weaponDistance = weaponList[selectedWeapon].weaponDistance;
-        weaponRate = weaponList[selectedWeapon].weaponSpeed;
+        weaponDamage = inventory[selectedItem].weaponDmg;
+        weaponDistance = inventory[selectedItem].weaponDistance;
+        weaponRate = inventory[selectedItem].weaponSpeed;
 
-        weaponModels.GetComponent<MeshFilter>().sharedMesh = weaponList[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
-        weaponModels.GetComponent<MeshRenderer>().sharedMaterial = weaponList[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+        itemModels.GetComponent<MeshFilter>().sharedMesh = inventory[selectedItem].itemModel.GetComponent<MeshFilter>().sharedMesh;
+        itemModels.GetComponent<MeshRenderer>().sharedMaterial = inventory[selectedItem].itemModel.GetComponent<MeshRenderer>().sharedMaterial;
     }
 
 }
