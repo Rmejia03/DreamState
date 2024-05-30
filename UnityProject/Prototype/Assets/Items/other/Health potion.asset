@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91be2f6c3132c9347948127964cf149e, type: 3}
   m_Name: Health potion
   m_EditorClassIdentifier: 
-  itemName: 
-  itemModel: {fileID: 0}
+  itemName: Health potion
+  itemModel: {fileID: 100000, guid: c6179e854b44e2541a9956947c806de0, type: 3}
   itemSound: {fileID: 0}
-  healthAmt: 0
+  healthAmt: 5
   shieldAmt: 0
+  isStackable: 1
+  maxStackSize: 10
   vol: 0
   icon: {fileID: 0}
   hitEffect: {fileID: 0}
