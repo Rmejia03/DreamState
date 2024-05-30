@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91be2f6c3132c9347948127964cf149e, type: 3}
   m_Name: Shield potion
   m_EditorClassIdentifier: 
+  itemName: 
   itemModel: {fileID: 0}
   itemSound: {fileID: 0}
   healthAmt: 0
@@ -19,8 +20,8 @@ MonoBehaviour:
   vol: 0
   icon: {fileID: 0}
   hitEffect: {fileID: 0}
-  weaponDmg: 0
-  weaponDistance: 0
-  weaponSpeed: 0
+  weaponDmg: 1
+  weaponDistance: 1
+  weaponSpeed: 0.01
   ammoCur: 0
   ammoMax: 0
