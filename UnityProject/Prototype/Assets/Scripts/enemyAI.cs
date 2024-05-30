@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 
 public class EnemyAI : MonoBehaviour, IDamage
@@ -272,7 +273,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void takeDamage(int damage)
     {
         HP -= damage;
-        //UpdateEnemyUI();
+
+
+        UpdateEnemyUI();
+
+
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         StartCoroutine(hitFlash());
@@ -283,6 +288,8 @@ public class EnemyAI : MonoBehaviour, IDamage
             Destroy(gameObject); 
         }
     }
+
+   
 
     IEnumerator hitFlash()
     {
@@ -296,4 +303,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrigin;
     }
+
+   
 }

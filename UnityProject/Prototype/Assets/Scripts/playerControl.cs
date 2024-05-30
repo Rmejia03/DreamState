@@ -29,13 +29,27 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int sprintMod;
     [SerializeField] int speed;
 
+    
+    [SerializeField] int meleeDamage;
+    [SerializeField] int meleeRange;
+    [SerializeField] float meleeCooldown;
+    [SerializeField] int meleeAniDuration;
+
+
+
+
     Vector3 moveDirection;
     Vector3 playerVelocity;
     int jumpCount;
     int HPOrig;
     float shieldOrig;
     bool isShooting;
+    bool isMeleeing;
     bool isRegen;
+
+
+    float nextMeleeTime;
+
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +79,17 @@ public class playerControl : MonoBehaviour, IDamage
             }
 
             Movement();
+
+           if(!isMeleeing && Input.GetButtonDown("Fire1"))
+            {  
+                StartCoroutine(MeleeAttack()); 
+            }
+            else
+            {
+                Debug.Log(!isMeleeing + " " + Input.GetButtonDown("Fire1"));
+            }
+
+            UpdateAnimation();
         }
     }
 
@@ -82,10 +107,10 @@ public class playerControl : MonoBehaviour, IDamage
                         (Input.GetAxis("Vertical") * transform.forward);
         controller.Move(moveDirection * speed * Time.deltaTime);
 
-        if(Input.GetButton("Fire1") && !isShooting)
-        {
-            StartCoroutine(Shoot());
-        }
+        //if(Input.GetButton("Fire1") && !isShooting)
+        //{
+        //    StartCoroutine(Shoot());
+        //}
 
         if(Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
@@ -109,27 +134,68 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator Shoot()
+    //IEnumerator Shoot()
+    //{
+    //    isShooting = true;
+    //    RaycastHit hit;
+
+    //    if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance))
+    //    {
+    //        Debug.Log(hit);
+
+    //        IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+    //        if(hit.transform != transform && dmg != null)
+    //        {
+    //            dmg.takeDamage(shootDamage);
+    //        }
+
+    //    }
+    //    yield return new WaitForSeconds(shootRate);
+    //    isShooting = false;
+       
+    //}
+    
+    IEnumerator MeleeAttack()
     {
-        isShooting = true;
-        RaycastHit hit;
-
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDistance))
+        if (!isMeleeing)
         {
-            Debug.Log(hit);
+            isMeleeing = true;
 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            animate.SetTrigger("Hit");
 
-            if(hit.transform != transform && dmg != null)
+            yield return new WaitForSeconds(meleeAniDuration);
+
+            DetectMeleeHit();
+
+            //nextMeleeTime = Time.time + meleeCooldown;
+
+            isMeleeing = false;
+        }
+    }
+
+    void DetectMeleeHit()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRange);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
             {
-                dmg.takeDamage(shootDamage);
+                IDamage dmg = collider.GetComponent<IDamage>();
+
+                if (dmg != null)
+                {
+                    dmg.takeDamage(meleeDamage);
+                }
             }
 
         }
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-       
     }
+
+ 
+  
+
 
     public void takeDamage(int amount)
     {
@@ -200,5 +266,13 @@ public class playerControl : MonoBehaviour, IDamage
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
+    }
+
+    void UpdateAnimation()
+    {
+        if(moveDirection.magnitude > 0)
+        {
+            animate.SetTrigger("Move");
+        }
     }
 }
