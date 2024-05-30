@@ -7,9 +7,13 @@ using UnityEngine.UI;
 
 public class itemStats : ScriptableObject
 {
+    public string itemName;
+
     [Header("Weapons/otherItems")]
     public GameObject itemModel;
     public AudioClip itemSound;
+    public int healthAmt;
+    public int shieldAmt;
     [Range(0, 1)] public float vol;
     public Image icon;
     public ParticleSystem hitEffect;

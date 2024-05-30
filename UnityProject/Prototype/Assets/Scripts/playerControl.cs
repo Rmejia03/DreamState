@@ -4,13 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class playerControl : MonoBehaviour, IDamage
 {
     [Header("Player Info")]
-    //[SerializeField] Animator animate;
     [SerializeField] CharacterController controller;
-    //[SerializeField] List<itemInfo> inventory = new List<itemInfo>();
 
     [Header("Health/Shield")]
     [SerializeField] int HP;
@@ -35,9 +34,12 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float meleeCooldown;
     [SerializeField] int meleeAniDuration;
 
-    [Header("weapons")]
-    [SerializeField] List<itemStats> inventory = new List<itemStats>();
+    [Header("items")]
+    //[SerializeField] List<itemStats> inventory = new List<itemStats>();
     [SerializeField] GameObject itemModels;
+    public inventoryManager inventoryManager;
+
+    public KeyCode useItemKey = KeyCode.E;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -49,9 +51,7 @@ public class playerControl : MonoBehaviour, IDamage
     bool isMeleeing;
     bool isRegen;
 
-
     float nextMeleeTime;
-
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +84,7 @@ public class playerControl : MonoBehaviour, IDamage
 
             Movement();
             selectItem();
+            useItem();
 
            /*if(!isMeleeing && Input.GetButtonDown("Fire1"))
             {
@@ -276,41 +277,75 @@ public class playerControl : MonoBehaviour, IDamage
 
     public void getItemStats(itemStats item)
     {
-        inventory.Add(item);
+        if(inventoryManager == null)
+        {
+            return;
+        }
 
-        selectedItem = inventory.Count - 1;
+        inventoryManager.AddItem(item);
 
-        weaponDamage = item.weaponDmg;
-        weaponDistance = item.weaponDistance;
-        weaponRate = item.weaponSpeed;
+        itemStats selectedItem = inventoryManager.GetSelectedItem();
 
-        itemModels.GetComponent<MeshFilter>().sharedMesh = item.itemModel.GetComponent<MeshFilter>().sharedMesh;
-        itemModels.GetComponent<MeshRenderer>().sharedMaterial = item.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
+        if(selectedItem != null)
+        {
+            weaponDamage = item.weaponDmg;
+            weaponDistance = item.weaponDistance;
+            weaponRate = item.weaponSpeed;
+
+            itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
+            itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
+        }
     }
 
     void selectItem()
     {
-        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedItem < inventory.Count - 1)
+        if(Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            selectedItem++;
+            Debug.Log("scroll up");
+            inventoryManager.SelectNextItem();
             changeItem();
         }
-        if(Input.GetAxis("Mouse ScrollWheel") < 0 && selectedItem > 0)
+        if(Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            selectedItem--;
+            Debug.Log("scroll down");
+            inventoryManager.SelectPreviousItem();
             changeItem();
+        }
+    }
+
+    void useItem()
+    {
+        if(Input.GetKeyDown(useItemKey))
+        {
+            itemStats selectedItem = inventoryManager.GetSelectedItem();
+
+            if(inventoryManager.IsHealingItemSelected())
+            {
+                healPlayer(selectedItem.healthAmt);
+                inventoryManager.RemoveItem(selectedItem);
+            }
         }
     }
 
     void changeItem()
     {
-        weaponDamage = inventory[selectedItem].weaponDmg;
-        weaponDistance = inventory[selectedItem].weaponDistance;
-        weaponRate = inventory[selectedItem].weaponSpeed;
+        itemStats selectedItem = inventoryManager.GetSelectedItem();
 
-        itemModels.GetComponent<MeshFilter>().sharedMesh = inventory[selectedItem].itemModel.GetComponent<MeshFilter>().sharedMesh;
-        itemModels.GetComponent<MeshRenderer>().sharedMaterial = inventory[selectedItem].itemModel.GetComponent<MeshRenderer>().sharedMaterial;
+        if(selectedItem != null)
+        {
+            weaponDamage = selectedItem.weaponDmg;
+            weaponDistance = selectedItem.weaponDistance;
+            weaponRate = selectedItem.weaponSpeed;
+
+            itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
+            itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
+        }    
     }
 
+    void healPlayer(int amount)
+    {
+        HP = Mathf.Min(HPOrig, HP + amount);
+        updateHPBarUI();
+    }
 }
 
