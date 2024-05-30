@@ -274,9 +274,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= damage;
 
-
-        UpdateEnemyUI();
-
+        //UpdateEnemyUI();
 
         agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -295,7 +293,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = enemyType.color;
+        //model.material.color = enemyType.color;
     }
 
     //Enemy HP
