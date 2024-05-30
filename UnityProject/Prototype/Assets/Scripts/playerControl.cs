@@ -293,7 +293,7 @@ public class playerControl : MonoBehaviour, IDamage
             selectedWeapon++;
             changeWeapon();
         }
-        else if(Input.GetAxis("Mouse ScrollWheel") < 0 && selectedWeapon > weaponList.Count)
+        if(Input.GetAxis("Mouse ScrollWheel") < 0 && selectedWeapon > 0)
         {
             selectedWeapon--;
             changeWeapon();
