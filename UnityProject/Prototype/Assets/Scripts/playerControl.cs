@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -18,9 +19,9 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float regenRate;
 
     [Header("Attack")]
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
+    [SerializeField] float weaponRate;
+    [SerializeField] int weaponDamage;
+    [SerializeField] int weaponDistance;
 
     [Header("Movement")]
     [SerializeField] int gravity;
@@ -29,19 +30,21 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int sprintMod;
     [SerializeField] int speed;
 
-    
+    [Header("Melee")]
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeRange;
     [SerializeField] float meleeCooldown;
     [SerializeField] int meleeAniDuration;
 
-
-
+    [Header("weapons")]
+    [SerializeField] List<weaponStats> weaponList = new List<weaponStats>();
+    [SerializeField] GameObject weaponModel;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
     int jumpCount;
     int HPOrig;
+    int selectedWeapon;
     float shieldOrig;
     bool isShooting;
     bool isMeleeing;
@@ -268,6 +271,43 @@ public class playerControl : MonoBehaviour, IDamage
         controller.enabled = true;
     }
 
+    public void getWeaponStats(weaponStats weapon)
+    {
+        weaponList.Add(weapon);
+
+        selectedWeapon = weaponList.Count - 1;
+
+        weaponDamage = weapon.weaponDmg;
+        weaponDistance = weapon.weaponDistance;
+        weaponRate = weapon.weaponSpeed;
+
+        weaponModel.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        weaponModel.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
+    void selectWeapon()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && selectedWeapon < weaponList.Count - 1)
+        {
+            selectedWeapon++;
+            changeWeapon();
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0 && selectedWeapon > weaponList.Count)
+        {
+            selectedWeapon--;
+            changeWeapon();
+        }
+    }
+
+    void changeWeapon()
+    {
+        weaponDamage = weaponList[selectedWeapon].weaponDmg;
+        weaponDistance = weaponList[selectedWeapon].weaponDistance;
+        weaponRate = weaponList[selectedWeapon].weaponSpeed;
+
+        weaponModel.GetComponent<MeshFilter>().sharedMesh = weaponList[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        weaponModel.GetComponent<MeshRenderer>().sharedMaterial = weaponList[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
     void UpdateAnimation()
     {
         if(moveDirection.magnitude > 0)
