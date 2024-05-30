@@ -25,10 +25,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int shootRange;
 
     [Header("Melee Attack")]
+    [SerializeField] bool isMelee;
     [SerializeField] float meleeRange;
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeAnimDur;
-    [SerializeField] bool isMelee;
 
     [Header("Roam")]
     [SerializeField] int roamDistance;
@@ -47,7 +47,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool isPatrolling;
     bool hasPatrolPoints;
     
-
     Vector3 startingPosition;
     Vector3 playerDirection;
 
@@ -60,7 +59,7 @@ public class EnemyAI : MonoBehaviour, IDamage
        
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
-        //HPOrigin = HP;
+        HPOrigin = HP;
         //UpdateEnemyUI();
 
         if (patrolPoints != null && patrolPoints.Length > 0)
