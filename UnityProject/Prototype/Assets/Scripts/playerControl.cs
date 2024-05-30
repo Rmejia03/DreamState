@@ -6,22 +6,28 @@ using UnityEngine.UI;
 
 public class playerControl : MonoBehaviour, IDamage
 {
+    [Header("Player Info")]
     [SerializeField] Animator animate;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] CharacterController controller;
+ 
+    [Header("Health/Shield")]
+    [SerializeField] int HP;
+    [SerializeField] float shield;
+    [SerializeField] float regenRate;
+
+    [Header("Attack")]
+    [SerializeField] float shootRate;
+    [SerializeField] int shootDamage;
+    [SerializeField] int shootDistance;
+
+    [Header("Movement")]
     [SerializeField] int gravity;
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int sprintMod;
     [SerializeField] int speed;
-    [SerializeField] int HP;
-    [SerializeField] float shield;
-    [SerializeField] float regenRate;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
-
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -30,6 +36,7 @@ public class playerControl : MonoBehaviour, IDamage
     float shieldOrig;
     bool isShooting;
     bool isRegen;
+
     // Start is called before the first frame update
     void Start()
     {
