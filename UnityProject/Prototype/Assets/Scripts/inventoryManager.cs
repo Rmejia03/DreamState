@@ -11,11 +11,9 @@ public class inventoryManager : MonoBehaviour
 
     public itemStats healingItem;
     public itemStats shieldItem;
-<<<<<<< HEAD
     public itemStats key01Item;
-=======
     public ParticleSystem hitEffect;
->>>>>>> Added particle effects
+
 
     public void AddItem(itemStats item)
     {
