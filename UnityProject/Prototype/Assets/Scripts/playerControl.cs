@@ -159,7 +159,13 @@ public class playerControl : MonoBehaviour, IDamage
             if(selectedItem != null && selectedItem.hitEffect != null)
             {
                 Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
-            }           
+            }
+
+            itemStats itemStats = inventoryManager.GetSelectedItem();
+            if (selectedItem != null && selectedItem.hitEffect != null)
+            {
+                Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
+            }
         }
 
         yield return new WaitForSeconds(weaponRate);
