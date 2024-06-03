@@ -11,14 +11,18 @@ public class inventoryManager : MonoBehaviour
 
     public itemStats healingItem;
     public itemStats shieldItem;
+<<<<<<< HEAD
     public itemStats key01Item;
+=======
+    public ParticleSystem hitEffect;
+>>>>>>> Added particle effects
 
     public void AddItem(itemStats item)
     {
         inventory.Add(item);
-        selectedItem = inventory.Count - 1;
+        selectedItem = inventory.Count - 1;      
     }
-
+ 
     public void RemoveItem(itemStats item)
     {
         if (inventory.Contains(item))

@@ -38,11 +38,13 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] GameObject itemModels;
     public inventoryManager inventoryManager;
 
+
     Vector3 moveDirection;
     Vector3 playerVelocity;
     int jumpCount;
     int HPOrig;
     int selectedItem;
+    int selectedGun;
     float shieldOrig;
     bool isShooting;
     bool isMeleeing;
@@ -153,8 +155,13 @@ public class playerControl : MonoBehaviour, IDamage
             {
                 dmg.takeDamage(weaponDamage);
             }
-
+            itemStats selectedItem = inventoryManager.GetSelectedItem();
+            if(selectedItem != null && selectedItem.hitEffect != null)
+            {
+                Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
+            }           
         }
+
         yield return new WaitForSeconds(weaponRate);
         isShooting = false;
 
