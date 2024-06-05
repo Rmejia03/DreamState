@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
     public void resume()
     {
         gameManager.instance.stateUnpause();
@@ -20,6 +24,11 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.playerScript.spawnPlayer();
         gameManager.instance.stateUnpause();
+    }
+    
+    public void mainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
     public void quit()
     {
