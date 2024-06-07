@@ -35,8 +35,12 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
-  - guid: b9b264a30780c6f4a8162e598feae304
+  - guid: f3f3b8bcba27eec41a4bc3c049a12c2d
     name: menuSound
+  - guid: b9b264a30780c6f4a8162e598feae304
+    name: MyExposedParam
+  - guid: 67b356b41915b9246abe9286ed72e90a
+    name: soundFX
   m_AudioMixerGroupViews:
   - guids:
     - 41b775c88d0c4b540b94acc5a5ffd6d7
