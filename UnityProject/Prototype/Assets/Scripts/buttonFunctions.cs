@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+    public Animator animator;
+    public float transition = 1f;
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
     public void resume()
     {
@@ -20,6 +22,12 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.stateUnpause();
     }
 
+    IEnumerator LoadLevel(int level)
+    {
+        animator.SetTrigger("Start");
+        yield return new WaitForSeconds(transition);
+        SceneManager.LoadScene(level);
+    }
 
 
 
