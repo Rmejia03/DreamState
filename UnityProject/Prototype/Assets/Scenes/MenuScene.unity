@@ -2477,7 +2477,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1740129484}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: quit
         m_Mode: 1
@@ -5084,18 +5084,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1950959842}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1496018769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6151,6 +6139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a783534feebcef947b4d0ac4d7d82f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  quitGame: {fileID: 666419367}
   animator: {fileID: 727157550}
   transition: 1
 --- !u!1 &1754868006
@@ -6959,11 +6948,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940768152}
   m_CullTransparentMesh: 1
---- !u!1 &1950959842 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7182738033316353751, guid: 5bcf34f7bea3dda40b7a286cc6b2c7ca, type: 3}
-  m_PrefabInstance: {fileID: 6881789997406010432}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2044828610
 GameObject:
   m_ObjectHideFlags: 0
@@ -7124,10 +7108,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8670111038825586450, guid: 5bcf34f7bea3dda40b7a286cc6b2c7ca, type: 3}
-      propertyPath: transition
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 844475196219067168, guid: 5bcf34f7bea3dda40b7a286cc6b2c7ca, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -7183,10 +7163,6 @@ PrefabInstance:
     - target: {fileID: 7182738033316353751, guid: 5bcf34f7bea3dda40b7a286cc6b2c7ca, type: 3}
       propertyPath: m_Name
       value: LevelLoader
-      objectReference: {fileID: 0}
-    - target: {fileID: 7182738033316353751, guid: 5bcf34f7bea3dda40b7a286cc6b2c7ca, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7323370862190127569, guid: 5bcf34f7bea3dda40b7a286cc6b2c7ca, type: 3}
       propertyPath: m_Alpha
