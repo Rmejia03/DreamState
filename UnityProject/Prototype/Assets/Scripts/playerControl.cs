@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -34,10 +35,21 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float meleeCooldown;
     [SerializeField] int meleeAniDuration;
 
-    [Header("items")]
+    [Header("Items")]
     [SerializeField] GameObject itemModels;
     public inventoryManager inventoryManager;
 
+    [Header("Doors")]
+    [SerializeField] int rayLength = 5;
+    [SerializeField] LayerMask layerInteract;
+    [SerializeField] string excludeLayerName = "Player";
+    [SerializeField] Image crosshair;
+
+    private DoorSoundAnimation raycastObject;
+    [SerializeField] KeyCode openDoorKey = KeyCode.E;
+    private const string interactableTag = "InteractiveObject";
+    private bool crosshairActive;
+    private bool doOnce;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -155,8 +167,9 @@ public class playerControl : MonoBehaviour, IDamage
     {
         isShooting = true;
         RaycastHit hit;
+        int mask = (1 << LayerMask.NameToLayer(excludeLayerName)) | layerInteract.value;
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, weaponDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, weaponDistance, mask))
         {
             Debug.Log(hit);
 
@@ -177,6 +190,30 @@ public class playerControl : MonoBehaviour, IDamage
             {
                 Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
             }
+            
+            if(hit.collider.CompareTag(interactableTag))
+            {
+                if(!doOnce)
+                {
+                    raycastObject = hit.collider.gameObject.GetComponent<DoorSoundAnimation>();
+                    CrosshairChange(true);
+                }
+
+                crosshairActive = true;
+                doOnce = true;
+                if(Input.GetKeyDown(openDoorKey))
+                {
+                    raycastObject.PlayAnimation();
+                }
+            }
+        }
+        else
+        {
+            if(crosshairActive)
+            {
+                CrosshairChange(false);
+                doOnce = false;
+            }
         }
 
         yield return new WaitForSeconds(weaponRate);
@@ -184,6 +221,18 @@ public class playerControl : MonoBehaviour, IDamage
 
     }
 
+    void CrosshairChange(bool on)
+    {
+        if(on && !doOnce)
+        {
+            crosshair.color = Color.white;
+        }
+        else
+        {
+            crosshair.color = Color.red;
+            crosshairActive = false;
+        }
+    }
     //IEnumerator MeleeAttack()
     //{
     //    if (!isMeleeing)
