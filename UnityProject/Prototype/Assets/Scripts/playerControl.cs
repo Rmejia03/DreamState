@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class playerControl : MonoBehaviour, IDamage
 {
     [Header("Player Info")]
-    //[SerializeField] Animator animate;
+    [SerializeField] Animator animate;
     [SerializeField] CharacterController controller;
 
     [Header("Health/Shield")]
@@ -51,12 +51,15 @@ public class playerControl : MonoBehaviour, IDamage
     bool isRegen;
 
     float nextMeleeTime;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         HPOrig = HP;
         shieldOrig = shield;
+
+        animator = GetComponent<Animator>();
 
         updateHPBarUI(); 
     }
@@ -105,6 +108,7 @@ public class playerControl : MonoBehaviour, IDamage
         {
             jumpCount = 0;
             playerVelocity = Vector3.zero;
+            animate.SetBool("IsJumping", false);
         }
 
         Sprint();
@@ -112,6 +116,12 @@ public class playerControl : MonoBehaviour, IDamage
         moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
                         (Input.GetAxis("Vertical") * transform.forward);
         controller.Move(moveDirection * speed * Time.deltaTime);
+
+        float isMoving = moveDirection.magnitude;
+        if(animate != null)
+        {
+            animate.SetFloat("IsMoving", isMoving);
+        }
 
         if (Input.GetButton("Fire1") && !isShooting)
         {
@@ -122,6 +132,7 @@ public class playerControl : MonoBehaviour, IDamage
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
+            animate.SetBool("IsJumping", true);
         }
 
         playerVelocity.y -= gravity * Time.deltaTime;   
