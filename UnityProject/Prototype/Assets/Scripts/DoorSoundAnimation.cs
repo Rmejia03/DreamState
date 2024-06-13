@@ -9,8 +9,8 @@ public class DoorSoundAnimation : MonoBehaviour
     private Animator doorAnimation;
     private bool doorOpen = false;
 
-    [SerializeField] private string openDoor;
-    [SerializeField] private string closeDoor;
+    [SerializeField] private string OpenDoor;
+    [SerializeField] private string CloseDoor;
 
     [SerializeField] private int waitTimer = 1;
     [SerializeField] private bool pauseInteraction = false;
@@ -28,28 +28,31 @@ public class DoorSoundAnimation : MonoBehaviour
         //doorAnimation = gameObject.GetComponent<Animator>();
     }
 
+    public void PlayAnimation()
+    {
+        Debug.Log("PlayAnimation called");
+        if (!doorOpen && !pauseInteraction)
+        {
+            Debug.Log("Opening door");
+            doorAnimation.Play(OpenDoor, 0, 0.0f);
+            doorOpen = true;
+            StartCoroutine(PauseDoor());
+            doorOpenSound.PlayDelayed(openDelay);
+        }
+        else if (doorOpen && !pauseInteraction)
+        {
+            Debug.Log("Closing door");
+            doorAnimation.Play(CloseDoor, 0, 0.0f);
+            doorOpen = false;
+            StartCoroutine(PauseDoor());
+            closeDoorSound.PlayDelayed(closeDelay);
+        }
+    }  
+
     private IEnumerator PauseDoor()
     {
         pauseInteraction = true;
         yield return new WaitForSeconds(waitTimer);
         pauseInteraction = false;
-    }
-
-    public void PlayAnimation()
-    {
-        if(!doorOpen && !pauseInteraction)
-        {
-            doorAnimation.Play(openDoor, 0, 0.0f);
-            doorOpen = true;
-            StartCoroutine(PauseDoor());
-            doorOpenSound.PlayDelayed(openDelay);
-        }
-        else if(doorOpen && !pauseInteraction)
-        {
-            doorAnimation.Play(closeDoor, 0, 0.0f);
-            doorOpen = false;
-            StartCoroutine(PauseDoor());
-            closeDoorSound.PlayDelayed(closeDelay);
-        }
     }
 }

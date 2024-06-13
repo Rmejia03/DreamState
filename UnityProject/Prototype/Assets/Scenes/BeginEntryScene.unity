@@ -283,8 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1b12ac441007140a1420e5a6181714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openDoor: 
-  closeDoor: 
+  OpenDoor: 
+  CloseDoor: 
   waitTimer: 1
   pauseInteraction: 0
   doorOpenSound: {fileID: 283152403}
@@ -1883,188 +1883,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 972947367898883046, guid: 05f63fb177c72c7419061ea4cdbdb062, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1823382547}
-    - targetCorrespondingSourceObject: {fileID: 438773946970529424, guid: 05f63fb177c72c7419061ea4cdbdb062, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 859136185}
-    - targetCorrespondingSourceObject: {fileID: 438773946970529424, guid: 05f63fb177c72c7419061ea4cdbdb062, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 859136186}
-    - targetCorrespondingSourceObject: {fileID: 438773946970529424, guid: 05f63fb177c72c7419061ea4cdbdb062, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 859136183}
-    - targetCorrespondingSourceObject: {fileID: 438773946970529424, guid: 05f63fb177c72c7419061ea4cdbdb062, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 859136182}
   m_SourcePrefab: {fileID: 100100000, guid: 05f63fb177c72c7419061ea4cdbdb062, type: 3}
 --- !u!4 &809469093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5110118666208414797, guid: 57cc311c2b9bcb7409cfafabaf4bdb01, type: 3}
   m_PrefabInstance: {fileID: 926596606}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &859136178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 438773946970529424, guid: 05f63fb177c72c7419061ea4cdbdb062, type: 3}
-  m_PrefabInstance: {fileID: 752157161}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &859136182
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859136178}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 629480c43ec3b6143a716bdb426f189e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!82 &859136183
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859136178}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3503526105411769335, guid: 73c2b8ef81d1b854ca1805174e57f970, type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 2
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!64 &859136185
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859136178}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5370605079649217358, guid: 5adb865b743928749b92eb6587590b9a, type: 3}
---- !u!114 &859136186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859136178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1b12ac441007140a1420e5a6181714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openDoor: 
-  closeDoor: 
-  waitTimer: 1
-  pauseInteraction: 0
-  doorOpenSound: {fileID: 283152403}
-  openDelay: 0
-  closeDoorSound: {fileID: 897278642}
-  closeDelay: 0.2
 --- !u!4 &861673325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4022347877494767347, guid: 49df6bd2ccef28a4ea22004fc04de732, type: 3}
@@ -4720,8 +4544,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1b12ac441007140a1420e5a6181714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openDoor: 
-  closeDoor: 
+  OpenDoor: openDoor
+  CloseDoor: closeDoor
   waitTimer: 1
   pauseInteraction: 0
   doorOpenSound: {fileID: 283152403}
@@ -5503,7 +5327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7586223973945768481, guid: cc40f1a318a43d145b23a36a532f289a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.32761437
+      value: 0.3276143
       objectReference: {fileID: 0}
     - target: {fileID: 7586223973945768481, guid: cc40f1a318a43d145b23a36a532f289a, type: 3}
       propertyPath: m_LocalRotation.w

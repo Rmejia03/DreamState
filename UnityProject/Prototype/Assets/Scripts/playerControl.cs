@@ -43,7 +43,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int rayLength = 5;
     [SerializeField] LayerMask layerInteract;
     [SerializeField] string excludeLayerName = "Player";
-    [SerializeField] Image crosshair;
+    [SerializeField] Image crosshair = null;
 
     private DoorSoundAnimation raycastObject;
     [SerializeField] KeyCode openDoorKey = KeyCode.E;
@@ -97,8 +97,8 @@ public class playerControl : MonoBehaviour, IDamage
             }
 
             Movement();
-            selectItem();
-            useItem();
+            //selectItem();
+            //useItem();
 
            /*if(!isMeleeing && Input.GetButtonDown("Fire1"))
             {
@@ -167,9 +167,9 @@ public class playerControl : MonoBehaviour, IDamage
     {
         isShooting = true;
         RaycastHit hit;
-        int mask = (1 << LayerMask.NameToLayer(excludeLayerName)) | layerInteract.value;
+        //int mask = (1 << LayerMask.NameToLayer(excludeLayerName)) | layerInteract.value;
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, weaponDistance, mask))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, weaponDistance))
         {
             Debug.Log(hit);
 
@@ -180,7 +180,7 @@ public class playerControl : MonoBehaviour, IDamage
                 dmg.takeDamage(weaponDamage);
             }
             itemStats selectedItem = inventoryManager.GetSelectedItem();
-            if(selectedItem != null && selectedItem.hitEffect != null)
+            if (selectedItem != null && selectedItem.hitEffect != null)
             {
                 Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
             }
@@ -190,10 +190,22 @@ public class playerControl : MonoBehaviour, IDamage
             {
                 Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
             }
-            
-            if(hit.collider.CompareTag(interactableTag))
+        }
+        yield return new WaitForSeconds(weaponRate);
+        isShooting = false;
+
+    }
+
+    public void DoorInteraction()
+    {
+        RaycastHit hit;
+        int mask = (1 << LayerMask.NameToLayer(excludeLayerName)) | layerInteract.value;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayLength, mask))
+        {
+            Debug.Log("Raycast hit: " + hit.collider.name);
+            if (hit.collider.CompareTag(interactableTag))
             {
-                if(!doOnce)
+                if (!doOnce)
                 {
                     raycastObject = hit.collider.gameObject.GetComponent<DoorSoundAnimation>();
                     CrosshairChange(true);
@@ -201,24 +213,29 @@ public class playerControl : MonoBehaviour, IDamage
 
                 crosshairActive = true;
                 doOnce = true;
-                if(Input.GetKeyDown(openDoorKey))
+
+                if (Input.GetKeyDown(openDoorKey))
                 {
                     raycastObject.PlayAnimation();
+                }
+            }
+            else
+            {
+                if (crosshairActive)
+                {
+                    CrosshairChange(false);
+                    doOnce = false;
                 }
             }
         }
         else
         {
-            if(crosshairActive)
+            if (crosshairActive)
             {
                 CrosshairChange(false);
                 doOnce = false;
             }
         }
-
-        yield return new WaitForSeconds(weaponRate);
-        isShooting = false;
-
     }
 
     void CrosshairChange(bool on)
@@ -363,66 +380,66 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
-    void selectItem()
-    {
-        if(Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            Debug.Log("scroll up");
-            inventoryManager.SelectNextItem();
-            changeItem();
-        }
-        if(Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            Debug.Log("scroll down");
-            inventoryManager.SelectPreviousItem();
-            changeItem();
-        }
-    }
+    //void selectItem()
+    //{
+    //    if(Input.GetAxis("Mouse ScrollWheel") > 0)
+    //    {
+    //        Debug.Log("scroll up");
+    //        inventoryManager.SelectNextItem();
+    //        changeItem();
+    //    }
+    //    if(Input.GetAxis("Mouse ScrollWheel") < 0)
+    //    {
+    //        Debug.Log("scroll down");
+    //        inventoryManager.SelectPreviousItem();
+    //        changeItem();
+    //    }
+    //}
 
-    void useItem()
-    {
-        if (Input.GetButtonDown("Use"))
-        {
-            itemStats selectedItem = inventoryManager.GetSelectedItem();
-            if (selectedItem != null)
-            {
-                if (inventoryManager.IsHealingItemSelected())
-                {
-                    healPlayer(selectedItem.healthAmt);
-                    inventoryManager.RemoveItem(selectedItem);
-                    changeItem();
-                }
-                else if (inventoryManager.IsShieldItemSelected())
-                {
-                    shieldPlayer(selectedItem.shieldAmt);
-                    inventoryManager.RemoveItem(selectedItem);
-                    changeItem();
-                }
-            }
+    //void useItem()
+    //{
+    //    if (Input.GetButtonDown("Use"))
+    //    {
+    //        itemStats selectedItem = inventoryManager.GetSelectedItem();
+    //        if (selectedItem != null)
+    //        {
+    //            if (inventoryManager.IsHealingItemSelected())
+    //            {
+    //                healPlayer(selectedItem.healthAmt);
+    //                inventoryManager.RemoveItem(selectedItem);
+    //                changeItem();
+    //            }
+    //            else if (inventoryManager.IsShieldItemSelected())
+    //            {
+    //                shieldPlayer(selectedItem.shieldAmt);
+    //                inventoryManager.RemoveItem(selectedItem);
+    //                changeItem();
+    //            }
+    //        }
             
-        }
-    }
+    //    }
+    //}
 
-    public void changeItem()
-    {
-        itemStats selectedItem = inventoryManager.GetSelectedItem();
+    //public void changeItem()
+    //{
+    //    itemStats selectedItem = inventoryManager.GetSelectedItem();
 
-        if (selectedItem != null)
-        {
-            weaponDamage = selectedItem.weaponDmg;
-            weaponDistance = selectedItem.weaponDistance;
-            weaponRate = selectedItem.weaponSpeed;
+    //    if (selectedItem != null)
+    //    {
+    //        weaponDamage = selectedItem.weaponDmg;
+    //        weaponDistance = selectedItem.weaponDistance;
+    //        weaponRate = selectedItem.weaponSpeed;
 
-            itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
-            itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
-        }
-        else if (selectedItem == null)
-        {
-            itemModels.GetComponent<MeshFilter>().sharedMesh = null;
-            itemModels.GetComponent<MeshRenderer>().sharedMaterial = null;
-        }
+    //        itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
+    //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
+    //    }
+    //    else if (selectedItem == null)
+    //    {
+    //        itemModels.GetComponent<MeshFilter>().sharedMesh = null;
+    //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = null;
+    //    }
 
-    }
+    //}
 
     public void healPlayer(int amount)
     {

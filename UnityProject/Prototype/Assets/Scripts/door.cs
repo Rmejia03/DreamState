@@ -13,7 +13,7 @@ public class door : MonoBehaviour
         {
             Destroy(gameObject);
             gameManager.instance.playerScript.inventoryManager.RemoveItem(selectedItem);
-            gameManager.instance.playerScript.changeItem();
+            //gameManager.instance.playerScript.changeItem();
         }
     }
 }
