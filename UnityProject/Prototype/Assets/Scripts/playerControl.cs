@@ -15,7 +15,7 @@ public class playerControl : MonoBehaviour, IDamage
     [Header("Health/Shield/Fear")]
     [SerializeField] int HP;
     [SerializeField] float shield;
-    [SerializeField] float fear;
+    [SerializeField] int fear;
     [SerializeField] float regenRate;
 
     [Header("Attack")]
@@ -73,10 +73,12 @@ public class playerControl : MonoBehaviour, IDamage
     {
         HPOrig = HP;
         shieldOrig = shield;
+        fearOrig = fear;
 
         animator = GetComponent<Animator>();
 
-        updateHPBarUI(); 
+        updateHPBarUI();
+        updateFearUI();
     }
 
     // Update is called once per frame
@@ -377,7 +379,7 @@ public class playerControl : MonoBehaviour, IDamage
 	}
     void updateFearUI()
     {
-        gameManager.instance.fearBar.fillAmount = fear / fearOrig;
+        gameManager.instance.fearBar.fillAmount = fear + fearOrig;
     }
 
     public void spawnPlayer()
