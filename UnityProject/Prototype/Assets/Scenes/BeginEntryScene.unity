@@ -2137,6 +2137,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 446113607807839378, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2375804354628364027, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
       propertyPath: doorOpenSound
       value: 
@@ -2190,10 +2194,36 @@ PrefabInstance:
       value: BossLevel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6919438215835215548, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1091336715277996305, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 4996383258843784861}
   m_SourcePrefab: {fileID: 100100000, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
+--- !u!1 &4996383258843784860 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1091336715277996305, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
+  m_PrefabInstance: {fileID: 4996383258843784859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4996383258843784861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4996383258843784860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfc5678b3f92a24a8541557d466964d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Instructions: {fileID: 0}
+  Animation: {fileID: 0}
+  OpenSound: {fileID: 0}
+  CloseSound: {fileID: 0}
+  Action: 0
 --- !u!1001 &5090612002910261508
 PrefabInstance:
   m_ObjectHideFlags: 0
