@@ -33,7 +33,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeRange;
     [SerializeField] float meleeCooldown;
-    [SerializeField] int meleeAniDuration;
+    [SerializeField] float meleeAniDuration;
 
     [Header("Items")]
     [SerializeField] GameObject itemModels;
@@ -63,6 +63,7 @@ public class playerControl : MonoBehaviour, IDamage
     bool isRegen;
 
     float nextMeleeTime;
+    int attackSeq = 0;
     Animator animator;
 
     // Start is called before the first frame update
@@ -97,6 +98,7 @@ public class playerControl : MonoBehaviour, IDamage
             }
 
             Movement();
+            HandleBackhandMelee();
             //selectItem();
             //useItem();
 
@@ -135,10 +137,10 @@ public class playerControl : MonoBehaviour, IDamage
             animate.SetFloat("IsMoving", isMoving);
         }
 
-        if (Input.GetButton("Fire1") && !isShooting)
-        {
-            StartCoroutine(Shoot());
-        }
+        //if (Input.GetButton("Fire1") && !isShooting)
+        //{
+        //    StartCoroutine(Shoot());
+        //}
 
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
@@ -250,42 +252,69 @@ public class playerControl : MonoBehaviour, IDamage
             crosshairActive = false;
         }
     }
-    //IEnumerator MeleeAttack()
-    //{
-    //    if (!isMeleeing)
-    //    {
-    //        isMeleeing = true;
 
-    //        animate.SetTrigger("Hit");
+    void HandleBackhandMelee()
+    {
+        if (Input.GetButtonDown("Fire1") && !isMeleeing && Time.time >= nextMeleeTime)
+        {
+ 
+            nextMeleeTime = Time.time + meleeCooldown;
 
-    //        yield return new WaitForSeconds(meleeAniDuration);
+            StartCoroutine(MeleeAttack());
+        }
+    }
 
-    //        DetectMeleeHit();
+    IEnumerator MeleeAttack()
+    {
+        if (!isMeleeing)
+        {
+            isMeleeing = true;
 
-    //        //nextMeleeTime = Time.time + meleeCooldown;
+            attackSeq++;
+            if (attackSeq > 3)
+                attackSeq = 1;
 
-    //        isMeleeing = false;
-    //    }
-    //}
+            switch (attackSeq)
+            {
+                case 1:
+                    animate.SetTrigger("Backhand Melee");
+                    break;
+                case 2:
+                    animate.SetTrigger("Slash Melee");
+                    break;
+                case 3:
+                    animate.SetTrigger("Stab Melee");
+                    break;
+            }
 
-    //void DetectMeleeHit()
-    //{
-    //    Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRange);
+            yield return new WaitForSeconds(meleeAniDuration / 2);
 
-    //    foreach (Collider collider in colliders)
-    //    {
-    //        if (collider.CompareTag("Enemy"))
-    //        {
-    //            IDamage dmg = collider.GetComponent<IDamage>();
+            DetectMeleeHit();
 
-    //            if (dmg != null)
-    //            {
-    //                dmg.takeDamage(meleeDamage);
-    //            }
-    //        }
+            yield return new WaitForSeconds(meleeAniDuration / 2);
 
-    //    }
-    //}
+            isMeleeing = false;
+        }
+    }
+
+    void DetectMeleeHit()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRange);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                IDamage dmg = collider.GetComponent<IDamage>();
+
+                if (dmg != null)
+                {
+                    dmg.takeDamage(meleeDamage);
+                }
+            }
+
+        }
+    }
 
     public void takeDamage(int amount)
     {
