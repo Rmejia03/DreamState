@@ -28,7 +28,7 @@ public class inventoryManager : MonoBehaviour
     public void AddItem(itemStats item)
     {
         inventory.Add(item);
-        //selectedItem = inventory.Count - 1;      
+        selectedItem = inventory.Count - 1;      
     }
  
     public void RemoveItem(itemStats item)
@@ -49,7 +49,7 @@ public class inventoryManager : MonoBehaviour
         foreach( var item in inventory)
         {
             GameObject obj = Instantiate(InventoryItem, ItemContent);
-            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+            var itemIcon = obj.transform.Find("Item/ItemIcon").GetComponent<Image>();
 
             itemIcon.sprite = item.icon;
         }
