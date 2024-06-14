@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class itemPickup : MonoBehaviour
 {
-    [SerializeField] itemStats item;
+    public itemStats item;
 
     // Start is called before the first frame update
-    void Start()
+   // void Start()
+    //
+       // item.ammoCur = item.ammoMax;
+   // }
+
+    void Pickup()
     {
-        item.ammoCur = item.ammoMax;
+        inventoryManager.Instance.AddItem(item);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            gameManager.instance.playerScript.getItemStats(item);
-            Destroy(gameObject);
+            Pickup();
         }
     }
 }

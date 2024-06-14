@@ -18,7 +18,7 @@ public class itemStats : ScriptableObject
     public bool isKey;
     public int maxStackSize;
     [Range(0, 1)] public float vol;
-    public Image icon;
+    public Sprite icon;
     public ParticleSystem hitEffect;
 
     [Header("Weapon")]

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91be2f6c3132c9347948127964cf149e, type: 3}
+  m_Name: Bow stats
+  m_EditorClassIdentifier: 
+  itemName: 
+  itemModel: {fileID: 5494625650325380441, guid: 944f765b84e4c4012876d61f4dfc7b5a, type: 3}
+  itemSound: {fileID: 0}
+  healthAmt: 0
+  shieldAmt: 0
+  isStackable: 0
+  isKey: 0
+  maxStackSize: 0
+  vol: 0
+  icon: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215, type: 3}
+  hitEffect: {fileID: 933686333084247282, guid: 0f3064cf58c98ac4facebe2fe6682406, type: 3}
+  weaponDmg: 2
+  weaponDistance: 500
+  weaponSpeed: 1
+  ammoCur: 45
+  ammoMax: 45

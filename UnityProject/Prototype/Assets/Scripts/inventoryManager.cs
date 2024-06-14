@@ -2,23 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class inventoryManager : MonoBehaviour
-{
+{ 
+    public static inventoryManager Instance;
+
     [Header("items")]
-    [SerializeField] List<itemStats> inventory = new List<itemStats>();
+    public List<itemStats> inventory = new List<itemStats>();
     public int selectedItem;
+
+    public Transform ItemContent;
+    public GameObject InventoryItem;
 
     public itemStats healingItem;
     public itemStats shieldItem;
     public itemStats key01Item;
     public ParticleSystem hitEffect;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void AddItem(itemStats item)
     {
         inventory.Add(item);
-        selectedItem = inventory.Count - 1;      
+        //selectedItem = inventory.Count - 1;      
     }
  
     public void RemoveItem(itemStats item)
@@ -31,6 +41,17 @@ public class inventoryManager : MonoBehaviour
             {
                 selectedItem = inventory.Count - 1;
             }
+        }
+    }
+
+    public void ListItems()
+    {
+        foreach( var item in inventory)
+        {
+            GameObject obj = Instantiate(InventoryItem, ItemContent);
+            var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
+
+            itemIcon.sprite = item.icon;
         }
     }
 
