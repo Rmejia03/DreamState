@@ -23,4 +23,12 @@ public class slotUI : MonoBehaviour
         itemIcon.sprite = newSprite;
         itemIcon.enabled = newSprite != null;
     }
+
+    public void SetHighlight(bool isHighlighted)
+    {
+        if(highlight != null)
+        {
+            highlight.SetActive(isHighlighted);
+        }
+    }
 }
