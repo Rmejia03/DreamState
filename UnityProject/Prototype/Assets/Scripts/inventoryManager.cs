@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class inventoryManager : MonoBehaviour
 { 
@@ -16,7 +17,13 @@ public class inventoryManager : MonoBehaviour
     public GameObject InventoryItem;
 
     public itemStats healingItem;
-    public itemStats shieldItem;
+    public int healingItemIndex;
+    [SerializeField] TMP_Text healingPotionCount;
+
+    public itemStats fearItem;
+    public int fearItemIndex;
+    [SerializeField] TMP_Text fearPotionCount;
+
     public itemStats key01Item;
     public ParticleSystem hitEffect;
 
@@ -27,8 +34,19 @@ public class inventoryManager : MonoBehaviour
 
     public void AddItem(itemStats item)
     {
-        inventory.Add(item);
-        selectedItem = inventory.Count - 1;      
+        if (item.itemName == healingItem.itemName)
+        {
+            healingItemIndex += 1;
+        }
+        else if (item.itemName == fearItem.itemName)
+        {
+            fearItemIndex += 1;
+        }
+        else
+        {
+            inventory.Add(item);
+            selectedItem = inventory.Count - 1;
+        }
     }
  
     public void RemoveItem(itemStats item)
@@ -80,14 +98,14 @@ public class inventoryManager : MonoBehaviour
         }
     }
 
-    public bool IsHealingItemSelected()
-    {
-        return inventory[selectedItem] != null && inventory[selectedItem].itemName == healingItem.itemName;
-    }
+    //public bool IsHealingItemSelected()
+    //{
+    //    return inventory[selectedItem] != null && inventory[selectedItem].itemName == healingItem.itemName;
+    //}
 
 
-    public bool IsShieldItemSelected()
-    {
-        return inventory[selectedItem] != null && inventory[selectedItem].itemName == shieldItem.itemName;
-    }
+    //public bool IsFearItemSelected()
+    //{
+    //    return inventory[selectedItem] != null && inventory[selectedItem].itemName == fearItem.itemName;
+    //}
 }

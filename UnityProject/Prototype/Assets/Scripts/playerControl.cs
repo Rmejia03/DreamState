@@ -365,7 +365,7 @@ public class playerControl : MonoBehaviour, IDamage
             return;
         }
 
-        inventoryManager.AddItem(item);
+        //inventoryManager.AddItem(item);
 
         itemStats selectedItem = inventoryManager.GetSelectedItem();
 
