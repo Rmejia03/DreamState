@@ -169,7 +169,7 @@ public class playerControl : MonoBehaviour, IDamage
 
     IEnumerator Shoot()
     {
-        isShooting = true;
+        //isShooting = true;
         RaycastHit hit;
         //int mask = (1 << LayerMask.NameToLayer(excludeLayerName)) | layerInteract.value;
 
@@ -196,7 +196,7 @@ public class playerControl : MonoBehaviour, IDamage
             }
         }
         yield return new WaitForSeconds(weaponRate);
-        isShooting = false;
+        //isShooting = false;
 
     }
 
