@@ -6,6 +6,7 @@ public class Door1 : MonoBehaviour
 {
     public float interactionRange;
     public GameObject interactText;
+    public string doorOpen, doorClose;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,8 @@ public class Door1 : MonoBehaviour
             if(hit.collider.gameObject.tag == "Door")
             {
                 GameObject door = hit.collider.transform.root.gameObject;
+                Animator doorAnimation = door.GetComponent<Animator>();
+                interactText.SetActive(true);
             }
         }
     }
