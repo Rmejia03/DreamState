@@ -228,6 +228,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2375804354628364027, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
+      propertyPath: OpenDoor
+      value: OpenDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 2375804354628364027, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
+      propertyPath: CloseDoor
+      value: CloseDoor
+      objectReference: {fileID: 0}
     - target: {fileID: 4812973280980649998, guid: 801a6ccceb0adc2409906683385bd336, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50
@@ -294,6 +302,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3932a3eda1b8f37429fe06ad4135da7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &817761678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817761672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24d46e50af11c44fa71ef7408151161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 7
+  interactText: {fileID: 0}
+  doorOpen: OpenDoor
+  doorClose: CloseDoor
 --- !u!1 &975541800
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +483,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1430997263066647236, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
       insertIndex: 2
       addedObject: {fileID: 817761677}
+    - targetCorrespondingSourceObject: {fileID: 1430997263066647236, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 817761678}
   m_SourcePrefab: {fileID: 100100000, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

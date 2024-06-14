@@ -27,6 +27,23 @@ public class Door1 : MonoBehaviour
                 GameObject door = hit.collider.transform.root.gameObject;
                 Animator doorAnimation = door.GetComponent<Animator>();
                 interactText.SetActive(true);
+                if(Input.GetKeyDown(KeyCode.E))
+                {
+                    if(doorAnimation.GetCurrentAnimatorStateInfo(0).IsName(doorOpen))
+                    {
+                        doorAnimation.ResetTrigger("open");
+                        doorAnimation.SetTrigger("close");
+                    }
+                    if (doorAnimation.GetCurrentAnimatorStateInfo(0).IsName(doorClose))
+                    {
+                        doorAnimation.ResetTrigger("close");
+                        doorAnimation.SetTrigger("open");
+                    }
+                }
+            }
+            else
+            {
+                interactText.SetActive(false);
             }
         }
     }
