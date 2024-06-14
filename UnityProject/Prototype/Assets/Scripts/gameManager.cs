@@ -9,21 +9,25 @@ public class gameManager : MonoBehaviour
     //Updated Visuals
     public static gameManager instance;
 
+    [Header("Menu Info")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] TMP_Text goalCount;
 
+    [Header("Player Info")]
     public GameObject playerSpawnPos;
     public GameObject checkpointPopup;
     public GameObject player;
     public playerControl playerScript;
 
+    [Header("UI Info")]
     public GameObject flashShield;
     public GameObject flashDamage;
     public Image HPBar;
     public Image shieldBar;
+    public Image fearBar;
     public Image enemyHPBar;
 
     public bool isPaused;

@@ -13,7 +13,7 @@ public class itemStats : ScriptableObject
     public GameObject itemModel;
     public AudioClip itemSound;
     public int healthAmt;
-    public int shieldAmt;
+    public int fearAmt;
     public bool isStackable;
     public bool isKey;
     public int maxStackSize;

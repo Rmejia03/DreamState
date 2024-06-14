@@ -45,34 +45,35 @@ public class EnemyAI : MonoBehaviour, IDamage
     bool destinationChosen;
     float angleToPlayer;
     float stoppingDistanceOrigin;
-    bool isPatrolling;
-    bool hasPatrolPoints;
+    //bool isPatrolling;
+    //bool hasPatrolPoints;
     
     Vector3 startingPosition;
     Vector3 playerDirection;
 
     int HPOrigin;
-    int currentPatrolPoint = 0;
+    //int currentPatrolPoint = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+       
        
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
         //UpdateEnemyUI();
 
-        if (patrolPoints != null && patrolPoints.Length > 0)
-        {
-            hasPatrolPoints = true;
-            StartCoroutine(Patrol());
-        }
-        else
-        {
-            hasPatrolPoints = false;
-            StartCoroutine(Roam());
-        }
+        //if (patrolPoints != null && patrolPoints.Length > 0)
+        //{
+        //    hasPatrolPoints = true;
+        //    StartCoroutine(Patrol());
+        //}
+        //else
+        //{
+        //    hasPatrolPoints = false;
+        //    StartCoroutine(Roam());
+        //}
       
     }
 
@@ -138,27 +139,27 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
 
     //Patrolling enemy 
-    IEnumerator Patrol()
-    {
-        isPatrolling = true;
-        agent.stoppingDistance = 0;
-        while(true)
-        {
-            Vector3 targetPosition = patrolPoints[currentPatrolPoint].position;
-            agent.SetDestination(targetPosition);
+    //IEnumerator Patrol()
+    //{
+    //    isPatrolling = true;
+    //    agent.stoppingDistance = 0;
+    //    while(true)
+    //    {
+    //        Vector3 targetPosition = patrolPoints[currentPatrolPoint].position;
+    //        agent.SetDestination(targetPosition);
 
-            while(agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
-            {
-                yield return null;
-            }
+    //        while(agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+    //        {
+    //            yield return null;
+    //        }
 
-            yield return new WaitForSeconds(patrolDelay);
+    //        yield return new WaitForSeconds(patrolDelay);
 
-            currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
-            yield return null;
+    //        currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
+    //        yield return null;
 
-        }
-    }
+    //    }
+    //}
 
     
 

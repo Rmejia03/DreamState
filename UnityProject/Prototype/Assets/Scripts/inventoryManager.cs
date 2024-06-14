@@ -37,10 +37,12 @@ public class inventoryManager : MonoBehaviour
         if (item.itemName == healingItem.itemName)
         {
             healingItemIndex += 1;
+            healingPotionCount.SetText(healingItemIndex.ToString());
         }
         else if (item.itemName == fearItem.itemName)
         {
             fearItemIndex += 1;
+            fearPotionCount.SetText(fearItemIndex.ToString());
         }
         else
         {

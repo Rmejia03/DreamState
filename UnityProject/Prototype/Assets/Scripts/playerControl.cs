@@ -12,9 +12,10 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] Animator animate;
     [SerializeField] CharacterController controller;
 
-    [Header("Health/Shield")]
+    [Header("Health/Shield/Fear")]
     [SerializeField] int HP;
     [SerializeField] float shield;
+    [SerializeField] float fear;
     [SerializeField] float regenRate;
 
     [Header("Attack")]
@@ -55,10 +56,11 @@ public class playerControl : MonoBehaviour, IDamage
     Vector3 playerVelocity;
     int jumpCount;
     int HPOrig;
+    int fearOrig;
     int selectedItem;
     int selectedGun;
     float shieldOrig;
-    bool isShooting;
+    //bool isShooting;
     bool isMeleeing;
     bool isRegen;
 
@@ -373,6 +375,10 @@ public class playerControl : MonoBehaviour, IDamage
 	{
 		gameManager.instance.shieldBar.fillAmount = shield / shieldOrig;
 	}
+    void updateFearUI()
+    {
+        gameManager.instance.fearBar.fillAmount = fear / fearOrig;
+    }
 
     public void spawnPlayer()
     {
@@ -425,29 +431,19 @@ public class playerControl : MonoBehaviour, IDamage
     //    }
     //}
 
-    //void useItem()
-    //{
-    //    if (Input.GetButtonDown("Use"))
-    //    {
-    //        itemStats selectedItem = inventoryManager.GetSelectedItem();
-    //        if (selectedItem != null)
-    //        {
-    //            if (inventoryManager.IsHealingItemSelected())
-    //            {
-    //                healPlayer(selectedItem.healthAmt);
-    //                inventoryManager.RemoveItem(selectedItem);
-    //                changeItem();
-    //            }
-    //            else if (inventoryManager.IsShieldItemSelected())
-    //            {
-    //                shieldPlayer(selectedItem.shieldAmt);
-    //                inventoryManager.RemoveItem(selectedItem);
-    //                changeItem();
-    //            }
-    //        }
-            
-    //    }
-    //}
+    void useItem()
+    {
+        if (Input.GetButtonDown("Use Health"))
+        {
+            healPlayer(inventoryManager.healingItem.healthAmt);
+            inventoryManager.healingItemIndex -= 1;
+        }
+        else if (Input.GetButtonDown("Use Fear"))
+        {
+            fearMeter(inventoryManager.fearItem.fearAmt);
+            inventoryManager.fearItemIndex -= 1;
+        }
+    }
 
     //public void changeItem()
     //{
@@ -476,10 +472,10 @@ public class playerControl : MonoBehaviour, IDamage
         updateHPBarUI();
     }
 
-    public void shieldPlayer(int amount)
+    public void fearMeter(int amount)
     {
-        shield = Mathf.Min(shieldOrig, shield + amount);
-        updateShieldUI();
+        fear = Mathf.Min(fearOrig, fear - amount);
+        updateFearUI();
     }
 }
 
