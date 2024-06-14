@@ -7320,9 +7320,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5444206947753887812, guid: 856a29b3e30b5eb4a88f82767403a8a2, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 2375804354628364027}
-    - targetCorrespondingSourceObject: {fileID: 5444206947753887812, guid: 856a29b3e30b5eb4a88f82767403a8a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1263767055137662468}
   m_SourcePrefab: {fileID: 100100000, guid: 856a29b3e30b5eb4a88f82767403a8a2, type: 3}
@@ -7331,26 +7328,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5444206947753887812, guid: 856a29b3e30b5eb4a88f82767403a8a2, type: 3}
   m_PrefabInstance: {fileID: 4947346757960407381}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2375804354628364027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1091336715277996305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1b12ac441007140a1420e5a6181714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OpenDoor: openDoor
-  CloseDoor: closeDoor
-  waitTimer: 1
-  pauseInteraction: 0
-  doorOpenSound: {fileID: 0}
-  openDelay: 0
-  closeDoorSound: {fileID: 0}
-  closeDelay: 0.3
 --- !u!65 &1263767055137662468
 BoxCollider:
   m_ObjectHideFlags: 0
