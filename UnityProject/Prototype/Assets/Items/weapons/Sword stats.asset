@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Sword stats
   m_EditorClassIdentifier: 
   itemName: 
+  icon: {fileID: 21300000, guid: 834226cee65bd084ab773615e25fb9f6, type: 3}
   itemModel: {fileID: 5494625650325380441, guid: 944f765b84e4c4012876d61f4dfc7b5a, type: 3}
-  itemSound: {fileID: 0}
-  healthAmt: 0
-  shieldAmt: 0
-  isStackable: 0
   isKey: 0
-  maxStackSize: 0
+  itemSound: {fileID: 0}
   vol: 0
-  icon: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
-  hitEffect: {fileID: 933686333084247282, guid: 0f3064cf58c98ac4facebe2fe6682406, type: 3}
+  healthAmt: 0
+  fearAmt: 0
+  isStackable: 0
+  maxStackSize: 0
   weaponDmg: 2
   weaponDistance: 500
   weaponSpeed: 1
   ammoCur: 45
   ammoMax: 45
+  hitEffect: {fileID: 933686333084247282, guid: 0f3064cf58c98ac4facebe2fe6682406, type: 3}

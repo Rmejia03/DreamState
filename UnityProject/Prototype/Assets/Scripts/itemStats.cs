@@ -9,17 +9,20 @@ public class itemStats : ScriptableObject
 {
     public string itemName;
 
-    [Header("Weapons/otherItems")]
+    [Header("item Info")]
+    public Sprite icon;
     public GameObject itemModel;
+    public bool isKey;
+
+    [Header("Sound")]
     public AudioClip itemSound;
+    [Range(0, 1)] public float vol;
+
+    [Header("Potions")]
     public int healthAmt;
     public int fearAmt;
     public bool isStackable;
-    public bool isKey;
     public int maxStackSize;
-    [Range(0, 1)] public float vol;
-    public Sprite icon;
-    public ParticleSystem hitEffect;
 
     [Header("Weapon")]
     [Range(1,10)] public int weaponDmg;
@@ -27,5 +30,5 @@ public class itemStats : ScriptableObject
     [Range(.01f,3)] public float weaponSpeed;
     public int ammoCur;
     public int ammoMax;
-   
+    public ParticleSystem hitEffect;
 }

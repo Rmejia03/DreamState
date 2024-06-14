@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
+using UnityEditor.UIElements;
 
 public class inventoryManager : MonoBehaviour
 { 
@@ -27,6 +28,8 @@ public class inventoryManager : MonoBehaviour
     public itemStats key01Item;
     public ParticleSystem hitEffect;
 
+    public toolbarUI ToolBarUI;
+
     private void Awake()
     {
         Instance = this;
@@ -34,6 +37,8 @@ public class inventoryManager : MonoBehaviour
 
     public void AddItem(itemStats item)
     {
+        //Debug.Log($"AddItem called with item: {item.itemName}");
+
         if (item.itemName == healingItem.itemName)
         {
             healingItemIndex += 1;
@@ -48,6 +53,8 @@ public class inventoryManager : MonoBehaviour
         {
             inventory.Add(item);
             selectedItem = inventory.Count - 1;
+
+            ToolBarUI.UpdateToolbar(inventory);
         }
     }
  
