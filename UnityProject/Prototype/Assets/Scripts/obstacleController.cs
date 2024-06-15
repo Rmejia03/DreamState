@@ -8,6 +8,8 @@ public class obstacleController : MonoBehaviour
     public bool isThorns;
     public bool isMushroom;
 
+    public int HP;
+
     playerControl Player;
     private int speedOrig;
 
@@ -33,6 +35,16 @@ public class obstacleController : MonoBehaviour
                 Player.speed = speedOrig;
                 Player = null;
             }
+        }
+    }
+
+    public void takeDamage(int damage)
+    {
+        HP -= damage;
+
+        if(HP <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }
