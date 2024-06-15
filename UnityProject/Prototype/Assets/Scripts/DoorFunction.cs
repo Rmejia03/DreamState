@@ -16,6 +16,7 @@ public class DoorFunction : MonoBehaviour
     public float interactDistance = 3f;
 
     private Transform playerTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,14 +29,7 @@ public class DoorFunction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerTransform = other.transform;
-            if (doorOpen)
-            {
-                CloseTxt.SetActive(true);
-            }
-            else
-            {
-                Instructions.SetActive(true);
-            }
+            InstructionText();
             Action = true;
         }
     }
@@ -47,6 +41,21 @@ public class DoorFunction : MonoBehaviour
             Instructions.SetActive(false);
             CloseTxt.SetActive(false);
             Action = false;
+            playerTransform = null;
+        }
+    }
+
+    private void InstructionText()
+    {
+        if(doorOpen)
+        {
+            CloseTxt.SetActive(true);
+            Instructions.SetActive(false);
+        }
+        else
+        {
+            Instructions.SetActive(true);
+            CloseTxt.SetActive(false);
         }
     }
     // Update is called once per frame
@@ -56,28 +65,33 @@ public class DoorFunction : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (!doorOpen)
-                {
-                    Trigger.SetActive(true);
-                    Instructions.SetActive(true);
-                    Animation.GetComponent<Animator>().Play("DoorOpen");
-                    OpenSound.Play();
-                    doorOpen = true;
-                    Instructions.SetActive(false);
-                    CloseTxt.SetActive(true);
-                }
-                else
-                {
-                    Trigger.SetActive(true);
-                    CloseTxt.SetActive(true);
-                    Animation.GetComponent<Animator>().Play("DoorClose");
-                    CloseSound.Play();
-                    doorOpen = false;
-                    CloseTxt.SetActive(false);
-                    Instructions.SetActive(true);
-                }
-                Action = false;
+                DoorInteraction();    
             }
         }
+    }
+
+    public void DoorInteraction()
+    {
+        if (!doorOpen)
+        {
+            Trigger.SetActive(true);
+            Instructions.SetActive(true);
+            Animation.GetComponent<Animator>().Play("DoorOpen");
+            OpenSound.Play();
+            doorOpen = true;
+            Instructions.SetActive(false);
+            CloseTxt.SetActive(true);
+        }
+        else
+        {
+            Trigger.SetActive(true);
+            CloseTxt.SetActive(true);
+            Animation.GetComponent<Animator>().Play("DoorClose");
+            CloseSound.Play();
+            doorOpen = false;
+            CloseTxt.SetActive(false);
+            Instructions.SetActive(true);
+        }
+        InstructionText();
     }
 }
