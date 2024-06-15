@@ -12,7 +12,6 @@ public class itemStats : ScriptableObject
     [Header("item Info")]
     public Sprite icon;
     public GameObject itemModel;
-    public bool isKey;
 
     [Header("Sound")]
     public AudioClip itemSound;
@@ -25,10 +24,14 @@ public class itemStats : ScriptableObject
     public int maxStackSize;
 
     [Header("Weapon")]
-    [Range(1,10)] public int weaponDmg;
-    [Range(1,500)]public int weaponDistance;
-    [Range(.01f,3)] public float weaponSpeed;
+    [Range(1, 10)] public int weaponDmg;
+    [Range(1, 500)] public int weaponDistance;
+    [Range(.01f, 3)] public float weaponSpeed;
     public int ammoCur;
     public int ammoMax;
     public ParticleSystem hitEffect;
+
+    [Header("Key")]
+    public bool isKey;
+    public int keyID;
 }
