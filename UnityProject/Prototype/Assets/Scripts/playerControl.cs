@@ -131,15 +131,37 @@ public class playerControl : MonoBehaviour, IDamage
 
         Sprint();
 
-        moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
-                        (Input.GetAxis("Vertical") * transform.forward);
+        //moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+        //                (Input.GetAxis("Vertical") * transform.forward);
+        //controller.Move(moveDirection * speed * Time.deltaTime);
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        moveDirection = (horizontalInput * transform.right) + ( verticalInput * transform.forward);
         controller.Move(moveDirection * speed * Time.deltaTime);
 
+
         float isMoving = moveDirection.magnitude;
-        if(animate != null)
+
+        animate.SetBool("Move Forward", verticalInput > 0);
+        animate.SetBool("Move Backward", verticalInput < 0);
+        animate.SetBool("Move Right", horizontalInput > 0);
+        animate.SetBool("Move Left", horizontalInput < 0);
+
+        if(isMoving == 0)
         {
-            animate.SetFloat("IsMoving", isMoving);
+            animate.SetBool("Move Forward", false );
+            animate.SetBool("Move Backward", false);
+            animate.SetBool("Move Right", false);
+            animate.SetBool("Move Left", false);
         }
+
+
+        //if(animate != null)
+        //{
+        //    animate.SetFloat("IsMoving", isMoving);
+        //}
 
         //if (Input.GetButton("Fire1") && !isShooting)
         //{
