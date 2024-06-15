@@ -157,7 +157,17 @@ public class playerControl : MonoBehaviour, IDamage
             animate.SetBool("Move Left", false);
         }
 
+        if(Input.GetButtonDown("Dodge") && horizontalInput > 0)
+        {
+            animate.SetTrigger("Dodge Right");
+            StartCoroutine(Dodge(transform.right));
+        }
 
+        if(Input.GetButtonDown("Dodge") && horizontalInput < 0)
+        {
+            animate.SetTrigger("Dodge Left");
+            StartCoroutine(Dodge(-transform.right));
+        }
         //if(animate != null)
         //{
         //    animate.SetFloat("IsMoving", isMoving);
@@ -294,6 +304,22 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator Dodge(Vector3 dodgeDirection)
+    {
+        float dodgeDistance = 3f;
+
+        float dodgeDuration = 0.5f;
+
+        float startTime = Time.time;
+
+        while(Time.time < startTime + dodgeDuration)
+        {
+            controller.Move(dodgeDirection * (dodgeDistance * Time.deltaTime / dodgeDuration));
+
+            yield return null;
+        }
+        
+    }
     IEnumerator MeleeAttack()
     {
         if (!isMeleeing)
