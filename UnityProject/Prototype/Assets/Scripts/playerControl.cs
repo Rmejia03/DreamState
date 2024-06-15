@@ -28,7 +28,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
     [SerializeField] int sprintMod;
-    [SerializeField] int speed;
+    public int speed;
 
     [Header("Melee")]
     [SerializeField] int meleeDamage;
@@ -157,6 +157,10 @@ public class playerControl : MonoBehaviour, IDamage
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    public void slowDownPlayer(int slowSpeed)
+    {
+        speed -= slowSpeed;
+    }
     void Sprint()
     {
         if (Input.GetButtonDown("Sprint"))
