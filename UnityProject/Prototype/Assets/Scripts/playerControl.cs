@@ -131,15 +131,56 @@ public class playerControl : MonoBehaviour, IDamage
 
         Sprint();
 
-        moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
-                        (Input.GetAxis("Vertical") * transform.forward);
+        //moveDirection = (Input.GetAxis("Horizontal") * transform.right) +
+        //                (Input.GetAxis("Vertical") * transform.forward);
+        //controller.Move(moveDirection * speed * Time.deltaTime);
+
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        moveDirection = (horizontalInput * transform.right) + ( verticalInput * transform.forward);
         controller.Move(moveDirection * speed * Time.deltaTime);
 
+
         float isMoving = moveDirection.magnitude;
-        if(animate != null)
+
+        animate.SetBool("Move Forward", verticalInput > 0);
+        animate.SetBool("Move Backward", verticalInput < 0);
+        animate.SetBool("Move Right", horizontalInput > 0);
+        animate.SetBool("Move Left", horizontalInput < 0);
+
+        if(isMoving == 0)
         {
-            animate.SetFloat("IsMoving", isMoving);
+            animate.SetBool("Move Forward", false );
+            animate.SetBool("Move Backward", false);
+            animate.SetBool("Move Right", false);
+            animate.SetBool("Move Left", false);
         }
+
+        //Dodge Right
+        if(Input.GetButtonDown("Dodge") && horizontalInput > 0)
+        {
+            animate.SetTrigger("Dodge Right");
+            StartCoroutine(Dodge(transform.right));
+        }
+
+        //Dodge Left
+        if(Input.GetButtonDown("Dodge") && horizontalInput < 0)
+        {
+            animate.SetTrigger("Dodge Left");
+            StartCoroutine(Dodge(-transform.right));
+        }
+
+        //Dodge Backwards
+        if(Input.GetButtonDown("Dodge") && verticalInput < 0)
+        {
+            animate.SetTrigger("Dodge Backwards");
+            StartCoroutine(Dodge(-transform.forward));
+        }
+        //if(animate != null)
+        //{
+        //    animate.SetFloat("IsMoving", isMoving);
+        //}
 
         //if (Input.GetButton("Fire1") && !isShooting)
         //{
@@ -272,6 +313,22 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
+    IEnumerator Dodge(Vector3 dodgeDirection)
+    {
+        float dodgeDistance = 3f;
+
+        float dodgeDuration = 0.5f;
+
+        float startTime = Time.time;
+
+        while(Time.time < startTime + dodgeDuration)
+        {
+            controller.Move(dodgeDirection * (dodgeDistance * Time.deltaTime / dodgeDuration));
+
+            yield return null;
+        }
+        
+    }
     IEnumerator MeleeAttack()
     {
         if (!isMeleeing)
