@@ -82,15 +82,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
        float animateSpeed = agent.velocity.normalized.magnitude;
        animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
-        //if (playerInRange && !CanSeePlayer())
-        //{
-        //    StartCoroutine(Roam());
-        //}
-        //else if (!playerInRange)
-        //{
-        //    StartCoroutine(Roam());
-        //}
-        /*if(playerInRange && !isAttacking && CanSeePlayer())
+        if (playerInRange && !CanSeePlayer())
+        {
+            StartCoroutine(Roam());
+        }
+        else if (!playerInRange)
+        {
+            StartCoroutine(Roam());
+        }
+        if(playerInRange && !isAttacking && CanSeePlayer())
         {
             float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
@@ -104,7 +104,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             }
             else
                 agent.SetDestination(gameManager.instance.player.transform.position);
-        }*/
+        }
 
         if(playerInRange && !CanSeePlayer())
         {
@@ -266,7 +266,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             animate.SetTrigger("MAttack");
 
             yield return new WaitForSeconds(meleeAnimDur);            
-            
+            meleeHit();
             isAttacking = false;
         }
     }
