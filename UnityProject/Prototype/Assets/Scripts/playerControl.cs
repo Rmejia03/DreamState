@@ -157,16 +157,25 @@ public class playerControl : MonoBehaviour, IDamage
             animate.SetBool("Move Left", false);
         }
 
+        //Dodge Right
         if(Input.GetButtonDown("Dodge") && horizontalInput > 0)
         {
             animate.SetTrigger("Dodge Right");
             StartCoroutine(Dodge(transform.right));
         }
 
+        //Dodge Left
         if(Input.GetButtonDown("Dodge") && horizontalInput < 0)
         {
             animate.SetTrigger("Dodge Left");
             StartCoroutine(Dodge(-transform.right));
+        }
+
+        //Dodge Backwards
+        if(Input.GetButtonDown("Dodge") && verticalInput < 0)
+        {
+            animate.SetTrigger("Dodge Backwards");
+            StartCoroutine(Dodge(-transform.forward));
         }
         //if(animate != null)
         //{

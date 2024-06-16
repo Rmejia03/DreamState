@@ -1419,7 +1419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3357411062115639825, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4594526744968587896, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
       propertyPath: fear
@@ -1452,8 +1452,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3090507727678580518, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5180237263439096194, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 461f8d4ce2fffac48aaed5a6b1fac684, type: 2}
     - target: {fileID: 5274867702682255313, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -45.068897
