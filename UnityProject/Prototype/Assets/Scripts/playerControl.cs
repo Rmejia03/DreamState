@@ -362,6 +362,11 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
+    public void BackhandHit()
+    {
+        DetectMeleeHit();
+    }
+
     void DetectMeleeHit()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRange);
