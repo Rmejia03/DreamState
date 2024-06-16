@@ -362,10 +362,7 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
-    public void BackhandHit()
-    {
-        DetectMeleeHit();
-    }
+
 
     void DetectMeleeHit()
     {
