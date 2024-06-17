@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using TMPro;
-using UnityEditor.UIElements;
 
 public class inventoryManager : MonoBehaviour
 { 
