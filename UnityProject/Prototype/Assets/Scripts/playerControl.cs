@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using TMPro;
 
 public class playerControl : MonoBehaviour, IDamage
 {
@@ -17,6 +18,8 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float shield;
     [SerializeField] int fear;
     [SerializeField] float regenRate;
+    [SerializeField] TextMeshProUGUI healthPotionText;
+    [SerializeField] TextMeshProUGUI fearPotionText;
 
     [Header("Attack")]
     [SerializeField] float weaponRate;
@@ -445,6 +448,24 @@ public class playerControl : MonoBehaviour, IDamage
         gameManager.instance.fearBar.fillAmount = fear + fearOrig;
     }
 
+    void updateHealthPotionUI()
+    {
+        if(inventoryManager != null)
+        {
+            int healthPotionCount = inventoryManager.healingItemIndex;
+            healthPotionText.text = healthPotionCount.ToString();
+        }
+    }
+
+    void updateFearPotionUI()
+    {
+        if (inventoryManager != null)
+        {
+            int fearPotionCount = inventoryManager.fearItemIndex;
+            fearPotionText.text = fearPotionCount.ToString();
+        }
+    }
+
     public void spawnPlayer()
     {
         HP = HPOrig; 
@@ -500,13 +521,29 @@ public class playerControl : MonoBehaviour, IDamage
     {
         if (Input.GetButtonDown("Use Health"))
         {
-            healPlayer(inventoryManager.healingItem.healthAmt);
-            inventoryManager.healingItemIndex -= 1;
+            if(inventoryManager.healingItemIndex <= 0 || HP >= HPOrig)
+            {
+                return;
+            }
+            else
+            {
+                healPlayer(inventoryManager.healingItem.healthAmt);
+                inventoryManager.healingItemIndex -= 1;
+                updateHealthPotionUI();
+            }
         }
         else if (Input.GetButtonDown("Use Fear"))
         {
-            fearMeter(inventoryManager.fearItem.fearAmt);
-            inventoryManager.fearItemIndex -= 1;
+            if (inventoryManager.fearItemIndex <= 0 || fear >= fearOrig)
+            {
+                return;
+            }
+            else
+            {
+                fearMeter(inventoryManager.fearItem.fearAmt);
+                inventoryManager.fearItemIndex -= 1;
+                updateFearPotionUI();
+            }
         }
     }
 

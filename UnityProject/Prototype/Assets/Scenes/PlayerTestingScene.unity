@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -261,6 +261,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 256be7671dc02934291923a1606d0dea, type: 3}
+--- !u!114 &229465612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8630280984602106959, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+  m_PrefabInstance: {fileID: 558891266385470881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &282850047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -322,6 +333,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63bc77d6d7dce4c489ef96bcb45056d4, type: 3}
+--- !u!114 &341602932 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6209382587744825892, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+  m_PrefabInstance: {fileID: 558891266385470881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &350631011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -713,6 +735,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecc8f4cfcb3b3f84182c2819e70b752d, type: 3}
+--- !u!114 &1178105637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5184504343680377159, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+  m_PrefabInstance: {fileID: 558891266385470881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1321194326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -872,6 +905,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1459499081 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8066753934273940769, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+  m_PrefabInstance: {fileID: 558891266385470881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1490560060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,6 +1046,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5718813585343631606, guid: 6096cd01f7f75c5488e8573834474fb2, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7648811369473612582, guid: 6096cd01f7f75c5488e8573834474fb2, type: 3}
       propertyPath: m_Name
       value: Arrow_Trap
@@ -1055,6 +1103,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2092241547}
   m_SourcePrefab: {fileID: 100100000, guid: 6096cd01f7f75c5488e8573834474fb2, type: 3}
+--- !u!114 &1896677150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4855410834079868205, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+  m_PrefabInstance: {fileID: 558891266385470881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2092241542 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7648811369473612582, guid: 6096cd01f7f75c5488e8573834474fb2, type: 3}
@@ -1291,6 +1350,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3689627568406684256, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+      propertyPath: HPBar
+      value: 
+      objectReference: {fileID: 1178105637}
+    - target: {fileID: 3689627568406684256, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+      propertyPath: fearBar
+      value: 
+      objectReference: {fileID: 341602932}
+    - target: {fileID: 3689627568406684256, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+      propertyPath: shieldBar
+      value: 
+      objectReference: {fileID: 229465612}
     - target: {fileID: 3892389358452789867, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1766,6 +1837,14 @@ PrefabInstance:
       propertyPath: meleeCooldown
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5825858907121114725, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
+      propertyPath: fearPotionText
+      value: 
+      objectReference: {fileID: 1896677150}
+    - target: {fileID: 5825858907121114725, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
+      propertyPath: healthPotionText
+      value: 
+      objectReference: {fileID: 1459499081}
     - target: {fileID: 5825858907121114725, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
       propertyPath: inventoryManager
       value: 
