@@ -104,7 +104,7 @@ public class playerControl : MonoBehaviour, IDamage
             Movement();
             HandleBackhandMelee();
             //selectItem();
-            //useItem();
+            useItem();
 
            /*if(!isMeleeing && Input.GetButtonDown("Fire1"))
             {
@@ -530,6 +530,8 @@ public class playerControl : MonoBehaviour, IDamage
     //    }
 
     //}
+
+
 
     public void healPlayer(int amount)
     {
