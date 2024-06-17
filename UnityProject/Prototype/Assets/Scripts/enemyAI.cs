@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     //[SerializeField] Material enemyType;
     [SerializeField] Animator animate;
     [SerializeField] Transform headPosition;
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int animateSpeedTransition;
     [SerializeField] int ViewAngle;
     [SerializeField] int faceTargetSpeed;
@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     Vector3 startingPosition;
     Vector3 playerDirection;
 
-    int HPOrigin;
+    float HPOrigin;
     //int currentPatrolPoint = 0;
 
     // Start is called before the first frame update
@@ -271,7 +271,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
-    public void takeDamage(int damage)
+    public void takeDamage(float damage, bool slowFlash = false)
     {
         HP -= damage;
 
