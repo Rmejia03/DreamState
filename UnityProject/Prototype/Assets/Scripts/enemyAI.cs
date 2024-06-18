@@ -266,7 +266,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             animate.SetTrigger("MAttack");
 
             yield return new WaitForSeconds(meleeAnimDur);            
-            meleeHit();
+            //meleeHit();
             isAttacking = false;
         }
     }
