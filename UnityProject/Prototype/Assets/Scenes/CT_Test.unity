@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 0c2b223cdaae04949940b44166a89729, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1b0342c2728f7d6498cfc1f4e393de65, type: 2}
 --- !u!1001 &188687535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1311,7 +1311,6 @@ GameObject:
   - component: {fileID: 9005149075778264348}
   - component: {fileID: 5576643487638350428}
   - component: {fileID: 827342349013481514}
-  - component: {fileID: 6705048790561595441}
   m_Layer: 0
   m_Name: Plate Trigger
   m_TagString: Untagged
@@ -1327,6 +1326,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2616483578490904230, guid: 84b106a36b0aa8c46849b594fbe9f817, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: efc7b318088c42a479269e3efa77a3aa, type: 2}
     - target: {fileID: 5338364725112779735, guid: 84b106a36b0aa8c46849b594fbe9f817, type: 3}
       propertyPath: m_Name
       value: Skeleton
@@ -1334,6 +1337,10 @@ PrefabInstance:
     - target: {fileID: 5338364725112779735, guid: 84b106a36b0aa8c46849b594fbe9f817, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269621733866234535, guid: 84b106a36b0aa8c46849b594fbe9f817, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9207668606757643555, guid: 84b106a36b0aa8c46849b594fbe9f817, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1451,21 +1458,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3377347788371566070}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &6705048790561595441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3377347788371566070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5fb5b7661529fb4084206d68eaf3a9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrow: {fileID: 5104563172443815125, guid: dec76db6fbde534428546ea41e5e401a, type: 3}
-  shootPOS: {fileID: 0}
-  resetRate: 1
 --- !u!1 &7208592211823951676
 GameObject:
   m_ObjectHideFlags: 0
