@@ -14,7 +14,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
 
     [Header("Health/Shield/Fear")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] float shield;
     [SerializeField] int fear;
     [SerializeField] float regenRate;
@@ -58,7 +58,7 @@ public class playerControl : MonoBehaviour, IDamage
     Vector3 moveDirection;
     Vector3 playerVelocity;
     int jumpCount;
-    int HPOrig;
+    float HPOrig;
     int fearOrig;
     int selectedItem;
     int selectedGun;
@@ -66,6 +66,10 @@ public class playerControl : MonoBehaviour, IDamage
     //bool isShooting;
     bool isMeleeing;
     bool isRegen;
+
+    bool inHazard = false;
+    bool isFlashing = false;
+    float hazardFlashDelay = 1f;
 
     float nextMeleeTime;
     int attackSeq = 0;
@@ -386,25 +390,55 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount, bool slowFlash = false)
     {
-        if (shield <= 0)
+        if(shield <= 0)
         {
             HP -= amount;
             updateHPBarUI();
-            StartCoroutine(flashScreen());
+            if(slowFlash)
+            {
+                StartCoroutine(flashScreenSlow());
+            }
+            else
+            {
+                StartCoroutine(flashScreen());
+            }
         }
         else
         {
             shield -= amount;
-            updateShieldUI();
-            StartCoroutine(flashShield());
-		}
-        
-        if (HP <= 0)
+            updateHPBarUI();
+            if(slowFlash)
+            {
+                StartCoroutine(flashShieldSlow());
+            }
+            else
+            {
+                StartCoroutine (flashShield());
+            }
+        }
+        if(HP <= 0)
         {
             gameManager.instance.youLost();
         }
+  //      if (shield <= 0)
+  //      {
+  //          HP -= amount;
+  //          updateHPBarUI();
+  //          StartCoroutine(flashScreen());
+  //      }
+  //      else
+  //      {
+  //          shield -= amount;
+  //          updateShieldUI();
+  //          StartCoroutine(flashShield());
+		//}
+        
+  //      if (HP <= 0)
+  //      {
+  //          gameManager.instance.youLost();
+  //      }
     }
 
 	IEnumerator flashScreen()
@@ -420,7 +454,31 @@ public class playerControl : MonoBehaviour, IDamage
 		yield return new WaitForSeconds(0.1f);
 		gameManager.instance.flashShield.SetActive(false);
 	}
-    
+    IEnumerator flashScreenSlow()
+    {
+        if (!isFlashing)
+        {
+            isFlashing = true;
+            gameManager.instance.flashDamage.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            gameManager.instance.flashDamage.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            isFlashing = false;
+        }
+    }
+
+    IEnumerator flashShieldSlow()
+    {
+        if (!isFlashing)
+        {
+            isFlashing = true;
+            gameManager.instance.flashShield.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            gameManager.instance.flashShield.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            isFlashing = false;
+        }
+    }
     IEnumerator RegenShield()
     {
         isRegen = true;
