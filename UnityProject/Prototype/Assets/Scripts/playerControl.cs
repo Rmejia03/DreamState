@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using TMPro;
 
 public class playerControl : MonoBehaviour, IDamage
 {
@@ -18,8 +17,6 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float shield;
     [SerializeField] int fear;
     [SerializeField] float regenRate;
-    [SerializeField] TextMeshProUGUI healthPotionText;
-    [SerializeField] TextMeshProUGUI fearPotionText;
 
     [Header("Attack")]
     [SerializeField] float weaponRate;
@@ -506,24 +503,6 @@ public class playerControl : MonoBehaviour, IDamage
         gameManager.instance.fearBar.fillAmount = fear + fearOrig;
     }
 
-    void updateHealthPotionUI()
-    {
-        if(inventoryManager != null)
-        {
-            int healthPotionCount = inventoryManager.healingItemIndex;
-            healthPotionText.text = healthPotionCount.ToString();
-        }
-    }
-
-    void updateFearPotionUI()
-    {
-        if (inventoryManager != null)
-        {
-            int fearPotionCount = inventoryManager.fearItemIndex;
-            fearPotionText.text = fearPotionCount.ToString();
-        }
-    }
-
     public void spawnPlayer()
     {
         HP = HPOrig; 
@@ -579,52 +558,41 @@ public class playerControl : MonoBehaviour, IDamage
     {
         if (Input.GetButtonDown("Use Health"))
         {
-            if(inventoryManager.healingItemIndex <= 0 || HP >= HPOrig)
-            {
-                return;
-            }
-            else
-            {
                 healPlayer(inventoryManager.healingItem.healthAmt);
+                updateHPBarUI();
                 inventoryManager.healingItemIndex -= 1;
-                updateHealthPotionUI();
-            }
+                inventoryManager.UpdateCount();
+            
         }
         else if (Input.GetButtonDown("Use Fear"))
         {
-            if (inventoryManager.fearItemIndex <= 0 || fear >= fearOrig)
-            {
-                return;
-            }
-            else
-            {
                 fearMeter(inventoryManager.fearItem.fearAmt);
+                updateFearUI();
                 inventoryManager.fearItemIndex -= 1;
-                updateFearPotionUI();
-            }
+                inventoryManager.UpdateCount();
         }
     }
 
-    //public void changeItem()
-    //{
-    //    itemStats selectedItem = inventoryManager.GetSelectedItem();
+        //public void changeItem()
+        //{
+        //    itemStats selectedItem = inventoryManager.GetSelectedItem();
 
-    //    if (selectedItem != null)
-    //    {
-    //        weaponDamage = selectedItem.weaponDmg;
-    //        weaponDistance = selectedItem.weaponDistance;
-    //        weaponRate = selectedItem.weaponSpeed;
+        //    if (selectedItem != null)
+        //    {
+        //        weaponDamage = selectedItem.weaponDmg;
+        //        weaponDistance = selectedItem.weaponDistance;
+        //        weaponRate = selectedItem.weaponSpeed;
 
-    //        itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
-    //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
-    //    }
-    //    else if (selectedItem == null)
-    //    {
-    //        itemModels.GetComponent<MeshFilter>().sharedMesh = null;
-    //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = null;
-    //    }
+        //        itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
+        //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
+        //    }
+        //    else if (selectedItem == null)
+        //    {
+        //        itemModels.GetComponent<MeshFilter>().sharedMesh = null;
+        //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = null;
+        //    }
 
-    //}
+        //}
 
 
 
