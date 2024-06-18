@@ -558,36 +558,41 @@ public class playerControl : MonoBehaviour, IDamage
     {
         if (Input.GetButtonDown("Use Health"))
         {
-            healPlayer(inventoryManager.healingItem.healthAmt);
-            inventoryManager.healingItemIndex -= 1;
+                healPlayer(inventoryManager.healingItem.healthAmt);
+                updateHPBarUI();
+                inventoryManager.healingItemIndex -= 1;
+                inventoryManager.UpdateCount();
+            
         }
         else if (Input.GetButtonDown("Use Fear"))
         {
-            fearMeter(inventoryManager.fearItem.fearAmt);
-            inventoryManager.fearItemIndex -= 1;
+                fearMeter(inventoryManager.fearItem.fearAmt);
+                updateFearUI();
+                inventoryManager.fearItemIndex -= 1;
+                inventoryManager.UpdateCount();
         }
     }
 
-    //public void changeItem()
-    //{
-    //    itemStats selectedItem = inventoryManager.GetSelectedItem();
+        //public void changeItem()
+        //{
+        //    itemStats selectedItem = inventoryManager.GetSelectedItem();
 
-    //    if (selectedItem != null)
-    //    {
-    //        weaponDamage = selectedItem.weaponDmg;
-    //        weaponDistance = selectedItem.weaponDistance;
-    //        weaponRate = selectedItem.weaponSpeed;
+        //    if (selectedItem != null)
+        //    {
+        //        weaponDamage = selectedItem.weaponDmg;
+        //        weaponDistance = selectedItem.weaponDistance;
+        //        weaponRate = selectedItem.weaponSpeed;
 
-    //        itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
-    //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
-    //    }
-    //    else if (selectedItem == null)
-    //    {
-    //        itemModels.GetComponent<MeshFilter>().sharedMesh = null;
-    //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = null;
-    //    }
+        //        itemModels.GetComponent<MeshFilter>().sharedMesh = selectedItem.itemModel.GetComponent<MeshFilter>().sharedMesh;
+        //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = selectedItem.itemModel.GetComponent<MeshRenderer>().sharedMaterial;
+        //    }
+        //    else if (selectedItem == null)
+        //    {
+        //        itemModels.GetComponent<MeshFilter>().sharedMesh = null;
+        //        itemModels.GetComponent<MeshRenderer>().sharedMaterial = null;
+        //    }
 
-    //}
+        //}
 
 
 

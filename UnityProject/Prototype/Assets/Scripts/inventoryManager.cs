@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using TMPro;
 
 public class inventoryManager : MonoBehaviour
-{ 
+{
     public static inventoryManager Instance;
 
     [Header("items")]
@@ -60,7 +60,7 @@ public class inventoryManager : MonoBehaviour
             ToolBarUI.UpdateToolbar(inventory);
         }
     }
- 
+
     public void RemoveItem(itemStats item)
     {
         if (inventory.Contains(item))
@@ -78,11 +78,11 @@ public class inventoryManager : MonoBehaviour
     {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        if(scroll > 0f)
+        if (scroll > 0f)
         {
             SelectNextItem();
         }
-        else if(scroll < 0f)
+        else if (scroll < 0f)
         {
             SelectPreviousItem();
         }
@@ -152,6 +152,12 @@ public class inventoryManager : MonoBehaviour
     {
         selectedItem = (selectedItem - 1 + inventory.Count) % inventory.Count;
         ToolBarUI.SelectSlot(selectedItem);
+    }
+
+    public void UpdateCount()
+    {
+        healingPotionCount.SetText(healingItemIndex.ToString());
+        fearPotionCount.SetText(fearItemIndex.ToString());
     }
 
     //public bool IsHealingItemSelected()
