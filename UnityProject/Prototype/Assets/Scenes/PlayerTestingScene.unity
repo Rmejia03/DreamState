@@ -539,6 +539,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 256be7671dc02934291923a1606d0dea, type: 3}
+--- !u!114 &528343020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3441878002832522939, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+  m_PrefabInstance: {fileID: 558891266385470881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d18fa837e4d3d5349a40a9dc8fc7cc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &635574034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1390,6 +1401,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4157307396927447779, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157307396927447779, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157307396927447779, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.3679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157307396927447779, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.3679245
+      objectReference: {fileID: 0}
     - target: {fileID: 4445378129547222493, guid: da21a16a861615b4393abb49baa9d72d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1841,6 +1868,10 @@ PrefabInstance:
       propertyPath: fearPotionText
       value: 
       objectReference: {fileID: 1896677150}
+    - target: {fileID: 5825858907121114725, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
+      propertyPath: InventoryManager
+      value: 
+      objectReference: {fileID: 528343020}
     - target: {fileID: 5825858907121114725, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
       propertyPath: healthPotionText
       value: 

@@ -46,6 +46,7 @@ public class inventoryManager : MonoBehaviour
         {
             healingItemIndex += 1;
             healingPotionCount.SetText(healingItemIndex.ToString());
+            //Debug.Log($"Added healing item. Total: {healingItemIndex}");
         }
         else if (item.itemName == fearItem.itemName)
         {

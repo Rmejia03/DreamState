@@ -9,11 +9,11 @@ public class door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        itemStats selectedItem = gameManager.instance.playerScript.inventoryManager.GetSelectedItem();
+        itemStats selectedItem = gameManager.instance.playerScript.InventoryManager.GetSelectedItem();
         if (other.CompareTag("Player") && selectedItem != null && selectedItem.isKey == true && ID == selectedItem.keyID)
         {
             Destroy(gameObject);
-            gameManager.instance.playerScript.inventoryManager.RemoveItem(selectedItem);
+            gameManager.instance.playerScript.InventoryManager.RemoveItem(selectedItem);
             //gameManager.instance.playerScript.changeItem();
         }
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -38,7 +39,7 @@ public class playerControl : MonoBehaviour, IDamage
 
     [Header("Items")]
     [SerializeField] GameObject itemModels;
-    public inventoryManager inventoryManager;
+    public inventoryManager InventoryManager;
 
     [Header("Doors")]
     [SerializeField] int rayLength = 5;
@@ -64,9 +65,9 @@ public class playerControl : MonoBehaviour, IDamage
     bool isMeleeing;
     bool isRegen;
 
-    bool inHazard = false;
+    //bool inHazard = false;
     bool isFlashing = false;
-    float hazardFlashDelay = 1f;
+    //float hazardFlashDelay = 1f;
 
     float nextMeleeTime;
     int attackSeq = 0;
@@ -82,6 +83,7 @@ public class playerControl : MonoBehaviour, IDamage
         animator = GetComponent<Animator>();
 
         updateHPBarUI();
+        updateShieldUI();
         updateFearUI();
     }
 
@@ -234,13 +236,13 @@ public class playerControl : MonoBehaviour, IDamage
             {
                 dmg.takeDamage(weaponDamage);
             }
-            itemStats selectedItem = inventoryManager.GetSelectedItem();
+            itemStats selectedItem = InventoryManager.GetSelectedItem();
             if (selectedItem != null && selectedItem.hitEffect != null)
             {
                 Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
             }
 
-            itemStats itemStats = inventoryManager.GetSelectedItem();
+            itemStats itemStats = InventoryManager.GetSelectedItem();
             if (selectedItem != null && selectedItem.hitEffect != null)
             {
                 Instantiate(selectedItem.hitEffect, hit.point, Quaternion.identity);
@@ -405,7 +407,8 @@ public class playerControl : MonoBehaviour, IDamage
         else
         {
             shield -= amount;
-            updateHPBarUI();
+            //updateHPBarUI();
+            updateShieldUI();
             if(slowFlash)
             {
                 StartCoroutine(flashShieldSlow());
@@ -518,14 +521,14 @@ public class playerControl : MonoBehaviour, IDamage
 
     public void getItemStats(itemStats item)
     {
-        if(inventoryManager == null)
+        if(InventoryManager == null)
         {
             return;
         }
 
         //inventoryManager.AddItem(item);
 
-        itemStats selectedItem = inventoryManager.GetSelectedItem();
+        itemStats selectedItem = InventoryManager.GetSelectedItem();
 
         if(selectedItem != null)
         {
@@ -558,18 +561,43 @@ public class playerControl : MonoBehaviour, IDamage
     {
         if (Input.GetButtonDown("Use Health"))
         {
-                healPlayer(inventoryManager.healingItem.healthAmt);
-                updateHPBarUI();
-                inventoryManager.healingItemIndex -= 1;
-                inventoryManager.UpdateCount();
             
+            if (InventoryManager.healingItemIndex == 0)
+            {
+                //Debug.Log("No healing items left");
+                return;
+            }
+            else if(HP == HPOrig)
+            {
+                return;
+            }
+            else
+            {
+                //Debug.Log($"Healing with amount: {InventoryManager.healingItem.healthAmt}");
+                healPlayer(InventoryManager.healingItem.healthAmt);
+                updateHPBarUI();
+                InventoryManager.healingItemIndex -= 1;
+                InventoryManager.UpdateCount();
+                //Debug.Log($"Healing items left: {InventoryManager.healingItemIndex}");
+            }
         }
         else if (Input.GetButtonDown("Use Fear"))
         {
-                fearMeter(inventoryManager.fearItem.fearAmt);
+            if(InventoryManager.fearItemIndex <= 0)
+            {
+                return;
+            }
+            else if (fear == fearOrig)
+            {
+                return;
+            }
+            else
+            {
+                fearMeter(InventoryManager.fearItem.fearAmt);
                 updateFearUI();
-                inventoryManager.fearItemIndex -= 1;
-                inventoryManager.UpdateCount();
+                InventoryManager.fearItemIndex -= 1;
+                InventoryManager.UpdateCount();
+            }   
         }
     }
 
@@ -600,6 +628,7 @@ public class playerControl : MonoBehaviour, IDamage
     {
         HP = Mathf.Min(HPOrig, HP + amount);
         updateHPBarUI();
+        Debug.Log($"Player healed by {amount}. Current HP: {HP}");
     }
 
     public void fearMeter(int amount)
