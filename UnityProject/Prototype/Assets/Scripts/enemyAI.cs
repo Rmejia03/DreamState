@@ -40,6 +40,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] float patrolSpeed;
     [SerializeField] int patrolDelay;
 
+    [Header("Death Animation")]
+    [SerializeField] AnimationClip deathAnimation;
+    [SerializeField] float deathAniDuration;
+
+    
+
+
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
@@ -283,12 +290,17 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if (HP <= 0) 
         {
-            gameManager.instance.updateGameGoal(-1); 
-            Destroy(gameObject); 
+            //gameManager.instance.updateGameGoal(-1); 
+            StartCoroutine(PlayDeathAnimation()); 
         }
     }
 
-   
+   IEnumerator PlayDeathAnimation()
+    {
+        animate.SetTrigger("Death");
+        yield return new WaitForSeconds(deathAniDuration);
+        Destroy(gameObject);
+    }
 
     IEnumerator hitFlash()
     {
