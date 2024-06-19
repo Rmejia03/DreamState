@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class pumpkinPopUpTrigger : MonoBehaviour
 {
-    public pumpkinPopUpTrigger pumpkinPopUp;
+    public enemyPopup pumpkinPopUp;
 
     private void OnTriggerEnter(Collider other)
     {
