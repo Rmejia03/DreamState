@@ -36,6 +36,8 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int meleeRange;
     [SerializeField] float meleeCooldown;
     [SerializeField] float meleeAniDuration;
+    [SerializeField] float comboResetTime;
+    [SerializeField] float comboDamageMultiplier;
 
     [Header("Items")]
     [SerializeField] GameObject itemModels;
@@ -71,6 +73,7 @@ public class playerControl : MonoBehaviour, IDamage
 
     float nextMeleeTime;
     int attackSeq = 0;
+    int successfulHits = 0;
     Animator animator;
 
     // Start is called before the first frame update
@@ -360,17 +363,42 @@ public class playerControl : MonoBehaviour, IDamage
 
             yield return new WaitForSeconds(meleeAniDuration / 2);
 
-            DetectMeleeHit();
+            bool hit = DetectMeleeHit();
 
             yield return new WaitForSeconds(meleeAniDuration / 2);
 
             isMeleeing = false;
+
+            if (hit)
+            {
+                successfulHits++;
+                if (successfulHits >= 3)
+                {
+                    int originalDamage = meleeDamage;
+                    meleeDamage = (int)(meleeDamage * comboDamageMultiplier);
+
+                    DealMeleeDamage();
+
+                    meleeDamage = originalDamage;
+
+                    successfulHits = 0;
+                }
+                else
+                {
+                    DealMeleeDamage();
+                }
+            }
+            else
+            {
+                successfulHits = 0;
+            }
+            
         }
     }
 
 
 
-    void DetectMeleeHit()
+    void DealMeleeDamage()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRange);
 
@@ -383,10 +411,26 @@ public class playerControl : MonoBehaviour, IDamage
                 if (dmg != null)
                 {
                     dmg.takeDamage(meleeDamage);
+                    
                 }
             }
-
         }
+    }
+
+    bool DetectMeleeHit()
+    {
+        bool hit = false;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRange);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                hit = true;
+                break;
+            }
+        }
+        return hit;
     }
 
     public void takeDamage(float amount, bool slowFlash = false)
