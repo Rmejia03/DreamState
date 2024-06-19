@@ -597,7 +597,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   shootRange: 0
   isMelee: 1
-  meleeRange: 5
+  meleeRange: 3
   meleeDamage: 3
   meleeAnimDur: 1
   roamDistance: 10
@@ -605,6 +605,8 @@ MonoBehaviour:
   patrolPoints: []
   patrolSpeed: 0
   patrolDelay: 0
+  deathAnimation: {fileID: -203655887218126122, guid: 589caadbb303ea64f8ff1441df84ca9e, type: 3}
+  deathAniDuration: 1
 --- !u!135 &7269621733866234535
 SphereCollider:
   m_ObjectHideFlags: 0

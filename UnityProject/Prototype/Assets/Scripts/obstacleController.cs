@@ -8,7 +8,7 @@ public class obstacleController : MonoBehaviour
     public bool isThorns;
     public bool isMushroom;
 
-    public int HP;
+    public float HP;
 
     playerControl Player;
     private int speedOrig;
@@ -51,9 +51,9 @@ public class obstacleController : MonoBehaviour
 		}
     }
 
-    public void takeDamage(int damage)
+    public void takeDamage(float amount, bool slowFlash = false)
     {
-        HP -= damage;
+        HP -= amount;
 
         if(HP <= 0)
         {
