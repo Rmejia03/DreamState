@@ -4,11 +4,34 @@ using UnityEngine;
 
 public class ForestBoss : MonoBehaviour
 {
+    Animator animation;
+
     [SerializeField] GameObject portal;
 
+
+    private void Start()
+    {
+        animation = GetComponent<Animator>();
+    }
     private void BossDeath()
     {
         ActivatePortal();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayNextAnimation();
+        }
+    }
+
+    private void PlayNextAnimation()
+    {
+        if(animation != null)
+        {
+            animation.SetTrigger("DetectionTrigger");
+        }
     }
 
     private void ActivatePortal()
@@ -21,9 +44,6 @@ public class ForestBoss : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            BossDeath();
-        }
+        
     }
 }
