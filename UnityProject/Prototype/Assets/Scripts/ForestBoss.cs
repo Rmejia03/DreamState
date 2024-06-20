@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ForestBoss : MonoBehaviour
 {
     Animator animation;
+    NavMeshAgent navMesh;
+    Transform playerTransform;
+    bool chase = false;
 
     [SerializeField] GameObject portal;
 
@@ -12,6 +16,13 @@ public class ForestBoss : MonoBehaviour
     private void Start()
     {
         animation = GetComponent<Animator>();
+        navMesh = GetComponent<NavMeshAgent>();
+        if(portal != null)
+        {
+            portal.SetActive(false);
+        }
+
+        navMesh.isStopped = true;
     }
     private void BossDeath()
     {
@@ -22,16 +33,23 @@ public class ForestBoss : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PlayNextAnimation();
+            playerTransform = other.transform;
+            BossRage();
         }
     }
 
-    private void PlayNextAnimation()
+    private void BossRage()
     {
         if(animation != null)
         {
             animation.SetTrigger("DetectionTrigger");
         }
+    }
+
+    private void ChasePlayer()
+    {
+        chase = true;
+        navMesh.isStopped = false;
     }
 
     private void ActivatePortal()
@@ -44,6 +62,13 @@ public class ForestBoss : MonoBehaviour
 
     private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            BossRage();
+        }
+        if(chase && playerTransform != null)
+        {
+            navMesh.SetDestination(playerTransform.position);
+        }
     }
 }
