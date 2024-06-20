@@ -474,7 +474,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -17.50658, y: 1, z: 55.023476}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8965598703557590779}
@@ -506,7 +506,7 @@ MonoBehaviour:
   bullet: {fileID: 0}
   shootRange: 0
   isMelee: 1
-  meleeRange: 5
+  meleeRange: 4
   meleeDamage: 1
   meleeAnimDur: 3
   roamDistance: 15
@@ -514,6 +514,8 @@ MonoBehaviour:
   patrolPoints: []
   patrolSpeed: 0
   patrolDelay: 0
+  deathAnimation: {fileID: -203655887218126122, guid: 1337d13b888743847acf05a2fe3d1a26, type: 3}
+  deathAniDuration: 5
 --- !u!95 &8140531693560431416
 Animator:
   serializedVersion: 5
