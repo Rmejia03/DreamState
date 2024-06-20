@@ -1,58 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ForestBoss : MonoBehaviour
 {
-    Animator animation;
-    NavMeshAgent navMesh;
+    [SerializeField] Animator animator;
+    [SerializeField] NavMeshAgent navMesh;
+    [SerializeField] Renderer model;
     Transform playerTransform;
-    bool chase = false;
+    bool isWalking = false;
 
+    [SerializeField] float bossHealth = 10f;
     [SerializeField] GameObject portal;
 
+    float currentHealth;
 
-    private void Start()
+    public void Start()
     {
-        animation = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
+        navMesh.isStopped = true;
+        currentHealth = bossHealth;
         if(portal != null)
         {
             portal.SetActive(false);
         }
-
-        navMesh.isStopped = true;
     }
-    private void BossDeath()
+
+    public void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        animator.SetTrigger("Die");
+        navMesh.isStopped = true;
+        ActivatePortal();
+        Destroy(gameObject, 2f);
+    }
+    public void BossDeath()
     {
         ActivatePortal();
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerTransform = other.transform;
-            BossRage();
+            StartReact();
         }
     }
 
-    private void BossRage()
+    public void StartReact()
     {
-        if(animation != null)
-        {
-            animation.SetTrigger("DetectionTrigger");
-        }
+        animator.SetTrigger("TriggerReact");
     }
 
-    private void ChasePlayer()
+    public void StartWalking()
     {
-        chase = true;
+        isWalking = true;
         navMesh.isStopped = false;
+        navMesh.SetDestination(playerTransform.position);
+        animator.SetBool("isWalking", true);
+        Debug.Log("Walking towards player");
     }
 
-    private void ActivatePortal()
+    public void ActivatePortal()
     {
         if(portal != null)
         {
@@ -60,13 +81,13 @@ public class ForestBoss : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void Update()
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            BossRage();
+            StartReact();
         }
-        if(chase && playerTransform != null)
+        if(isWalking && playerTransform != null)
         {
             navMesh.SetDestination(playerTransform.position);
         }
