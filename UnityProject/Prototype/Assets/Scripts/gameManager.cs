@@ -38,7 +38,7 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player"); 
-        playerScript = player.GetComponent<playerControl>();
+        //playerScript = player.GetComponent<playerControl>();
         playerSpawnPos = GameObject.FindWithTag("player spawn pos");
     }
 

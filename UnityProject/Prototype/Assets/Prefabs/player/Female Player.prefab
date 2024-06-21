@@ -803,6 +803,12 @@ MonoBehaviour:
   lockVerticalMin: 0
   lockVerticalMax: 40
   invertY: 0
+  playerTransform: {fileID: 5274867702682255313}
+  cameraDistance: 4
+  verticalCamera: 1.5
+  collision:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!20 &3521728270661570800
 Camera:
   m_ObjectHideFlags: 0
@@ -1071,7 +1077,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -45.068897, y: 1.0000002, z: 58.776814}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1394304591165182856}
@@ -1108,12 +1114,14 @@ MonoBehaviour:
   jumpMax: 2
   sprintMod: 2
   speed: 5
-  meleeDamage: 0
-  meleeRange: 0
-  meleeCooldown: 0
-  meleeAniDuration: 0
+  meleeDamage: 4
+  meleeRange: 3
+  meleeCooldown: 0.5
+  meleeAniDuration: 0.47
+  comboResetTime: 3
+  comboDamageMultiplier: 1.5
   itemModels: {fileID: 0}
-  inventoryManager: {fileID: 0}
+  InventoryManager: {fileID: 0}
   rayLength: 5
   layerInteract:
     serializedVersion: 2
@@ -1185,7 +1193,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1
