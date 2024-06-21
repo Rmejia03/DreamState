@@ -56,6 +56,8 @@ public class EnemyAI : MonoBehaviour, IDamage
     Vector3 playerDirection;
 
     float HPOrigin;
+
+    public playerControl player;
     //int currentPatrolPoint = 0;
 
     // Start is called before the first frame update
@@ -236,9 +238,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             playerInRange = false;
             agent.stoppingDistance = 0;
-            gameManager.instance.playerScript.fearVision.ResetFearCo = 
-                gameManager.instance.playerScript.fearVision.
-                StartCoroutine(gameManager.instance.playerScript.fearVision.ResetFear());
+            player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
         }
     }
 

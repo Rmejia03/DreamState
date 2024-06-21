@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 1b0342c2728f7d6498cfc1f4e393de65, type: 2}
+--- !u!114 &3256767 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6071017995779391131, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
+  m_PrefabInstance: {fileID: 1049363245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d677bba2aed2cc544915062c4322e909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &188687535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -444,6 +455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Male Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4594526744968587896, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
+      propertyPath: fearVision
+      value: 
+      objectReference: {fileID: 3256767}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -741,6 +756,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6096cd01f7f75c5488e8573834474fb2, type: 3}
+--- !u!114 &1681132031 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4594526744968587896, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
+  m_PrefabInstance: {fileID: 1049363245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9989111ce90f64394a00e64bfd4ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2067133460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1269,6 +1295,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1031073425161601030, guid: 84b106a36b0aa8c46849b594fbe9f817, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1681132031}
     - target: {fileID: 2047288129548518479, guid: 84b106a36b0aa8c46849b594fbe9f817, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1420,10 +1450,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4410946344922549142, guid: c2b7b705ebe25a148a6d961d69a583e3, type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4449948418954476881, guid: c2b7b705ebe25a148a6d961d69a583e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1645.4572
