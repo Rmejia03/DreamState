@@ -18,8 +18,9 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float shield;
     [SerializeField] int fear;
     [SerializeField] float regenRate;
+	public FearVision fearVision;
 
-    [Header("Attack")]
+	[Header("Attack")]
     [SerializeField] float weaponRate;
     [SerializeField] int weaponDamage;
     [SerializeField] int weaponDistance;
@@ -404,7 +405,7 @@ public class playerControl : MonoBehaviour, IDamage
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("Enemy") || collider.CompareTag("Obstacle"))
             {
                 IDamage dmg = collider.GetComponent<IDamage>();
 
@@ -424,7 +425,7 @@ public class playerControl : MonoBehaviour, IDamage
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("Enemy") || collider.CompareTag("Obstacle"))
             {
                 hit = true;
                 break;
@@ -439,6 +440,11 @@ public class playerControl : MonoBehaviour, IDamage
         {
             HP -= amount;
             updateHPBarUI();
+            if (!fearVision.rising)
+            {
+                fearVision.FearRisingCo = fearVision.StartCoroutine(fearVision.FearRising());
+            }
+
             if(slowFlash)
             {
                 StartCoroutine(flashScreenSlow());

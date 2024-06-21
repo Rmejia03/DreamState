@@ -44,9 +44,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] AnimationClip deathAnimation;
     [SerializeField] float deathAniDuration;
 
-    
-
-
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
@@ -239,6 +236,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             playerInRange = false;
             agent.stoppingDistance = 0;
+            gameManager.instance.playerScript.fearVision.ResetFearCo = 
+                gameManager.instance.playerScript.fearVision.
+                StartCoroutine(gameManager.instance.playerScript.fearVision.ResetFear());
         }
     }
 
