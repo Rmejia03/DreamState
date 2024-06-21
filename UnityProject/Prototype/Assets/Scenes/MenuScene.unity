@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7752,6 +7752,7 @@ GameObject:
   - component: {fileID: 1782306673}
   - component: {fileID: 1782306672}
   - component: {fileID: 1782306671}
+  - component: {fileID: 1782306674}
   m_Layer: 5
   m_Name: Play button
   m_TagString: Untagged
@@ -7819,12 +7820,12 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1782306672}
+  m_TargetGraphic: {fileID: 1496018769}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1917850738}
-        m_TargetAssemblyTypeName: SkinManager, Assembly-CSharp
+      - m_Target: {fileID: 1782306674}
+        m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
@@ -7873,6 +7874,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782306669}
   m_CullTransparentMesh: 1
+--- !u!114 &1782306674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782306669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a783534feebcef947b4d0ac4d7d82f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quitGame: {fileID: 0}
+  animator: {fileID: 727157550}
+  transition: 1
 --- !u!1 &1792657446
 GameObject:
   m_ObjectHideFlags: 0
@@ -8749,8 +8765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865622735fb38b946897c281cb6166b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  femaleSkin: {fileID: 3090507727678580518, guid: 17f157763028efb4b916dcdeba9aa58d, type: 3}
-  maleSkin: {fileID: 608009930021195024, guid: cc40f1a318a43d145b23a36a532f289a, type: 3}
 --- !u!4 &1917850739
 Transform:
   m_ObjectHideFlags: 0
