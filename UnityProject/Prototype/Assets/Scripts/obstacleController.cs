@@ -23,12 +23,12 @@ public class obstacleController : MonoBehaviour, IDamage
             if (Player != null && isSpiderWeb)
             {
                 speedOrig = Player.speed;
-                Player.slowDownPlayer(2);
+                Player.slowDownPlayer(6);
             }
 			if (Player != null && isThorns)
 			{
 				speedOrig = Player.speed;
-				Player.slowDownPlayer(2);
+				Player.slowDownPlayer(6);
                 StartCoroutine(thornPoke());
 			}
 		}
