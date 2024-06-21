@@ -60,12 +60,10 @@
     <Analyzer Include="C:\Users\marco\2022.3.27f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Suntail Village\Scripts\LightCulling.cs" />
     <Compile Include="Assets\Scripts\IDamage.cs" />
     <Compile Include="Assets\Scripts\door.cs" />
     <Compile Include="Assets\Scripts\DoorFunction.cs" />
     <Compile Include="Assets\Scripts\playerControl.cs" />
-    <Compile Include="Assets\Suntail Village\Scripts\PhysicsObject.cs" />
     <Compile Include="Assets\Scripts\toolbarUI.cs" />
     <Compile Include="Assets\Scripts\spawner.cs" />
     <Compile Include="Assets\Scripts\itemPickup.cs" />
@@ -79,22 +77,18 @@
     <Compile Include="Assets\Scripts\SkinLoader.cs" />
     <Compile Include="Assets\Scripts\slotUI.cs" />
     <Compile Include="Assets\Scripts\checkpoint.cs" />
-    <Compile Include="Assets\Suntail Village\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Hazard.cs" />
     <Compile Include="Assets\Scripts\gameManager.cs" />
     <Compile Include="Assets\Scripts\MainMapPortal.cs" />
     <Compile Include="Assets\Scripts\ForrestPortal.cs" />
+    <Compile Include="Assets\Scripts\PortalMainToForest.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\obstacleController.cs" />
     <Compile Include="Assets\Scripts\SkinManager.cs" />
-    <Compile Include="Assets\Suntail Village\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Suntail Village\Scripts\PlayerInteractions.cs" />
     <Compile Include="Assets\Scripts\buttonFunctions.cs" />
     <Compile Include="Assets\Scripts\enemyPopup.cs" />
-    <Compile Include="Assets\Suntail Village\Scripts\SuntailStartDemo.cs" />
     <Compile Include="Assets\Scripts\cameraControl.cs" />
     <Compile Include="Assets\Scripts\bullet.cs" />
-    <Compile Include="Assets\Suntail Village\Scripts\AudioZoneControl.cs" />
     <Compile Include="Assets\Scripts\pumpkinPopUpTrigger.cs" />
     <Compile Include="Assets\Scripts\itemStats.cs" />
   </ItemGroup>
