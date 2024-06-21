@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class obstacleController : MonoBehaviour
+public class obstacleController : MonoBehaviour, IDamage
 {
     public bool isSpiderWeb;
     public bool isThorns;
@@ -60,6 +60,8 @@ public class obstacleController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
     IEnumerator thornPoke()
     {
             gameManager.instance.player.GetComponent<IDamage>().takeDamage(1);
