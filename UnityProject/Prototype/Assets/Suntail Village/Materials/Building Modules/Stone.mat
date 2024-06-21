@@ -15,7 +15,9 @@ Material:
   - _SMOOTHNESSSOURCE_ALBEDO_ALPHA
   m_InvalidKeywords:
   - _BLENDNORMALS_ON
-  - _COVERAGEOVERLAYMETHOD_WORLD_NORMAL
+  - _COVERAGEOVERLAYMETHOD_VERTEX_POSITION
+  - _COVERAGEOVERLAYTYPE_VERTEX_POSITION
+  - _NORMALMAP
   - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -28,11 +30,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 6a84e83055fdb344b9a8c48e6279010c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 797754f24015e2546823c4d42c8f1470, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 415fdecd98a87504bafd8a53edd8ca42, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoverageAlbedo:
@@ -40,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoverageMask:
-        m_Texture: {fileID: 2800000, guid: 6957a9a5e9662df408d1b919ca4f404b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38cd991401e210d40a7dda2fa2f42159, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _CoverageNormal:
@@ -68,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6a84e83055fdb344b9a8c48e6279010c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 797754f24015e2546823c4d42c8f1470, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -80,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: a2c725e17005ce84aa7aa59b310deb31, type: 3}
+        m_Texture: {fileID: 2800000, guid: 415fdecd98a87504bafd8a53edd8ca42, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -101,10 +103,10 @@ Material:
     - _BlendNormals: 1
     - _BumpScale: 1
     - _CoverageContrast: 0.1
-    - _CoverageFade: 1
-    - _CoverageOffset: 0.2
-    - _CoverageOverlayMethod: 0
-    - _CoverageSmoothness: 0
+    - _CoverageFade: 0.1
+    - _CoverageOffset: -1.31
+    - _CoverageOverlayMethod: 1
+    - _CoverageSmoothness: 0.15
     - _CoverageThickness: 0
     - _CullMode: 2
     - _Cutoff: 0.5
@@ -115,7 +117,7 @@ Material:
     - _Glossiness: 1
     - _GlossyReflections: 1
     - _InvertCoverageMask: 0
-    - _Metallic: 0
+    - _Metallic: 1
     - _Mode: 0
     - _NormalScale: 1
     - _OcclusionStrength: 1
@@ -124,14 +126,14 @@ Material:
     - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SurfaceNormalInt: 2
-    - _SurfaceSmoothness: 1
+    - _SurfaceNormalInt: 1
+    - _SurfaceSmoothness: 0.5
     - _Tiling: 1
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _CoverageColor: {r: 0.39978504, g: 0.44099998, b: 0.39978504, a: 0}
+    - _Color: {r: 0.13557816, g: 1, b: 0, a: 1}
+    - _CoverageColor: {r: 0.49494904, g: 0.54509807, b: 0.49662068, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
