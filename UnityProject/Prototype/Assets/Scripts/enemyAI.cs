@@ -44,6 +44,11 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] AnimationClip deathAnimation;
     [SerializeField] float deathAniDuration;
 
+    [Header("Spawn Settings")]
+    [SerializeField] GameObject miniEnemyPrefab;
+    [SerializeField] int numberOfSpawns;
+    [SerializeField] float spawnRange;
+
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
@@ -300,6 +305,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         animate.SetTrigger("Death");
         yield return new WaitForSeconds(deathAniDuration);
+
+        for(int i = 0; i< numberOfSpawns; i++)
+        {
+            Instantiate(miniEnemyPrefab, GetRandomSpawnPosition(), Quaternion.identity);
+        }
+
         Destroy(gameObject);
     }
 
@@ -316,5 +327,13 @@ public class EnemyAI : MonoBehaviour, IDamage
         gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrigin;
     }
 
-   
+    private Vector3 GetRandomSpawnPosition()
+    {
+
+        Vector3 randomOffset = new Vector3(Random.Range(-spawnRange,spawnRange),0,Random.Range(-spawnRange,spawnRange));
+
+        return transform.position + randomOffset;
+    }
+
+
 }
