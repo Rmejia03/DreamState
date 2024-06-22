@@ -25,7 +25,7 @@ public class obstacleController : MonoBehaviour, IDamage
             Player.stopSprint();
             if (Player != null && isSpiderWeb)
             {
-                Player.slowDownPlayer(6);
+                Player.slowDownPlayer(4);
             }
 			if (Player != null && isThorns)
 			{
