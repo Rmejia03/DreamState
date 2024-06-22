@@ -11,24 +11,25 @@ public class obstacleController : MonoBehaviour, IDamage
     public float HP;
 
     playerControl Player;
-    private int speedOrig;
-
+    //private int sprintOrig;
     bool isPoking;
 
-    private void OnTriggerEnter(Collider other)
+
+	private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
-        {
+        {            
             Player = other.GetComponent<playerControl>();
+            
+            Player.Stuck = true;
+            Player.stopSprint();
             if (Player != null && isSpiderWeb)
             {
-                speedOrig = Player.speed;
                 Player.slowDownPlayer(6);
             }
 			if (Player != null && isThorns)
 			{
-				speedOrig = Player.speed;
-				Player.slowDownPlayer(6);
+				Player.slowDownPlayer(4);
                 StartCoroutine(thornPoke());
 			}
 		}
@@ -38,14 +39,15 @@ public class obstacleController : MonoBehaviour, IDamage
     {
         if(other.CompareTag("Player"))
         {
+            Player.sprintMod = Player.sprintOrig;
+			Player.Stuck = false;
+			Player.speed = Player.speedOrig;
             if(Player != null && isSpiderWeb)
             {
-                Player.speed = speedOrig;
                 Player = null;
             }
 			if (Player != null && isThorns)
-			{
-				Player.speed = speedOrig;
+			{				
 				Player = null;
 			}
 		}

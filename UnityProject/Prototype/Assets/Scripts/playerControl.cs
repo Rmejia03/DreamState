@@ -29,8 +29,12 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int gravity;
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
-    [SerializeField] int sprintMod;
-    public int speed;
+	public int speed;
+    public int speedOrig;
+	public int sprintMod;
+    public int sprintOrig;
+    public bool sprinting= false;
+    public bool Stuck;
 
     [Header("Melee")]
     [SerializeField] int meleeDamage;
@@ -83,7 +87,8 @@ public class playerControl : MonoBehaviour, IDamage
         HPOrig = HP;
         shieldOrig = shield;
         fearOrig = fear;
-
+        speedOrig = speed;
+        sprintOrig = sprintMod;
         animator = GetComponent<Animator>();
 
         updateHPBarUI();
@@ -240,16 +245,33 @@ public class playerControl : MonoBehaviour, IDamage
     }
     void Sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+        if (!Stuck)
         {
-            speed *= sprintMod;
+            if (Input.GetButtonDown("Sprint"))
+            {
+                speed *= sprintMod;
+               sprinting = true;
+            }
+            else if (Input.GetButtonUp("Sprint"))
+            {
+                speed /= sprintMod; 
+                sprinting = false;
+                if(speed < speedOrig)
+                {
+                    speed = speedOrig;
+                }
+            }
         }
-        else if (Input.GetButtonUp("Sprint"))
+       
+    }
+    public void stopSprint()
+    {
+        if (sprinting)
         {
-            speed /= sprintMod; 
+            speed /= sprintMod;
+            sprinting = false;
         }
     }
-
     IEnumerator Shoot()
     {
         //isShooting = true;
@@ -431,7 +453,7 @@ public class playerControl : MonoBehaviour, IDamage
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("Enemy") || collider.CompareTag("Obstacle"))
             {
                 IDamage dmg = collider.GetComponent<IDamage>();
 
@@ -451,7 +473,7 @@ public class playerControl : MonoBehaviour, IDamage
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Enemy"))
+            if (collider.CompareTag("Enemy") || collider.CompareTag("Obstacle"))
             {
                 hit = true;
                 break;
