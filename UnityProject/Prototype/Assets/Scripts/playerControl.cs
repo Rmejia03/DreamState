@@ -500,6 +500,11 @@ public class playerControl : MonoBehaviour, IDamage
         return hit;
     }
 
+    void meleeHit()
+    {
+        DealMeleeDamage(true);
+    }
+
     public void takeDamage(float amount, bool slowFlash = false)
     {
         if(shield <= 0)
