@@ -121,7 +121,7 @@ public class playerControl : MonoBehaviour, IDamage
             }
 
             Movement();
-            HandleBackhandMelee();
+            HandleMelee();
             //selectItem();
             useItem();
             
@@ -360,14 +360,22 @@ public class playerControl : MonoBehaviour, IDamage
         }
     }
 
-    void HandleBackhandMelee()
+    void HandleMelee()
     {
-        if (Input.GetButtonDown("Fire1") && !isMeleeing && Time.time >= nextMeleeTime)
+        if (!isMeleeing && Time.time >= nextMeleeTime)
         {
- 
-            nextMeleeTime = Time.time + meleeCooldown;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                nextMeleeTime = Time.time + meleeCooldown;
 
-            StartCoroutine(MeleeAttack());
+                StartCoroutine(MeleeAttack(false));
+            }
+            else if (Input.GetButtonDown("Fire2"))
+            {
+                nextMeleeTime = Time.time + meleeCooldown * 2;
+
+                StartCoroutine(MeleeAttack(true));
+            }
         }
     }
 
@@ -387,68 +395,78 @@ public class playerControl : MonoBehaviour, IDamage
         }
         
     }
-    IEnumerator MeleeAttack()
+    IEnumerator MeleeAttack(bool isHeavy)
     {
         if (!isMeleeing)
         {
             isMeleeing = true;
 
-            attackSeq++;
-            if (attackSeq > 3)
-                attackSeq = 1;
-
-            switch (attackSeq)
+            if (isHeavy)
             {
-                case 1:
-                    animate.SetTrigger("Backhand Melee");
-                    break;
-                case 2:
-                    animate.SetTrigger("Slash Melee");
-                    break;
-                case 3:
-                    animate.SetTrigger("Stab Melee");
-                    break;
-            }
-
-            yield return new WaitForSeconds(meleeAniDuration / 2);
-
-            bool hit = DetectMeleeHit();
-
-            yield return new WaitForSeconds(meleeAniDuration / 2);
-
-            isMeleeing = false;
-
-            if (hit)
-            {
-                successfulHits++;
-                if (successfulHits >= 3)
-                {
-                    int originalDamage = meleeDamage;
-                    meleeDamage = (int)(meleeDamage * comboDamageMultiplier);
-
-                    DealMeleeDamage();
-
-                    meleeDamage = originalDamage;
-
-                    successfulHits = 0;
-                }
-                else
-                {
-                    DealMeleeDamage();
-                }
+                animate.SetTrigger("Heavy Attack");
+                yield return new WaitForSeconds(meleeAniDuration);
             }
             else
             {
-                successfulHits = 0;
+                attackSeq++;
+                if (attackSeq > 3)
+                    attackSeq = 1;
+
+                switch (attackSeq)
+                {
+                    case 1:
+                        animate.SetTrigger("Backhand Melee");
+                        break;
+                    case 2:
+                        animate.SetTrigger("Slash Melee");
+                        break;
+                    case 3:
+                        animate.SetTrigger("Stab Melee");
+                        break;
+                }
+
+                yield return new WaitForSeconds(meleeAniDuration / 2);
+
+                bool hit = DetectMeleeHit();
+
+                yield return new WaitForSeconds(meleeAniDuration / 2);
+
+                isMeleeing = false;
+
+                if (hit)
+                {
+                    successfulHits++;
+                    if (successfulHits >= 3)
+                    {
+                        int originalDamage = meleeDamage;
+                        meleeDamage = (int)(meleeDamage * comboDamageMultiplier);
+
+                        DealMeleeDamage(false);
+
+                        meleeDamage = originalDamage;
+
+                        successfulHits = 0;
+                    }
+                    else
+                    {
+                        DealMeleeDamage(false);
+                    }
+                }
+                else
+                {
+                    successfulHits = 0;
+                }
             }
-            
+            isMeleeing = false;
         }
     }
 
 
 
-    void DealMeleeDamage()
+    void DealMeleeDamage(bool isHeavy)
     {
+        int damageDealt = isHeavy ? meleeDamage * 2 : meleeDamage;
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, meleeRange);
 
         foreach (Collider collider in colliders)
