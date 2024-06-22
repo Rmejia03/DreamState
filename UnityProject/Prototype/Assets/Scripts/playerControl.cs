@@ -99,10 +99,10 @@ public class playerControl : MonoBehaviour, IDamage
             float animateSpeed = controller.velocity.normalized.magnitude;
         }
 
-        if (fearVision.intensity > 0)
-        {
-            updateFearUI();
-        }
+       if (fearVision.intensity > 0)
+            {
+                updateFearUI();
+            }
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
@@ -119,7 +119,7 @@ public class playerControl : MonoBehaviour, IDamage
             HandleBackhandMelee();
             //selectItem();
             useItem();
-
+            
            /*if(!isMeleeing && Input.GetButtonDown("Fire1"))
             {
                 StartCoroutine(Shoot());
@@ -131,7 +131,29 @@ public class playerControl : MonoBehaviour, IDamage
             }*/
 
             //UpdateAnimation();
+            if (fearVision.FearRisingCo == null && fearVision.rising)
+			 {
+			     fearVision.FearRisingCo = StartCoroutine(fearVision.FearRising());
+			 }
+			 if (fearVision.ResetFearCo == null && !fearVision.rising)
+			 {
+			     fearVision.ResetFearCo = StartCoroutine(fearVision.ResetFear());
+			 }
         }
+        else
+        {
+			if (fearVision.FearRisingCo != null)
+			{
+				StopCoroutine(fearVision.FearRisingCo);
+				fearVision.FearRisingCo = null;
+			}
+			if (fearVision.ResetFearCo != null)
+			{
+				StopCoroutine(fearVision.ResetFearCo);
+				fearVision.ResetFearCo = null;
+			}
+			
+		}
     }
 
     void Movement()
@@ -409,7 +431,7 @@ public class playerControl : MonoBehaviour, IDamage
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Enemy") || collider.CompareTag("Obstacle"))
+            if (collider.CompareTag("Enemy"))
             {
                 IDamage dmg = collider.GetComponent<IDamage>();
 
@@ -429,7 +451,7 @@ public class playerControl : MonoBehaviour, IDamage
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Enemy") || collider.CompareTag("Obstacle"))
+            if (collider.CompareTag("Enemy"))
             {
                 hit = true;
                 break;

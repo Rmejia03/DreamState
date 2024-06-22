@@ -607,6 +607,7 @@ MonoBehaviour:
   patrolDelay: 0
   deathAnimation: {fileID: -203655887218126122, guid: 589caadbb303ea64f8ff1441df84ca9e, type: 3}
   deathAniDuration: 1
+  player: {fileID: 0}
 --- !u!135 &7269621733866234535
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -643,7 +644,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2

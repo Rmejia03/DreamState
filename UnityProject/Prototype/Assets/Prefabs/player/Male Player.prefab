@@ -1278,8 +1278,9 @@ MonoBehaviour:
   controller: {fileID: 7719540952399042350}
   HP: 15
   shield: 5
-  fear: 10
+  fear: 0
   regenRate: 0.25
+  fearVision: {fileID: 6071017995779391131}
   weaponRate: 0
   weaponDamage: 0
   weaponDistance: 0
@@ -1596,6 +1597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 0
+  rising: 0
 --- !u!1 &4553820053479741798
 GameObject:
   m_ObjectHideFlags: 0

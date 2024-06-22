@@ -68,6 +68,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
+        player = gameManager.instance.player.GetComponent<playerControl>();
         //UpdateEnemyUI();
 
         //if (patrolPoints != null && patrolPoints.Length > 0)
