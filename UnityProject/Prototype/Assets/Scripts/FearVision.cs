@@ -31,17 +31,10 @@ public class FearVision : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	//void Update()
-	//{
-	//	if (Input.GetKeyUp(KeyCode.I))
-	//	{
-	//		StartCoroutine(FearRising());
-	//	}
-	//	if (Input.GetKeyUp(KeyCode.O))
-	//	{
-	//		StartCoroutine(ResetFear());
-	//	}
-	//}
+	void Update()
+	{
+	
+	}
 
 	public IEnumerator FearRising()
 	{
@@ -61,8 +54,7 @@ public class FearVision : MonoBehaviour
 		{
 			
 			intensity += .0005f;
-			if(intensity>1)
-				intensity = 1;
+			intensity = Mathf.Clamp01(intensity);
 			vignette.intensity.Override(intensity);
 			yield return null;
 		}
@@ -79,8 +71,7 @@ public class FearVision : MonoBehaviour
 		while (vignette.intensity.value > 0)
 		{
 			intensity -= .001f;
-			if(intensity<0)
-				intensity = 0;
+			intensity = Mathf.Clamp01(intensity);
 			vignette.intensity.Override(intensity);
 			yield return null;
 		}

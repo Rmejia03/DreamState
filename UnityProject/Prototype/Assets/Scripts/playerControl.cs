@@ -99,6 +99,10 @@ public class playerControl : MonoBehaviour, IDamage
             float animateSpeed = controller.velocity.normalized.magnitude;
         }
 
+        if (fearVision.intensity > 0)
+        {
+            updateFearUI();
+        }
         //Prevents hit damage on pause
         if (!gameManager.instance.isPaused)
         {
@@ -553,8 +557,8 @@ public class playerControl : MonoBehaviour, IDamage
 	}
     void updateFearUI()
     {
-        gameManager.instance.fearBar.fillAmount = fear + fearOrig;
-    }
+        gameManager.instance.fearBar.fillAmount = fearVision.intensity;
+	}
 
     public void spawnPlayer()
     {
