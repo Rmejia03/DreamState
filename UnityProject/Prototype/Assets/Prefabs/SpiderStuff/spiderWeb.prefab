@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7879763545744485671}
   m_Layer: 0
   m_Name: spiderWeb
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539535786371637058}
-  m_Mesh: {fileID: 4300000, guid: 6f62e5c45e80dc64d9819d5aeed09497, type: 3}
+  m_Mesh: {fileID: 1643052578576305334, guid: 10d1af66a96ece24ea9efb598f1f628f, type: 3}
 --- !u!23 &3752446670675665468
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b9bdff80ef35cca4caf45d8885130909, type: 2}
+  - {fileID: -5640537977667537720, guid: 10d1af66a96ece24ea9efb598f1f628f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
