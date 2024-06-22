@@ -1057,6 +1057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5274867702682255313}
   - component: {fileID: 5825858907121114725}
+  - component: {fileID: -2692940079080875503}
   - component: {fileID: 5180237263439096194}
   - component: {fileID: 5700580616421041326}
   - component: {fileID: 5172683480511457850}
@@ -1106,14 +1107,19 @@ MonoBehaviour:
   shield: 5
   fear: 10
   regenRate: 0.25
+  fearVision: {fileID: 0}
   weaponRate: 0
   weaponDamage: 0
   weaponDistance: 0
   gravity: 20
   jumpSpeed: 8
   jumpMax: 2
-  sprintMod: 2
   speed: 5
+  speedOrig: 0
+  sprintMod: 2
+  sprintOrig: 0
+  sprinting: 0
+  Stuck: 0
   meleeDamage: 4
   meleeRange: 3
   meleeCooldown: 0.5
@@ -1129,6 +1135,28 @@ MonoBehaviour:
   excludeLayerName: Player
   crosshair: {fileID: 0}
   openDoorKey: 101
+--- !u!114 &-2692940079080875503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3090507727678580518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd87a55498372a4fa01f0b1e1c4bbf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sens: 0
+  lockVerticalMin: 5
+  lockVerticalMax: 50
+  invertY: 0
+  playerTransform: {fileID: 5274867702682255313}
+  cameraDistance: 4
+  verticalCamera: 1.5
+  collision:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &5180237263439096194
 Animator:
   serializedVersion: 5

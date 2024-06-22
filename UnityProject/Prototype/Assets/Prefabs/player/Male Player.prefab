@@ -1230,6 +1230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913098418618219665}
+  - component: {fileID: 1898564715185806518}
   - component: {fileID: 4594526744968587896}
   - component: {fileID: 3429169186105464675}
   - component: {fileID: 7719540952399042350}
@@ -1262,6 +1263,28 @@ Transform:
   - {fileID: 1718268605649975256}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1898564715185806518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3357411062115639825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd87a55498372a4fa01f0b1e1c4bbf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sens: 0
+  lockVerticalMin: 5
+  lockVerticalMax: 50
+  invertY: 0
+  playerTransform: {fileID: 1913098418618219665}
+  cameraDistance: 4
+  verticalCamera: 1.5
+  collision:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &4594526744968587896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1287,8 +1310,12 @@ MonoBehaviour:
   gravity: 20
   jumpSpeed: 8
   jumpMax: 2
-  sprintMod: 2
   speed: 5
+  speedOrig: 0
+  sprintMod: 2
+  sprintOrig: 0
+  sprinting: 0
+  Stuck: 0
   meleeDamage: 4
   meleeRange: 3
   meleeCooldown: 0.5
