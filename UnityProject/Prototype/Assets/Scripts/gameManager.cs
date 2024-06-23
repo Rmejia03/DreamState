@@ -47,7 +47,7 @@ public class gameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.P))
         {
-            if(menuActive == null)
+            if (menuActive == null)
             {
                 statePause();
 
@@ -55,7 +55,7 @@ public class gameManager : MonoBehaviour
                 menuActive.SetActive(isPaused);
             }
 
-            else if(menuActive == menuPause)
+            else if (menuActive == menuPause)
             {
                 stateUnpause();
             }

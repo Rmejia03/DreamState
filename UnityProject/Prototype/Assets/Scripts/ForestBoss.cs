@@ -1,31 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Services.Analytics.Internal;
-using UnityEditor;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
+
 
 public class ForestBoss : MonoBehaviour, IDamage
 {
-    [SerializeField] Animator animator;
-    [SerializeField] NavMeshAgent navMesh;
+    [Header("Enemy Info")]
+    [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
+    [SerializeField] Animator animate;
     [SerializeField] Transform headPosition;
+    [SerializeField] float HP;
     [SerializeField] int animateSpeedTransition;
     [SerializeField] int ViewAngle;
     [SerializeField] int faceTargetSpeed;
+    [SerializeField] float attackRate;
+
+    [Header("Melee Attack")]
     [SerializeField] bool isMelee;
     [SerializeField] float meleeRange;
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeAnimDur;
-    public Transform playerTransform;
-    bool isWalking = false;
 
-    
-    [SerializeField] float bossHealth;
-    [SerializeField] GameObject portal;
+    [Header("Death Animation")]
+    [SerializeField] AnimationClip deathAnimation;
+    [SerializeField] float deathAniDuration;
 
-    float currentHealth;
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
@@ -36,110 +39,48 @@ public class ForestBoss : MonoBehaviour, IDamage
     Vector3 startingPosition;
     Vector3 playerDirection;
 
-    public void Start()
+    float HPOrigin;
+
+    public playerControl player;
+    public Transform playerTransform;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        animator = GetComponent<Animator>();
-        navMesh = GetComponent<NavMeshAgent>();
-        navMesh.isStopped = true;
         startingPosition = transform.position;
-        stoppingDistanceOrigin = navMesh.stoppingDistance;
-        currentHealth = bossHealth;
-        if(portal != null)
-        {
-            portal.SetActive(false);
-        }
-        if(playerTransform != null)
-        {
-            Debug.LogError("Player Transform not assigned to boss");
-        }
+        stoppingDistanceOrigin = agent.stoppingDistance;
+        HPOrigin = HP;
+
+        //player = gameManager.instance.player.GetComponent<playerControl>();
+        //UpdateEnemyUI();
+
     }
 
-    public void Update()
+    // Update is called once per frame
+    void Update()
     {
-        float animateSpeed = navMesh.velocity.normalized.magnitude;
-        animator.SetFloat("Speed", Mathf.Lerp(animator.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartReact();
-        }
-        //if (isWalking && playerTransform != null)
-        //{
-        //    navMesh.SetDestination(playerTransform.position);
-        //}
-
+        float animateSpeed = agent.velocity.normalized.magnitude;
+        animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
+      
         if (playerInRange && !isAttacking && CanSeePlayer())
         {
             float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
             if (isMelee && distanceToPlayer <= meleeRange)
             {
-                StartCoroutine(MeleeAttack());
+                RandomAttack();
             }
+
+            else
+                agent.SetDestination(gameManager.instance.player.transform.position);
         }
-    }
-    //public void TakeDamage(float amount, bool slowFlash = false)
-    //{
-    //    currentHealth -= amount;
-    //    if(currentHealth <= 0)
-    //    {
-    //        Die();
-    //    }
-    //}
 
-    void Die()
-    {
-        animator.SetTrigger("Death");
-        navMesh.isStopped = true;
-        ActivatePortal();
-        Destroy(gameObject, 2f);
-    }
-    public void BossDeath()
-    {
-        ActivatePortal();
-    }
+     
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerTransform = other.transform;
-            StartReact();
-        }
-    }
-
-    public void StartReact()
-    {
-        animator.SetTrigger("TriggerReact");
-    }
-
-    //public void StartWalking()
-    //{
-    //    isWalking = true;
-    //    navMesh.isStopped = false;
-    //    navMesh.SetDestination(playerTransform.position);
-    //    animator.SetBool("isWalking", true);
-    //    Debug.Log("Walking towards player");
-    //}
-
-    public void ActivatePortal()
-    {
-        if(portal != null)
-        {
-            portal.SetActive(true);
-        }
     }
 
 
-    public void takeDamage(float amount, bool slowFlash = false)
-    {
-        currentHealth -= amount;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
+    //See player within range
     bool CanSeePlayer()
     {
         playerDirection = gameManager.instance.player.transform.position - headPosition.position;
@@ -154,12 +95,12 @@ public class ForestBoss : MonoBehaviour, IDamage
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= ViewAngle)
             {
-                navMesh.stoppingDistance = stoppingDistanceOrigin;
-                navMesh.SetDestination(gameManager.instance.player.transform.position);
+                agent.stoppingDistance = stoppingDistanceOrigin;
+                agent.SetDestination(gameManager.instance.player.transform.position);
 
                 float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
-                if (navMesh.remainingDistance <= navMesh.stoppingDistance)
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     FaceTarget();
                 }
@@ -169,15 +110,14 @@ public class ForestBoss : MonoBehaviour, IDamage
                     StartCoroutine(MeleeAttack());
                 }
 
-                
-
                 return true;
             }
         }
-        navMesh.stoppingDistance = 0;
+        agent.stoppingDistance = 0;
         return false;
     }
 
+    //Check if in melee range
     bool IsInRangeForMelee()
     {
         return Vector3.Distance(transform.position, gameManager.instance.player.transform.position) <= meleeRange;
@@ -189,6 +129,50 @@ public class ForestBoss : MonoBehaviour, IDamage
         Quaternion rotation = Quaternion.LookRotation(new Vector3(playerDirection.x, 0, playerDirection.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * faceTargetSpeed);
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+            animate.SetTrigger("Rage");
+
+            
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            agent.stoppingDistance = 0;
+            player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
+        }
+    }
+
+    IEnumerator RandomAttack()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        int attackChoice = Random.Range(1, 4);
+
+        switch (attackChoice)
+        {
+            case 1:
+                animate.SetTrigger("Attack 1");
+                break;
+            case 2:
+                animate.SetTrigger("Attack 2");
+                break;
+            case 3:
+                animate.SetTrigger("Attack 3");
+                break;
+            default:
+                break;
+        }
+    }
+
 
     public void meleeHit()
     {
@@ -202,7 +186,7 @@ public class ForestBoss : MonoBehaviour, IDamage
         if (!isAttacking)
         {
             isAttacking = true;
-            animator.SetTrigger("MAttack");
+            animate.SetTrigger("MAttack");
 
             yield return new WaitForSeconds(meleeAnimDur);
             //meleeHit();
@@ -210,5 +194,45 @@ public class ForestBoss : MonoBehaviour, IDamage
         }
     }
 
+    public void takeDamage(float damage, bool slowFlash = false)
+    {
+        HP -= damage;
+
+        //UpdateEnemyUI();
+
+        agent.SetDestination(gameManager.instance.player.transform.position);
+
+        StartCoroutine(hitFlash());
+
+        if (HP <= 0)
+        {
+            //gameManager.instance.updateGameGoal(-1); 
+            StartCoroutine(PlayDeathAnimation());
+
+        }
+    }
+
+    IEnumerator PlayDeathAnimation()
+    {
+        animate.SetTrigger("Death");
+        yield return new WaitForSeconds(deathAniDuration);
+
+        Destroy(gameObject);
+    }
+
+    IEnumerator hitFlash()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = Color.white;
+    }
+
+    //Enemy HP
+    void UpdateEnemyUI()
+    {
+        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrigin;
+    }
+
+   
 
 }
