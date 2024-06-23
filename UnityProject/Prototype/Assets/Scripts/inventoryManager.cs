@@ -54,6 +54,11 @@ public class inventoryManager : MonoBehaviour
         CheckAlphaNumericKey();
     }
 
+    public void InitializeInventoryForPlayer(GameObject player)
+    {
+        player.GetComponent<playerControl>().InventoryManager = this;
+    }
+
     public void AddItem(itemStats item)
     {
         if (item.itemName == healingItem.itemName)

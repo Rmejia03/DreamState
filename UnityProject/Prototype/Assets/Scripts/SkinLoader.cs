@@ -19,6 +19,8 @@ public class SkinLoader : MonoBehaviour
 
             gameManager.instance.player = clonedPlayer;
             gameManager.instance.playerScript = clonedPlayer.GetComponent<playerControl>();
+
+            inventoryManager.Instance.InitializeInventoryForPlayer(clonedPlayer);
             
         }
     }

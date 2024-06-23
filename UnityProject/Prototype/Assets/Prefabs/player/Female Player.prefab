@@ -1171,7 +1171,7 @@ MonoBehaviour:
   shield: 5
   fear: 0
   regenRate: 0.25
-  fearVision: {fileID: 6071017995779391131, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
+  fearVision: {fileID: 5170875549578296172}
   weaponRate: 0
   weaponDamage: 0
   weaponDistance: 0
@@ -1190,6 +1190,7 @@ MonoBehaviour:
   meleeAniDuration: 0.47
   comboResetTime: 3
   comboDamageMultiplier: 1.5
+  isDefending: 0
   itemModels: {fileID: 0}
   InventoryManager: {fileID: 0}
   rayLength: 5
