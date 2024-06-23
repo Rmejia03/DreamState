@@ -9,7 +9,15 @@ public class buttonFunctions : MonoBehaviour
     public Animator animator;
     public float transition = 1f;
 
-    public void PlayGame()
+	void Start()
+	{
+		if (Application.platform == RuntimePlatform.WebGLPlayer)
+		{
+			quitGame.gameObject.SetActive(false);
+		}
+	}
+
+	public void PlayGame()
     {
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
