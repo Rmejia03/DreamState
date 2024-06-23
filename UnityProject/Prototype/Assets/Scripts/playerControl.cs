@@ -511,7 +511,7 @@ public class playerControl : MonoBehaviour, IDamage
     {
         if (isDefending)
         {
-            animate.SetTrigger("isDefending");
+            animate.SetTrigger("DefendHit");
             amount = 0;
             StartCoroutine(FlashWhileDefending());
         }
