@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using TMPro;
 
 public class BossEnemy : MonoBehaviour, IDamage
 {
@@ -25,6 +27,7 @@ public class BossEnemy : MonoBehaviour, IDamage
     [SerializeField] int ViewAngle;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] float attackRate;
+    [SerializeField] string bossName;
 
     [Header("Range Attack")]
     [SerializeField] Transform shootPOS;
@@ -45,6 +48,21 @@ public class BossEnemy : MonoBehaviour, IDamage
     [Header("Death Animation")]
     [SerializeField] AnimationClip deathAnimation;
     [SerializeField] float deathAniDuration;
+
+    [Header("Health Bar")]
+    [SerializeField] Image healthBarFill;
+    [SerializeField] TMP_Text healthBarNameText;
+    [SerializeField] GameObject healthBarUI;
+
+    [Header("portal")]
+    [SerializeField] GameObject portal;
+
+    [Header("Poison Bubble")]
+    [SerializeField] GameObject poisonPrefab;
+    [SerializeField] float poisonDuration = 5f;
+    [SerializeField] float poisonDamage = .5f;
+    [SerializeField] float poisonTickRate = 1f;
+    public GameObject poisonInstance;
 
     bool isAttacking;
     bool playerInRange;
@@ -68,9 +86,26 @@ public class BossEnemy : MonoBehaviour, IDamage
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
 
+        if(healthBarUI  != null)
+        {
+            healthBarUI.SetActive(false);
+        }
+
         if (shield == null)
         {
             shield.SetActive(false);
+        }
+
+
+        if (poisonPrefab != null)
+        {
+            poisonInstance = Instantiate(poisonPrefab, transform);
+            poisonInstance.SetActive(false); // Start with the poison bubble inactive
+            Debug.Log("Poison bubble instantiated and set inactive.");
+        }
+        else
+        {
+            Debug.LogWarning("Poison prefab is not assigned.");
         }
     }
 
@@ -89,6 +124,8 @@ public class BossEnemy : MonoBehaviour, IDamage
 
         if (playerInRange && !isAttacking && CanSeePlayer())
         {
+            FaceTarget();
+
             if (isMelee && distanceToPlayer <= meleeRange)
             {
                 StartCoroutine(MeleeAttack());
@@ -122,6 +159,12 @@ public class BossEnemy : MonoBehaviour, IDamage
 
     private void StartBattle()
     {
+        if (healthBarUI != null)
+        {
+            healthBarUI.SetActive(true);
+            healthBarNameText.text = bossName;
+            UpdateEnemyUI();
+        }
         StartNextStage();
     }
 
@@ -169,11 +212,6 @@ public class BossEnemy : MonoBehaviour, IDamage
                 if (stage == Stage.Stage2 || stage == Stage.Stage3)
                 {
                     agent.stoppingDistance = shootStopDis;
-
-                    if (distanceToPlayer <= shootRange)
-                    {
-                        StartCoroutine(Shoot());
-                    }
                 }
                 else if (isMelee && !isAttacking && distanceToPlayer <= meleeRange)
                 {
@@ -221,7 +259,7 @@ public class BossEnemy : MonoBehaviour, IDamage
 
         float ogStopDis = agent.stoppingDistance;
         agent.stoppingDistance = shootStopDis;
-
+        FaceTarget();
         createBullet();
 
         yield return new WaitForSeconds(attackRate);
@@ -265,7 +303,7 @@ public class BossEnemy : MonoBehaviour, IDamage
 
         HP -= damage;
         OnDamage();
-        //UpdateEnemyUI();
+        UpdateEnemyUI();
 
         agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -275,6 +313,8 @@ public class BossEnemy : MonoBehaviour, IDamage
         {
             StartCoroutine(PlayDeathAnimation());
             DestroyAllEnemies();
+            healthBarUI.SetActive(false);
+            portal.SetActive(true);
         }
     }
 
@@ -311,15 +351,27 @@ public class BossEnemy : MonoBehaviour, IDamage
             case Stage.Stage1:
                 stage = Stage.Stage2;
                 isMelee = false;
+                Shoot();
                 StartCoroutine(ActivateShield(shield, 5f));
                 Debug.Log("Starting Stage 2");
                 break;
 
             case Stage.Stage2:
-                shieldActivated = false;    
+                shieldActivated = false;
+                isMelee = true;
+                meleeAnimDur /= 2;
+                meleeDamage *= 2;
+                
                 stage = Stage.Stage3;
                 StartCoroutine(ActivateShield(shield, 5f));
                 Debug.Log("Starting Stage 3");
+
+                if (poisonInstance != null)
+                {
+                    poisonInstance.SetActive(true);
+                    StartCoroutine(ApplyPoisonDmg(poisonInstance));
+                    StartCoroutine(DeactivatePoison(poisonInstance, poisonDuration));
+                }
                 break;
         }
     }
@@ -342,8 +394,12 @@ public class BossEnemy : MonoBehaviour, IDamage
     //Enemy HP
     void UpdateEnemyUI()
     {
-        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrigin;
+        if(healthBarFill != null)
+        {
+            healthBarFill.fillAmount = HP / HPOrigin;
+        }
     }
+
     private void DestroyAllEnemies()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -362,10 +418,31 @@ public class BossEnemy : MonoBehaviour, IDamage
 
         shieldActivated = true;
 
-        Debug.Log("Activating shield: " + shield.name);
+        //Debug.Log("Activating shield: " + shield.name);
         shield.SetActive(true);
         yield return new WaitForSeconds(time);
         shield.SetActive(false);
-        Debug.Log("Deactivating shield: " + shield.name);
+        //Debug.Log("Deactivating shield: " + shield.name);
+    }
+
+    IEnumerator ApplyPoisonDmg(GameObject poison)
+    {
+        float time = 0f;
+
+        while (time < poisonDuration)
+        {
+            if (Vector3.Distance(gameManager.instance.player.transform.position, poison.transform.position) <= poison.GetComponent<SphereCollider>().radius)
+            {
+                gameManager.instance.player.GetComponent<IDamage>().takeDamage(poisonDamage);
+            }
+            time += poisonTickRate;
+            yield return new WaitForSeconds(poisonTickRate);
+        }
+    }
+
+    IEnumerator DeactivatePoison(GameObject poison, float time)
+    {
+        yield return new WaitForSeconds(time);
+        poison.SetActive(false);
     }
 }
