@@ -2641,7 +2641,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8020686559335457186}
-  - component: {fileID: 7038881134880482672}
   - component: {fileID: 3096630781580552198}
   - component: {fileID: 1196101397809890532}
   - component: {fileID: 3665047146077562035}
@@ -2670,41 +2669,6 @@ Transform:
   - {fileID: 3236897858193190351}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7038881134880482672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6373681271564361033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9256cee763de204ab590f7c137bb2f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 1196101397809890532}
-  model: {fileID: 2157498023881320028}
-  animate: {fileID: 3096630781580552198}
-  headPosition: {fileID: 3761654374617358298}
-  HP: 50
-  animateSpeedTransition: 5
-  ViewAngle: 90
-  faceTargetSpeed: 8
-  attackRate: 6
-  shootPOS: {fileID: 0}
-  bullet: {fileID: 0}
-  shootRange: 0
-  isMelee: 1
-  meleeRange: 5
-  meleeDamage: 6
-  meleeAnimDur: 3
-  roamDistance: 15
-  roamTimer: 3
-  patrolPoints: []
-  patrolSpeed: 0
-  patrolDelay: 0
-  deathAnimation: {fileID: 0}
-  deathAniDuration: 5
 --- !u!95 &3096630781580552198
 Animator:
   serializedVersion: 5

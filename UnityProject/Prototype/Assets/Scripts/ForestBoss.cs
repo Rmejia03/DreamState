@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ForestBoss : MonoBehaviour
+public class ForestBoss : MonoBehaviour, IDamage
 {
     [SerializeField] Animator animator;
     [SerializeField] NavMeshAgent navMesh;
@@ -29,14 +29,14 @@ public class ForestBoss : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float amount)
-    {
-        currentHealth -= amount;
-        if(currentHealth <= 0)
-        {
-            Die();
-        }
-    }
+    //public void TakeDamage(float amount, bool slowFlash = false)
+    //{
+    //    currentHealth -= amount;
+    //    if(currentHealth <= 0)
+    //    {
+    //        Die();
+    //    }
+    //}
 
     void Die()
     {
@@ -90,6 +90,15 @@ public class ForestBoss : MonoBehaviour
         if(isWalking && playerTransform != null)
         {
             navMesh.SetDestination(playerTransform.position);
+        }
+    }
+
+    public void takeDamage(float amount, bool slowFlash = false)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            Die();
         }
     }
 }

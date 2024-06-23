@@ -2913,7 +2913,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6373681271564361033, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1290998418}
   m_SourcePrefab: {fileID: 100100000, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
 --- !u!1001 &1004999748
 PrefabInstance:
@@ -3651,6 +3654,43 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2b7b705ebe25a148a6d961d69a583e3, type: 3}
+--- !u!137 &1289621587 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2157498023881320028, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
+  m_PrefabInstance: {fileID: 975251366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1290998411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6373681271564361033, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
+  m_PrefabInstance: {fileID: 975251366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1290998414 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1196101397809890532, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
+  m_PrefabInstance: {fileID: 975251366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1290998415 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3096630781580552198, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
+  m_PrefabInstance: {fileID: 975251366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1290998418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290998411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962f7587c59f11d479d46ae176bd96dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1290998415}
+  navMesh: {fileID: 1290998414}
+  model: {fileID: 1289621587}
+  bossHealth: 10
+  portal: {fileID: 106415433}
 --- !u!1001 &1339320870
 PrefabInstance:
   m_ObjectHideFlags: 0
