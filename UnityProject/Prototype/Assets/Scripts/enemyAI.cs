@@ -335,5 +335,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         return transform.position + randomOffset;
     }
 
+    public float GetHealth()
+    {
+        return HP;
+    }
 
 }
