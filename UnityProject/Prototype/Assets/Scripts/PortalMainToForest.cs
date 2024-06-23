@@ -11,6 +11,9 @@ public class PortalMainToForest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            inventoryManager.Instance.SaveInventory();
+
+
             SceneManager.LoadScene(mainToForest);
         }
     }

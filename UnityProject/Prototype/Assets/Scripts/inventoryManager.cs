@@ -31,7 +31,21 @@ public class inventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
+
+    private void Start()
+    {
+        LoadInventory();
     }
 
     private void Update()
@@ -159,6 +173,45 @@ public class inventoryManager : MonoBehaviour
     {
         healingPotionCount.SetText(healingItemIndex.ToString());
         fearPotionCount.SetText(fearItemIndex.ToString());
+    }
+
+    private class InventoryData
+    {
+        public List<itemStats> inventory;
+        public int selectedItem;
+        public int healingItemIndex;
+        public int fearItemIndex;
+    }
+
+    public void SaveInventory()
+    {
+        InventoryData data = new InventoryData
+        {
+            inventory = this.inventory,
+            selectedItem = this.selectedItem,
+            healingItemIndex = this.healingItemIndex,
+            fearItemIndex = this.fearItemIndex
+        };
+
+        string json = JsonUtility.ToJson(data);
+        PlayerPrefs.SetString("InventoryData", json);
+    }
+
+    public void LoadInventory()
+    {
+        if(PlayerPrefs.HasKey("InventoryData"))
+        {
+            string json = PlayerPrefs.GetString("InventoryData");
+            InventoryData data = JsonUtility.FromJson<InventoryData>(json);
+
+            this.inventory = data.inventory;
+            this.selectedItem = data.selectedItem;
+            this.healingItemIndex = data.healingItemIndex;
+            this.fearItemIndex = data.fearItemIndex;
+
+            ToolBarUI.UpdateToolbar(inventory);
+            UpdateCount();
+        }
     }
 
     //public bool IsHealingItemSelected()
