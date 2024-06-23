@@ -412,6 +412,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f806479e8f345a24eb958912ee2d3790, type: 3}
+--- !u!114 &305290309 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4594526744968587896, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
+  m_PrefabInstance: {fileID: 562507711}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9989111ce90f64394a00e64bfd4ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &333142742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4039,7 +4050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &7693322068396704934
 GameObject:
   m_ObjectHideFlags: 0
@@ -4648,7 +4659,11 @@ MonoBehaviour:
   miniEnemyPrefab: {fileID: 0}
   numberOfSpawns: 0
   spawnRange: 0
-  player: {fileID: 0}
+  poisonPrefab: {fileID: 0}
+  spawnPos: {fileID: 0}
+  cooldown: 0
+  speed: 0
+  player: {fileID: 305290309}
 --- !u!4 &8997228240962567184
 Transform:
   m_ObjectHideFlags: 0

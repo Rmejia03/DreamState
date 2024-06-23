@@ -49,6 +49,14 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int numberOfSpawns;
     [SerializeField] float spawnRange;
 
+    [Header("Poison Attack")]
+    [SerializeField] private GameObject poisonPrefab;
+    [SerializeField] private Transform spawnPos;
+    [SerializeField] private float cooldown;
+    [SerializeField] private float speed;
+
+    private bool isPoisonAttacking = false;
+
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
@@ -340,4 +348,44 @@ public class EnemyAI : MonoBehaviour, IDamage
         return HP;
     }
 
+    public void SetBehaviorStage1()
+    {
+        isMelee = true;
+    }
+    public void SetBehaviorStage2()
+    {
+        isMelee = false;
+        attackRate = 1f;
+        StartCoroutine(Shoot());
+    }
+    public void SetBehaviorStage3()
+    {
+        isMelee = false;
+    }
+
+    //private IEnumerator PoisonAttackRoutine()
+    //{
+    //    while (true)
+    //    {
+    //        yield return new WaitForSeconds(cooldown);
+
+    //        if(!isPoisonAttacking)
+    //        {
+    //            StartCoroutine(ShootPoison());
+    //        }
+    //    }
+    //}
+
+    //private IEnumerator ShootPoison()
+    //{
+    //    isPoisonAttacking = true;
+
+    //    GameObject poison = Instantiate(poisonPrefab, spawnPos.position, spawnPos.rotation);
+    //    Rigidbody rb = poison.GetComponent<Rigidbody>();
+    //    Vector3 direction = (gameManager.instance.player.transform.position - spawnPos.position).normalized;
+    //    rb.velocity = direction * speed;
+
+    //    yield return new WaitForSeconds(cooldown);
+    //    isPoisonAttacking = false;
+    //}
 }

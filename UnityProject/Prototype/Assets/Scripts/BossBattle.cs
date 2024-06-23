@@ -78,16 +78,19 @@ public class BossBattle : MonoBehaviour
         switch(stage)
         {
             case Stage.waitingToStart:
+                BossEnemy.SetBehaviorStage1();
                 stage = Stage.Stage1;
                 break;
 
             case Stage.Stage1:
                 stage = Stage.Stage2;
+                BossEnemy.SetBehaviorStage2();
                 StartCoroutine(ActivateShield(shield, 5f));
                 break;
 
             case Stage.Stage2:
                 stage = Stage.Stage3;
+                BossEnemy.SetBehaviorStage3();
                 StartCoroutine(ActivateShield(shield2, 5f));
                 break;
         }
