@@ -541,25 +541,43 @@ public class playerControl : MonoBehaviour, IDamage
         }
         if(HP <= 0)
         {
+            StartCoroutine(PlayDeathAnimation());
+
+            StartCoroutine(HandlePlayerDeath());
+            //gameManager.instance.youLost();
+        }
+
+        IEnumerator HandlePlayerDeath()
+        {
+            yield return new WaitForSeconds(3f);
+
             gameManager.instance.youLost();
         }
-  //      if (shield <= 0)
-  //      {
-  //          HP -= amount;
-  //          updateHPBarUI();
-  //          StartCoroutine(flashScreen());
-  //      }
-  //      else
-  //      {
-  //          shield -= amount;
-  //          updateShieldUI();
-  //          StartCoroutine(flashShield());
-		//}
-        
-  //      if (HP <= 0)
-  //      {
-  //          gameManager.instance.youLost();
-  //      }
+
+        IEnumerator PlayDeathAnimation()
+        {
+            animate.SetTrigger("Death");
+            yield return new WaitForSeconds(3f);
+
+            Destroy(gameObject);
+        }
+        //      if (shield <= 0)
+        //      {
+        //          HP -= amount;
+        //          updateHPBarUI();
+        //          StartCoroutine(flashScreen());
+        //      }
+        //      else
+        //      {
+        //          shield -= amount;
+        //          updateShieldUI();
+        //          StartCoroutine(flashShield());
+        //}
+
+        //      if (HP <= 0)
+        //      {
+        //          gameManager.instance.youLost();
+        //      }
     }
 
 	IEnumerator flashScreen()
