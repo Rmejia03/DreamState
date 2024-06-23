@@ -1812,7 +1812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3357411062115639825, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4594526744968587896, guid: a33886a38cfee364ea6f3f0a3fc4925a, type: 3}
       propertyPath: fear
@@ -2029,6 +2029,10 @@ PrefabInstance:
     - target: {fileID: 1713806005489536847, guid: 8537de0bb63f382409c86dc47bb7cdae, type: 3}
       propertyPath: m_Name
       value: SpiderMom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713806005489536847, guid: 8537de0bb63f382409c86dc47bb7cdae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4814566744574615824, guid: 8537de0bb63f382409c86dc47bb7cdae, type: 3}
       propertyPath: miniEnemyPrefab

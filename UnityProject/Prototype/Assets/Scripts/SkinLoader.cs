@@ -13,7 +13,13 @@ public class SkinLoader : MonoBehaviour
 
         if(selectedSkinPrefab != null )
         {
-            Instantiate(selectedSkinPrefab, spawnPoint.position, spawnPoint.rotation);
+            GameObject clonedPlayer = Instantiate(selectedSkinPrefab, spawnPoint.position, spawnPoint.rotation);
+            clonedPlayer.tag = "Player";
+            clonedPlayer.layer = LayerMask.NameToLayer("Player");
+
+            gameManager.instance.player = clonedPlayer;
+            gameManager.instance.playerScript = clonedPlayer.GetComponent<playerControl>();
+            
         }
     }
 }
