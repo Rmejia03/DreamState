@@ -337,6 +337,7 @@ public class BossEnemy : MonoBehaviour, IDamage
             DestroyAllEnemies();
             healthBarUI.SetActive(false);
             portal.SetActive(true);
+            BossManager.instance.BossDefeated();
         }
     }
 
