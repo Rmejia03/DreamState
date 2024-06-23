@@ -12,7 +12,7 @@ public class ForestBoss : MonoBehaviour, IDamage
     Transform playerTransform;
     bool isWalking = false;
 
-    [SerializeField] float bossHealth = 10f;
+    [SerializeField] float bossHealth;
     [SerializeField] GameObject portal;
 
     float currentHealth;
