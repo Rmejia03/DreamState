@@ -7005,6 +7005,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 510707564623620724, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
+      propertyPath: deathAniDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6373681271564361033, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
       propertyPath: m_Name
       value: Forest Boss
@@ -7555,3 +7559,4 @@ SceneRoots:
   - {fileID: 1438675079}
   - {fileID: 1736397106}
   - {fileID: 3785239304522053244}
+  - {fileID: 2132992058}
