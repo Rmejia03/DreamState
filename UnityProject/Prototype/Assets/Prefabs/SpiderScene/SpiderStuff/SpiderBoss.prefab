@@ -602,7 +602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6013044762479963644}
-  - component: {fileID: 5584484813623659363}
+  - component: {fileID: 292015759649460514}
   - component: {fileID: 7470380493307413950}
   - component: {fileID: 6183256675537887206}
   - component: {fileID: 2571295750000924514}
@@ -641,7 +641,7 @@ Transform:
   - {fileID: 6057581240544656730}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5584484813623659363
+--- !u!114 &292015759649460514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -650,37 +650,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1684516562541580141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4dfa5c53f5310144be3258cce519a2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8665d0f4a68c1244e8c11b135ea1a216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 7470380493307413950}
   model: {fileID: 4874604730939113996}
   animate: {fileID: 6183256675537887206}
-  headPosition: {fileID: 2133325780304140697}
+  headPosition: {fileID: 14658683618404528}
   HP: 100
   shield: {fileID: 5993560992248317751}
-  animateSpeedTransition: 5
-  ViewAngle: 200
-  faceTargetSpeed: 1
-  attackRate: 0.5
+  animateSpeedTransition: 3
+  ViewAngle: 100
+  faceTargetSpeed: 2
+  attackRate: 3
   bossName: Arachnarok
   shootPOS: {fileID: 14658683618404528}
   bullet: {fileID: 5104563172443815125, guid: 1932c248694104c49a990a5a9106d0b2, type: 3}
   shootRange: 20
-  shootStopDis: 5
+  shootStopDis: 10
   isMelee: 1
-  meleeRange: 5
-  meleeDamage: 1
-  meleeAnimDur: 2
-  roamDistance: 5
+  meleeRange: 4
+  meleeDamage: 2
+  meleeAnimDur: 3
+  roamDistance: 15
   roamTimer: 3
   deathAnimation: {fileID: 0}
-  deathAniDuration: 1
+  deathAniDuration: 0
   healthBarFill: {fileID: 0}
   healthBarNameText: {fileID: 0}
   healthBarUI: {fileID: 0}
   portal: {fileID: 0}
-  poisonPrefab: {fileID: 3523314027010509222, guid: f7903aa291a20a940ae9982b2a1698b9, type: 3}
+  poisonPrefab: {fileID: 1022033564899768708}
   poisonDuration: 5
   poisonDamage: 0.5
   poisonTickRate: 1

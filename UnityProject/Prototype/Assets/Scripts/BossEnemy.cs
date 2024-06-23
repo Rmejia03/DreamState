@@ -248,7 +248,7 @@ public class BossEnemy : MonoBehaviour, IDamage
         {
             playerInRange = false;
             agent.stoppingDistance = 5;
-            player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
+            //player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
         }
     }
 
@@ -289,7 +289,7 @@ public class BossEnemy : MonoBehaviour, IDamage
             animate.SetTrigger("MAttack");
 
             yield return new WaitForSeconds(meleeAnimDur);
-            //meleeHit();
+            meleeHit();
             isAttacking = false;
         }
     }
