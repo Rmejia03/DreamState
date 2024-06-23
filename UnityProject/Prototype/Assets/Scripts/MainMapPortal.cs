@@ -13,8 +13,9 @@ public class MainMapPortal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             inventoryManager.Instance.SaveInventory();
-
+            
             SceneManager.LoadScene(mainMap);
+            Timer.Instance.stopTimer();
         }
     }
 }
