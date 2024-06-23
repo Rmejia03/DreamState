@@ -2682,20 +2682,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962f7587c59f11d479d46ae176bd96dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3096630781580552198}
-  navMesh: {fileID: 1196101397809890532}
+  agent: {fileID: 1196101397809890532}
   model: {fileID: 2157498023881320028}
+  animate: {fileID: 3096630781580552198}
   headPosition: {fileID: 5324383859530036800}
-  animateSpeedTransition: 8
-  ViewAngle: 90
-  faceTargetSpeed: 8
+  HP: 50
+  animateSpeedTransition: 10
+  ViewAngle: 180
+  faceTargetSpeed: 15
+  attackRate: 0
   isMelee: 1
   meleeRange: 6
   meleeDamage: 8
   meleeAnimDur: 3
+  deathAnimation: {fileID: 0}
+  deathAniDuration: 3
+  player: {fileID: 0}
   playerTransform: {fileID: 0}
-  bossHealth: 10
-  portal: {fileID: 0}
 --- !u!95 &3096630781580552198
 Animator:
   serializedVersion: 5
@@ -2727,10 +2730,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 5
+  m_Acceleration: 25
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 300
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
