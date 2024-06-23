@@ -69,6 +69,9 @@ public class BossEnemy : MonoBehaviour, IDamage
     bool destinationChosen;
     float angleToPlayer;
     float stoppingDistanceOrigin;
+    bool battleStarted = false;
+    bool poisonActive = false;
+    bool isApplyingPoisonDmg = false;
 
     Vector3 startingPosition;
     Vector3 playerDirection;
@@ -100,12 +103,8 @@ public class BossEnemy : MonoBehaviour, IDamage
         if (poisonPrefab != null)
         {
             poisonInstance = Instantiate(poisonPrefab, transform);
-            poisonInstance.SetActive(false); // Start with the poison bubble inactive
-            Debug.Log("Poison bubble instantiated and set inactive.");
-        }
-        else
-        {
-            Debug.LogWarning("Poison prefab is not assigned.");
+            poisonInstance.SetActive(false);
+            //Debug.Log("Poison bubble instantiated and set inactive.");
         }
     }
 
@@ -153,10 +152,42 @@ public class BossEnemy : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            StartBattle();
+            
+            if(!battleStarted)
+            {
+                StartBattle();
+            }
+
+            if(stage == Stage.Stage3 && !isApplyingPoisonDmg)
+            {
+                StartCoroutine(ApplyPoisonDmg(other));
+            }
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Player") && stage == Stage.Stage3 && poisonActive && !isApplyingPoisonDmg)
+        {
+            StartCoroutine(ApplyPoisonDmg(other));
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            agent.stoppingDistance = 5;
+            //player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
+
+            if (stage == Stage.Stage3)
+            {
+                isApplyingPoisonDmg = false;
+                StopCoroutine(ApplyPoisonDmg(other));
+            }
+        }
+    }
     private void StartBattle()
     {
         if (healthBarUI != null)
@@ -165,6 +196,7 @@ public class BossEnemy : MonoBehaviour, IDamage
             healthBarNameText.text = bossName;
             UpdateEnemyUI();
         }
+        battleStarted = true;
         StartNextStage();
     }
 
@@ -240,16 +272,6 @@ public class BossEnemy : MonoBehaviour, IDamage
     {
         Quaternion rotation = Quaternion.LookRotation(new Vector3(playerDirection.x, 0, playerDirection.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * faceTargetSpeed);
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
-            agent.stoppingDistance = 5;
-            //player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
-        }
     }
 
     IEnumerator Shoot()
@@ -334,7 +356,7 @@ public class BossEnemy : MonoBehaviour, IDamage
                 {
                     Debug.Log("Transitioning to Stage 3");
                     StartNextStage();
-                }
+               }
                 break;
         }
     }
@@ -345,31 +367,30 @@ public class BossEnemy : MonoBehaviour, IDamage
         {
             case Stage.waitingToStart:
                 stage = Stage.Stage1;
-                Debug.Log("Starting Stage 1");
+                //Debug.Log("Starting Stage 1");
                 break;
 
             case Stage.Stage1:
                 stage = Stage.Stage2;
                 isMelee = false;
-                Shoot();
                 StartCoroutine(ActivateShield(shield, 5f));
-                Debug.Log("Starting Stage 2");
+                Shoot();
+                //Debug.Log("Starting Stage 2");
                 break;
 
             case Stage.Stage2:
+                stage = Stage.Stage3;
                 shieldActivated = false;
+                StartCoroutine(ActivateShield(shield, 5f));
                 isMelee = true;
                 meleeAnimDur /= 2;
                 meleeDamage *= 2;
-                
-                stage = Stage.Stage3;
-                StartCoroutine(ActivateShield(shield, 5f));
-                Debug.Log("Starting Stage 3");
+                //Debug.Log("Starting Stage 3");
 
                 if (poisonInstance != null)
                 {
                     poisonInstance.SetActive(true);
-                    StartCoroutine(ApplyPoisonDmg(poisonInstance));
+                    poisonActive = true;
                     StartCoroutine(DeactivatePoison(poisonInstance, poisonDuration));
                 }
                 break;
@@ -425,24 +446,29 @@ public class BossEnemy : MonoBehaviour, IDamage
         //Debug.Log("Deactivating shield: " + shield.name);
     }
 
-    IEnumerator ApplyPoisonDmg(GameObject poison)
+    IEnumerator ApplyPoisonDmg(Collider player)
     {
         float time = 0f;
-
-        while (time < poisonDuration)
+        isApplyingPoisonDmg = true;
+        while (time < poisonDuration && isApplyingPoisonDmg)
         {
-            if (Vector3.Distance(gameManager.instance.player.transform.position, poison.transform.position) <= poison.GetComponent<SphereCollider>().radius)
+
+            if(player.CompareTag("Player"))
             {
-                gameManager.instance.player.GetComponent<IDamage>().takeDamage(poisonDamage);
+                player.GetComponent<IDamage>().takeDamage(poisonDamage);
             }
+          
             time += poisonTickRate;
             yield return new WaitForSeconds(poisonTickRate);
         }
+        isApplyingPoisonDmg = false;
     }
 
     IEnumerator DeactivatePoison(GameObject poison, float time)
     {
         yield return new WaitForSeconds(time);
         poison.SetActive(false);
+        poisonActive = false;
+        isApplyingPoisonDmg = false;
     }
 }

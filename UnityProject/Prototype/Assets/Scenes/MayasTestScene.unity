@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogColor: {r: 0.6541537, g: 1, b: 0.5518868, a: 1}
+  m_FogMode: 1
+  m_FogDensity: 0.03
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -7741,6 +7741,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7746967809932051935}
   m_CullTransparentMesh: 1
+--- !u!1001 &4802807837218779052
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 348587597615019408, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_Name
+      value: SpiderBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -185.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1229
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804434282149715504, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731155435309350555, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: portal
+      value: 
+      objectReference: {fileID: 1584755834}
+    - target: {fileID: 8731155435309350555, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: healthBarUI
+      value: 
+      objectReference: {fileID: 1302622716}
+    - target: {fileID: 8731155435309350555, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: healthBarFill
+      value: 
+      objectReference: {fileID: 478944684}
+    - target: {fileID: 8731155435309350555, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
+      propertyPath: healthBarNameText
+      value: 
+      objectReference: {fileID: 922424971}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 710c299d62b88f64889bd63ab5e0b803, type: 3}
 --- !u!114 &4817975152410540922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10074,79 +10147,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &6517055786349194372
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 292015759649460514, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: portal
-      value: 
-      objectReference: {fileID: 1584755834}
-    - target: {fileID: 292015759649460514, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: healthBarUI
-      value: 
-      objectReference: {fileID: 1302622716}
-    - target: {fileID: 292015759649460514, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: healthBarFill
-      value: 
-      objectReference: {fileID: 478944684}
-    - target: {fileID: 292015759649460514, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: healthBarNameText
-      value: 
-      objectReference: {fileID: 922424971}
-    - target: {fileID: 1684516562541580141, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_Name
-      value: SpiderBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -185.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 12.1229
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -18.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013044762479963644, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6c8f6576a80e17b408c574e0968ef30f, type: 3}
 --- !u!1 &6528635963600959236
 GameObject:
   m_ObjectHideFlags: 0
@@ -14000,7 +14000,7 @@ SceneRoots:
   - {fileID: 1850786279}
   - {fileID: 310892206}
   - {fileID: 2104039750}
-  - {fileID: 6517055786349194372}
+  - {fileID: 4802807837218779052}
   - {fileID: 46522162}
   - {fileID: 3949004978007165782}
   - {fileID: 333142742}
