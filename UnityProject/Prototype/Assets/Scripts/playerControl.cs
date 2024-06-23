@@ -511,7 +511,9 @@ public class playerControl : MonoBehaviour, IDamage
     {
         if (isDefending)
         {
-            amount = amount * 0;
+            animate.SetTrigger("isDefending");
+            amount = 0;
+            StartCoroutine(FlashWhileDefending());
         }
         if(shield <= 0)
         {
@@ -569,6 +571,19 @@ public class playerControl : MonoBehaviour, IDamage
         //      {
         //          gameManager.instance.youLost();
         //      }
+    }
+
+    IEnumerator FlashWhileDefending()
+    {
+        if(!isFlashing)
+        {
+            isFlashing = true;
+            gameManager.instance.flashDamage.SetActive(true);
+            yield return new WaitForSeconds(.1f);
+            gameManager.instance.flashDamage.SetActive(false);
+            yield return new WaitForSeconds(.1f);
+            isFlashing = false;
+        }
     }
     IEnumerator HandlePlayerDeath()
     {
