@@ -68,7 +68,8 @@ public class ForestBoss : MonoBehaviour, IDamage
 
             if (isMelee && distanceToPlayer <= meleeRange)
             {
-                RandomAttack();
+                StartCoroutine(RandomAttack());
+                
             }
 
             else
@@ -105,10 +106,6 @@ public class ForestBoss : MonoBehaviour, IDamage
                     FaceTarget();
                 }
 
-                if (isMelee && !isAttacking && distanceToPlayer <= meleeRange)
-                {
-                    StartCoroutine(MeleeAttack());
-                }
 
                 return true;
             }
@@ -153,23 +150,29 @@ public class ForestBoss : MonoBehaviour, IDamage
 
     IEnumerator RandomAttack()
     {
-        yield return new WaitForSeconds(0.5f);
-
-        int attackChoice = Random.Range(1, 4);
-
-        switch (attackChoice)
+        if (!isAttacking)
         {
-            case 1:
-                animate.SetTrigger("Attack 1");
-                break;
-            case 2:
-                animate.SetTrigger("Attack 2");
-                break;
-            case 3:
-                animate.SetTrigger("Attack 3");
-                break;
-            default:
-                break;
+            isAttacking = true;
+            
+
+            int attackChoice = Random.Range(1, 4);
+
+            switch (attackChoice)
+            {
+                case 1:
+                    animate.SetTrigger("Attack 1");
+                    break;
+                case 2:
+                    animate.SetTrigger("Attack 2");
+                    break;
+                case 3:
+                    animate.SetTrigger("Attack 3");
+                    break;
+                default:
+                    break;
+            }
+            yield return new WaitForSeconds(meleeAnimDur);
+            isAttacking = false;
         }
     }
 
@@ -181,18 +184,7 @@ public class ForestBoss : MonoBehaviour, IDamage
             gameManager.instance.player.GetComponent<IDamage>().takeDamage(meleeDamage);
         }
     }
-    IEnumerator MeleeAttack()
-    {
-        if (!isAttacking)
-        {
-            isAttacking = true;
-            animate.SetTrigger("MAttack");
-
-            yield return new WaitForSeconds(meleeAnimDur);
-            //meleeHit();
-            isAttacking = false;
-        }
-    }
+    
 
     public void takeDamage(float damage, bool slowFlash = false)
     {
