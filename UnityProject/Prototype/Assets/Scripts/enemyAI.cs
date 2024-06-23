@@ -297,7 +297,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (HP <= 0) 
         {
             //gameManager.instance.updateGameGoal(-1); 
-            StartCoroutine(PlayDeathAnimation()); 
+            StartCoroutine(PlayDeathAnimation());
+
+            for (int i = 0; i < numberOfSpawns; i++)
+            {
+                Instantiate(miniEnemyPrefab, GetRandomSpawnPosition(), Quaternion.identity);
+            }
         }
     }
 
@@ -305,11 +310,6 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         animate.SetTrigger("Death");
         yield return new WaitForSeconds(deathAniDuration);
-
-        for(int i = 0; i< numberOfSpawns; i++)
-        {
-            Instantiate(miniEnemyPrefab, GetRandomSpawnPosition(), Quaternion.identity);
-        }
 
         Destroy(gameObject);
     }
