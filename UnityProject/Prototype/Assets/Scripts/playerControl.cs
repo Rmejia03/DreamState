@@ -43,6 +43,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float meleeAniDuration;
     [SerializeField] float comboResetTime;
     [SerializeField] float comboDamageMultiplier;
+    public bool isDefending = false;
 
     [Header("Items")]
     [SerializeField] GameObject itemModels;
@@ -122,6 +123,7 @@ public class playerControl : MonoBehaviour, IDamage
 
             Movement();
             HandleMelee();
+            PlayerDefend();
             //selectItem();
             useItem();
             
@@ -507,6 +509,10 @@ public class playerControl : MonoBehaviour, IDamage
 
     public void takeDamage(float amount, bool slowFlash = false)
     {
+        if (isDefending)
+        {
+            amount = amount * 0;
+        }
         if(shield <= 0)
         {
             HP -= amount;
@@ -539,30 +545,61 @@ public class playerControl : MonoBehaviour, IDamage
                 StartCoroutine (flashShield());
             }
         }
-        if(HP <= 0)
+        if (HP <= 0)
         {
-            gameManager.instance.youLost();
+            StartCoroutine(PlayDeathAnimation());
+
+            StartCoroutine(HandlePlayerDeath());
+            //gameManager.instance.youLost();
         }
-  //      if (shield <= 0)
-  //      {
-  //          HP -= amount;
-  //          updateHPBarUI();
-  //          StartCoroutine(flashScreen());
-  //      }
-  //      else
-  //      {
-  //          shield -= amount;
-  //          updateShieldUI();
-  //          StartCoroutine(flashShield());
-		//}
-        
-  //      if (HP <= 0)
-  //      {
-  //          gameManager.instance.youLost();
-  //      }
+        //      if (shield <= 0)
+        //      {
+        //          HP -= amount;
+        //          updateHPBarUI();
+        //          StartCoroutine(flashScreen());
+        //      }
+        //      else
+        //      {
+        //          shield -= amount;
+        //          updateShieldUI();
+        //          StartCoroutine(flashShield());
+        //}
+
+        //      if (HP <= 0)
+        //      {
+        //          gameManager.instance.youLost();
+        //      }
+    }
+    IEnumerator HandlePlayerDeath()
+    {
+        yield return new WaitForSeconds(3f);
+
+        gameManager.instance.youLost();
     }
 
-	IEnumerator flashScreen()
+    IEnumerator PlayDeathAnimation()
+    {
+        animate.SetTrigger("Death");
+        yield return new WaitForSeconds(3f);
+
+        Destroy(gameObject);
+    }
+
+    void PlayerDefend()
+    {
+        if (Input.GetButtonDown("Defend"))
+        {
+            isDefending = true;
+            animate.SetBool("isDefending", true);
+        }
+        else if(Input.GetButtonUp("Defend"))
+        {
+            isDefending = false;
+            animate.SetBool("isDefending", false);
+        }
+
+    }
+    IEnumerator flashScreen()
 	{
 		gameManager.instance.flashDamage.SetActive(true);
 		yield return new WaitForSeconds(0.1f);
