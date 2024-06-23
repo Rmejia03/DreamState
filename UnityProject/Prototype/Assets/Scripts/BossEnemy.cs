@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
 
-
-public class EnemyAI : MonoBehaviour, IDamage
+public class BossEnemy : MonoBehaviour, IDamage
 {
+    public enum Stage
+    {
+        waitingToStart,
+        Stage1,
+        Stage2,
+        Stage3,
+    }
+
+    //[SerializeField] private spawner SpawnEnemies;
     [Header("Enemy Info")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
-    //[SerializeField] Material enemyType;
     [SerializeField] Animator animate;
     [SerializeField] Transform headPosition;
     [SerializeField] float HP;
+    public GameObject shield;
     [SerializeField] int animateSpeedTransition;
     [SerializeField] int ViewAngle;
     [SerializeField] int faceTargetSpeed;
@@ -24,6 +30,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPOS;
     [SerializeField] GameObject bullet;
     [SerializeField] int shootRange;
+    [SerializeField] float shootStopDis;
 
     [Header("Melee Attack")]
     [SerializeField] bool isMelee;
@@ -35,34 +42,24 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int roamDistance;
     [SerializeField] int roamTimer;
 
-    [Header("Patrol")]
-    [SerializeField] Transform[] patrolPoints;
-    [SerializeField] float patrolSpeed;
-    [SerializeField] int patrolDelay;
-
     [Header("Death Animation")]
     [SerializeField] AnimationClip deathAnimation;
     [SerializeField] float deathAniDuration;
-
-    [Header("Spawn Settings")]
-    [SerializeField] GameObject miniEnemyPrefab;
-    [SerializeField] int numberOfSpawns;
-    [SerializeField] float spawnRange;
 
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
     float angleToPlayer;
     float stoppingDistanceOrigin;
-    //bool isPatrolling;
-    //bool hasPatrolPoints;
-    
+
     Vector3 startingPosition;
     Vector3 playerDirection;
 
     float HPOrigin;
 
     public playerControl player;
+    private Stage stage;
+    private bool shieldActivated;
 
     // Start is called before the first frame update
     void Start()
@@ -70,67 +67,68 @@ public class EnemyAI : MonoBehaviour, IDamage
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
-        
-        //player = gameManager.instance.player.GetComponent<playerControl>();
-        //UpdateEnemyUI();
 
-        //if (patrolPoints != null && patrolPoints.Length > 0)
-        //{
-        //    hasPatrolPoints = true;
-        //    StartCoroutine(Patrol());
-        //}
-        //else
-        //{
-        //    hasPatrolPoints = false;
-        //    StartCoroutine(Roam());
-        //}
-      
+        if (shield == null)
+        {
+            shield.SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-       float animateSpeed = agent.velocity.normalized.magnitude;
-       animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
-        if (playerInRange && !CanSeePlayer())
-        {
-            StartCoroutine(Roam());
-        }
-        else if (!playerInRange)
-        {
-            StartCoroutine(Roam());
-        }
-        if(playerInRange && !isAttacking && CanSeePlayer())
-        {
-            float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
+        float animateSpeed = agent.velocity.normalized.magnitude;
+        animate.SetFloat("Speed", Mathf.Lerp(animate.GetFloat("Speed"), animateSpeed, Time.deltaTime * animateSpeedTransition));
 
-            if(isMelee && distanceToPlayer <= meleeRange)
+        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
+
+        if (!playerInRange || !CanSeePlayer())
+        {
+            StartCoroutine(Roam());
+        }
+
+        if (playerInRange && !isAttacking && CanSeePlayer())
+        {
+            if (isMelee && distanceToPlayer <= meleeRange)
             {
                 StartCoroutine(MeleeAttack());
             }
-            else if(!isMelee && distanceToPlayer <= shootRange)
+            else if (!isMelee && distanceToPlayer <= shootRange)
             {
+                agent.stoppingDistance = shootStopDis;
                 StartCoroutine(Shoot());
             }
             else
+            {
+                agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
+            }
         }
 
-        if(playerInRange && !CanSeePlayer())
-        {
-            StartCoroutine(Roam());
-        }
-        else if(!playerInRange)
-        {
-            StartCoroutine(Roam());
-        }
-     
     }
-    
+    private void Awake()
+    {
+        stage = Stage.waitingToStart;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+            StartBattle();
+        }
+    }
+
+    private void StartBattle()
+    {
+        StartNextStage();
+    }
+
     //Roaming Enemy
     IEnumerator Roam()
     {
-        if(!destinationChosen && agent.remainingDistance < 0.05f)
+        if (!destinationChosen && agent.remainingDistance < 0.05f)
         {
             destinationChosen = true;
             agent.stoppingDistance = 0;
@@ -148,31 +146,6 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
-    //Patrolling enemy 
-    //IEnumerator Patrol()
-    //{
-    //    isPatrolling = true;
-    //    agent.stoppingDistance = 0;
-    //    while(true)
-    //    {
-    //        Vector3 targetPosition = patrolPoints[currentPatrolPoint].position;
-    //        agent.SetDestination(targetPosition);
-
-    //        while(agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
-    //        {
-    //            yield return null;
-    //        }
-
-    //        yield return new WaitForSeconds(patrolDelay);
-
-    //        currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Length;
-    //        yield return null;
-
-    //    }
-    //}
-
-    
-
     //See player within range
     bool CanSeePlayer()
     {
@@ -184,37 +157,40 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         RaycastHit hit;
 
-        if(Physics.Raycast(headPosition.position, playerDirection, out hit))
+        if (Physics.Raycast(headPosition.position, playerDirection, out hit))
         {
-            if(hit.collider.CompareTag("Player") && angleToPlayer <= ViewAngle)
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= ViewAngle)
             {
                 agent.stoppingDistance = stoppingDistanceOrigin;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
                 float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
-                if (agent.remainingDistance <= agent.stoppingDistance)
+                if (stage == Stage.Stage2 || stage == Stage.Stage3)
                 {
-                    FaceTarget();
-                }
+                    agent.stoppingDistance = shootStopDis;
 
-                if (isMelee && !isAttacking && distanceToPlayer <= meleeRange)
+                    if (distanceToPlayer <= shootRange)
+                    {
+                        StartCoroutine(Shoot());
+                    }
+                }
+                else if (isMelee && !isAttacking && distanceToPlayer <= meleeRange)
                 {
                     StartCoroutine(MeleeAttack());
                 }
-
                 else if (!isMelee && !isAttacking)
                 {
                     StartCoroutine(Shoot());
                 }
-               
+
                 return true;
             }
         }
         agent.stoppingDistance = 0;
         return false;
     }
-    
+
     //Check if in melee range
     bool IsInRangeForMelee()
     {
@@ -228,20 +204,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * faceTargetSpeed);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = true;
-        }
-    }
-
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            agent.stoppingDistance = 0;
+            agent.stoppingDistance = 5;
             player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
         }
     }
@@ -251,9 +219,15 @@ public class EnemyAI : MonoBehaviour, IDamage
         isAttacking = true;
         animate.SetTrigger("Attack");
 
+        float ogStopDis = agent.stoppingDistance;
+        agent.stoppingDistance = shootStopDis;
+
         createBullet();
 
         yield return new WaitForSeconds(attackRate);
+
+        agent.stoppingDistance = ogStopDis;
+
         isAttacking = false;
     }
 
@@ -276,7 +250,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             isAttacking = true;
             animate.SetTrigger("MAttack");
 
-            yield return new WaitForSeconds(meleeAnimDur);            
+            yield return new WaitForSeconds(meleeAnimDur);
             //meleeHit();
             isAttacking = false;
         }
@@ -284,27 +258,73 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void takeDamage(float damage, bool slowFlash = false)
     {
-        HP -= damage;
+        if(shield.activeSelf)
+        {
+            return;
+        }
 
+        HP -= damage;
+        OnDamage();
         //UpdateEnemyUI();
 
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         StartCoroutine(hitFlash());
 
-        if (HP <= 0) 
+        if (HP <= 0)
         {
-            //gameManager.instance.updateGameGoal(-1); 
             StartCoroutine(PlayDeathAnimation());
-
-            for (int i = 0; i < numberOfSpawns; i++)
-            {
-                Instantiate(miniEnemyPrefab, GetRandomSpawnPosition(), Quaternion.identity);
-            }
+            DestroyAllEnemies();
         }
     }
 
-   IEnumerator PlayDeathAnimation()
+    public void OnDamage()
+    {
+        switch (stage)
+        {
+            case Stage.Stage1:
+                if (HP <= 70)
+                {
+                    Debug.Log("Transitioning to Stage 2");
+                    StartNextStage();
+                }
+                break;
+            case Stage.Stage2:
+                if (HP <= 50)
+                {
+                    Debug.Log("Transitioning to Stage 3");
+                    StartNextStage();
+                }
+                break;
+        }
+    }
+
+    private void StartNextStage()
+    {
+        switch (stage)
+        {
+            case Stage.waitingToStart:
+                stage = Stage.Stage1;
+                Debug.Log("Starting Stage 1");
+                break;
+
+            case Stage.Stage1:
+                stage = Stage.Stage2;
+                isMelee = false;
+                StartCoroutine(ActivateShield(shield, 5f));
+                Debug.Log("Starting Stage 2");
+                break;
+
+            case Stage.Stage2:
+                shieldActivated = false;    
+                stage = Stage.Stage3;
+                StartCoroutine(ActivateShield(shield, 5f));
+                Debug.Log("Starting Stage 3");
+                break;
+        }
+    }
+
+    IEnumerator PlayDeathAnimation()
     {
         animate.SetTrigger("Death");
         yield return new WaitForSeconds(deathAniDuration);
@@ -324,12 +344,28 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrigin;
     }
-
-    private Vector3 GetRandomSpawnPosition()
+    private void DestroyAllEnemies()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        Vector3 randomOffset = new Vector3(Random.Range(-spawnRange,spawnRange),0,Random.Range(-spawnRange,spawnRange));
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+    }
+    private IEnumerator ActivateShield(GameObject shield, float time)
+    {
+        if(shieldActivated)
+        {
+            yield break;
+        }
 
-        return transform.position + randomOffset;
+        shieldActivated = true;
+
+        Debug.Log("Activating shield: " + shield.name);
+        shield.SetActive(true);
+        yield return new WaitForSeconds(time);
+        shield.SetActive(false);
+        Debug.Log("Deactivating shield: " + shield.name);
     }
 }
