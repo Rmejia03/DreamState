@@ -49,13 +49,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int numberOfSpawns;
     [SerializeField] float spawnRange;
 
-    [Header("Poison Attack")]
-    [SerializeField] private GameObject poisonPrefab;
-    [SerializeField] private Transform spawnPos;
-    [SerializeField] private float cooldown;
-    [SerializeField] private float speed;
+    [Header("shield")]
+    public GameObject shield;
 
-    private bool isPoisonAttacking = false;
+    //[SerializeField] private GameObject poisonPrefab;
+    //[SerializeField] private Transform spawnPos;
+    //[SerializeField] private float cooldown;
+    //[SerializeField] private float speed;
+
+    //private bool isPoisonAttacking = false;
 
     bool isAttacking;
     bool playerInRange;
@@ -71,17 +73,22 @@ public class EnemyAI : MonoBehaviour, IDamage
     float HPOrigin;
 
     public playerControl player;
+    public BossBattle bossBattle;
     //int currentPatrolPoint = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-       
-       
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
-        player = gameManager.instance.player.GetComponent<playerControl>();
+
+        if (bossBattle != null )
+        {
+            bossBattle.AssignShield(shield);
+        }
+        
+        //player = gameManager.instance.player.GetComponent<playerControl>();
         //UpdateEnemyUI();
 
         //if (patrolPoints != null && patrolPoints.Length > 0)
@@ -295,6 +302,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void takeDamage(float damage, bool slowFlash = false)
     {
         HP -= damage;
+        bossBattle.OnDamage();
 
         //UpdateEnemyUI();
 
@@ -305,6 +313,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (HP <= 0) 
         {
             //gameManager.instance.updateGameGoal(-1); 
+            bossBattle.BossDead();
             StartCoroutine(PlayDeathAnimation());
 
             for (int i = 0; i < numberOfSpawns; i++)

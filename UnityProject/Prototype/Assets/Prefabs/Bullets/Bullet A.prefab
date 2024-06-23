@@ -73,7 +73,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -141,29 +141,47 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.22029376
       - serializedVersion: 3
-        time: 0.47416282
-        value: 0.47525185
-        inSlope: 0.03871252
-        outSlope: 0.03871252
+        time: 0.25103268
+        value: 0.43565172
+        inSlope: 0.2207964
+        outSlope: 0.2207964
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.4009666
+        outWeight: 0.92903113
       - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -3.2795882
-        outSlope: -3.2795882
+        time: 0.45100898
+        value: 0.37354875
+        inSlope: -0.54192096
+        outSlope: -0.54192096
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.28865072
+        inWeight: 0.33333334
+        outWeight: 0.75620496
+      - serializedVersion: 3
+        time: 0.6723884
+        value: 0.23898554
+        inSlope: -0.656093
+        outSlope: -0.656093
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 1
+        outWeight: 0.6972832
+      - serializedVersion: 3
+        time: 1
+        value: 0.009902954
+        inSlope: -1.0482575
+        outSlope: -1.0482575
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 1
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.61320746, g: 0.9262771, b: 1, a: 1}
+      key0: {r: 0.47061336, g: 0.990566, b: 0.4438857, a: 1}
       key1: {r: 0.61320746, g: 0.9262771, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -213,7 +231,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
