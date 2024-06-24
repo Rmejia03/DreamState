@@ -40,6 +40,7 @@ public class gameManager : MonoBehaviour
         //player = GameObject.FindWithTag("Player"); 
         //playerScript = player.GetComponent<playerControl>();
         playerSpawnPos = GameObject.FindWithTag("player spawn pos");
+
     }
 
     // Update is called once per frame
@@ -102,4 +103,4 @@ public class gameManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(isPaused);
     }
-} 
+}
