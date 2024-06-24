@@ -21286,6 +21286,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3461913714893317232, guid: 0fa5a2a863929e943bbe80b7a26d7332, type: 3}
+      propertyPath: remainingTime
+      value: 900
+      objectReference: {fileID: 0}
     - target: {fileID: 5617488844660859554, guid: 0fa5a2a863929e943bbe80b7a26d7332, type: 3}
       propertyPath: m_Name
       value: Timer
@@ -31325,7 +31329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6987294693489781788, guid: 6c5e21e27a33ad744b6a329375ecd0c6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
