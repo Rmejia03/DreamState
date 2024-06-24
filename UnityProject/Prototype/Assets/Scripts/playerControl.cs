@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -49,11 +48,19 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] GameObject itemModels;
     public inventoryManager InventoryManager;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip meleeAttackSound;
+    public AudioClip heavyAttackSound;
+    public AudioClip defendHitSound;
+
     [Header("Doors")]
     [SerializeField] int rayLength = 5;
     [SerializeField] LayerMask layerInteract;
     [SerializeField] string excludeLayerName = "Player";
     [SerializeField] Image crosshair = null;
+
+   
 
     private DoorSoundAnimation raycastObject;
     [SerializeField] KeyCode openDoorKey = KeyCode.E;
@@ -91,6 +98,20 @@ public class playerControl : MonoBehaviour, IDamage
         speedOrig = speed;
         sprintOrig = sprintMod;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
+
+        if (meleeAttackSound == null)
+            Debug.LogError("Melee attack sound is not assigned!");
+        if (heavyAttackSound == null)
+            Debug.LogError("Heavy attack sound is not assigned!");
+        if (defendHitSound == null)
+            Debug.LogError("Defend hit sound is not assigned!");
+
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource component not found!");
+        }
 
         updateHPBarUI();
         updateShieldUI();
@@ -406,6 +427,7 @@ public class playerControl : MonoBehaviour, IDamage
             if (isHeavy)
             {
                 animate.SetTrigger("Heavy Attack");
+                audioSource.PlayOneShot(heavyAttackSound);
                 yield return new WaitForSeconds(meleeAniDuration);
             }
             else
@@ -426,6 +448,8 @@ public class playerControl : MonoBehaviour, IDamage
                         animate.SetTrigger("Stab Melee");
                         break;
                 }
+
+                audioSource.PlayOneShot(meleeAttackSound, 1f);
 
                 yield return new WaitForSeconds(meleeAniDuration / 2);
 
@@ -606,6 +630,7 @@ public class playerControl : MonoBehaviour, IDamage
         {
             isDefending = true;
             animate.SetBool("isDefending", true);
+            audioSource.PlayOneShot(defendHitSound, 1f );
         }
         else if(Input.GetButtonUp("Defend"))
         {
@@ -809,5 +834,7 @@ public class playerControl : MonoBehaviour, IDamage
         fear = Mathf.Min(fearOrig, fear - amount);
         updateFearUI();
     }
+
+
 }
 

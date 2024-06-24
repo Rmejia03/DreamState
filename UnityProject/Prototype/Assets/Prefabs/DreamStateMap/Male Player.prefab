@@ -687,7 +687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7531741196379597111
 Transform:
   m_ObjectHideFlags: 0
@@ -696,7 +696,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868855210254545138}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 140.68, y: 10.2, z: 117.31}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
@@ -727,22 +727,32 @@ MonoBehaviour:
   shield: 5
   fear: 10
   regenRate: 0.25
+  fearVision: {fileID: 0}
   weaponRate: 0
   weaponDamage: 0
   weaponDistance: 0
   gravity: 20
   jumpSpeed: 8
   jumpMax: 2
-  sprintMod: 2
   speed: 5
+  speedOrig: 0
+  sprintMod: 2
+  sprintOrig: 0
+  sprinting: 0
+  Stuck: 0
   meleeDamage: 4
   meleeRange: 3
   meleeCooldown: 0.5
   meleeAniDuration: 0.47
   comboResetTime: 3
   comboDamageMultiplier: 1.5
+  isDefending: 0
   itemModels: {fileID: 0}
   InventoryManager: {fileID: 0}
+  audioSource: {fileID: 0}
+  meleeAttackSound: {fileID: 0}
+  heavyAttackSound: {fileID: 0}
+  defendHitSound: {fileID: 0}
   rayLength: 5
   layerInteract:
     serializedVersion: 2
