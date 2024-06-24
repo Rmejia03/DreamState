@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class BossManager : MonoBehaviour
 {
     public static BossManager instance;
@@ -11,6 +11,9 @@ public class BossManager : MonoBehaviour
 
     public GameObject winScreen;
     public GameObject finalPortal;
+
+    public GameObject boss1;
+    public GameObject boss2;
 
     private void Awake()
     {
@@ -29,6 +32,19 @@ public class BossManager : MonoBehaviour
     {
         defeatedBosses++;
         CheckAllBossesDefeated();
+        UpdateBossUI();
+    }
+
+    public void UpdateBossUI()
+    {
+        if(defeatedBosses == 1)
+        {
+            boss1.SetActive(true);
+        }
+        else if (defeatedBosses == 2) 
+        { 
+            boss2.SetActive(true); 
+        }
     }
 
     private void CheckAllBossesDefeated()
