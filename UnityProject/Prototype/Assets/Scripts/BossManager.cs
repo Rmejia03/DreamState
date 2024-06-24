@@ -52,6 +52,7 @@ public class BossManager : MonoBehaviour
         if(defeatedBosses >= totalBosses)
         {
             finalPortal.SetActive(true);
+            ShowWinScreen();
         }
     }
 
