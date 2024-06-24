@@ -4,7 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
+using TMPro;
 
 public class ForestBoss : MonoBehaviour, IDamage
 {
@@ -18,6 +19,7 @@ public class ForestBoss : MonoBehaviour, IDamage
     [SerializeField] int ViewAngle;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] float attackRate;
+    [SerializeField] string bossName;
 
     [Header("Melee Attack")]
     [SerializeField] bool isMelee;
@@ -28,6 +30,11 @@ public class ForestBoss : MonoBehaviour, IDamage
     [Header("Death Animation")]
     [SerializeField] AnimationClip deathAnimation;
     [SerializeField] float deathAniDuration;
+
+    [Header("Health Bar")]
+    [SerializeField] Image healthBarFill;
+    [SerializeField] TMP_Text healthBarNameText;
+    [SerializeField] GameObject healthBarUI;
 
     bool isAttacking;
     bool playerInRange;
@@ -53,7 +60,10 @@ public class ForestBoss : MonoBehaviour, IDamage
 
         //player = gameManager.instance.player.GetComponent<playerControl>();
         //UpdateEnemyUI();
-
+        if (healthBarUI != null)
+        {
+            healthBarUI.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -134,7 +144,12 @@ public class ForestBoss : MonoBehaviour, IDamage
             playerInRange = true;
             animate.SetTrigger("Rage");
 
-            
+            if (healthBarUI != null)
+            {
+                healthBarUI.SetActive(true);
+                healthBarNameText.text = bossName;
+                UpdateEnemyUI();
+            }
         }
     }
 
@@ -222,9 +237,12 @@ public class ForestBoss : MonoBehaviour, IDamage
     //Enemy HP
     void UpdateEnemyUI()
     {
-        gameManager.instance.enemyHPBar.fillAmount = (float)HP / HPOrigin;
+        if (healthBarFill != null)
+        {
+            healthBarFill.fillAmount = HP / HPOrigin;
+        }
     }
 
-   
+
 
 }
