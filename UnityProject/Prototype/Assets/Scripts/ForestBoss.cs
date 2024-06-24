@@ -215,7 +215,7 @@ public class ForestBoss : MonoBehaviour, IDamage
         {
             //gameManager.instance.updateGameGoal(-1); 
             StartCoroutine(PlayDeathAnimation());
-
+            BossManager.instance.BossDefeated();
         }
     }
 
