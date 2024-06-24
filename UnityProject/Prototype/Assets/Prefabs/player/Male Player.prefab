@@ -1242,7 +1242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1913098418618219665
 Transform:
   m_ObjectHideFlags: 0
@@ -1278,8 +1278,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animate: {fileID: 3429169186105464675}
   controller: {fileID: 7719540952399042350}
-  HP: 15
-  shield: 5
+  HP: 50
+  shield: 10
   fear: 10
   regenRate: 0.25
   fearVision: {fileID: 6071017995779391131}

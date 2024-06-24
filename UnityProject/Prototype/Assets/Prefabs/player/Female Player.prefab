@@ -1132,7 +1132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5274867702682255313
 Transform:
   m_ObjectHideFlags: 0
@@ -1168,8 +1168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animate: {fileID: 5180237263439096194}
   controller: {fileID: 5700580616421041326}
-  HP: 15
-  shield: 5
+  HP: 50
+  shield: 10
   fear: 0
   regenRate: 0.25
   fearVision: {fileID: 5170875549578296172}
@@ -1194,16 +1194,16 @@ MonoBehaviour:
   isDefending: 0
   itemModels: {fileID: 1110147516629967877}
   InventoryManager: {fileID: 0}
+  audioSource: {fileID: 832279893731918910}
+  meleeAttackSound: {fileID: 8300000, guid: 2b25c28e8c3b0e940b34d9f1411443a8, type: 3}
+  heavyAttackSound: {fileID: 8300000, guid: 823caca11e5bab94bbeda4426c2ba9cc, type: 3}
+  defendHitSound: {fileID: 8300000, guid: 3735e89844af53e4eaabef69ee80c151, type: 3}
   rayLength: 5
   layerInteract:
     serializedVersion: 2
     m_Bits: 8
   excludeLayerName: Player
   crosshair: {fileID: 0}
-  audioSource: {fileID: 832279893731918910}
-  meleeAttackSound: {fileID: 8300000, guid: 2b25c28e8c3b0e940b34d9f1411443a8, type: 3}
-  heavyAttackSound: {fileID: 8300000, guid: 823caca11e5bab94bbeda4426c2ba9cc, type: 3}
-  defendHitSound: {fileID: 8300000, guid: 3735e89844af53e4eaabef69ee80c151, type: 3}
   openDoorKey: 101
 --- !u!95 &5180237263439096194
 Animator:
