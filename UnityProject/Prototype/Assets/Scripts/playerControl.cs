@@ -571,8 +571,11 @@ public class playerControl : MonoBehaviour, IDamage
                 StartCoroutine (flashShield());
             }
         }
-        if (HP <= 0)
+        if (HP <= 1)
         {
+            controller.enabled = false;
+            
+
             StartCoroutine(PlayDeathAnimation());
 
             StartCoroutine(HandlePlayerDeath());
