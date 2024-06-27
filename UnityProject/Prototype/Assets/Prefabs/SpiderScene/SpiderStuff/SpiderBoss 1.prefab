@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7008833059819666269}
   - component: {fileID: 7391706532349770737}
   - component: {fileID: 7072357090156419591}
+  - component: {fileID: 5578422351283473988}
   m_Layer: 10
   m_Name: SpiderBoss 1
   m_TagString: Enemy
@@ -178,6 +179,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &5578422351283473988
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348587597615019408}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.89, y: 1.13, z: 1}
+  m_Center: {x: 0, y: 0.91, z: -0.27}
 --- !u!1 &434408644600562604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,7 +1055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6601012322495375270
 Transform:
   m_ObjectHideFlags: 0
@@ -5939,7 +5961,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0eec4d11656c87144a8e69a26d12e01b, type: 2}
+  - {fileID: 2100000, guid: 895ef6f0af9188241bb7a7fcc116cd3e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
