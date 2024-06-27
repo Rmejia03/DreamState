@@ -242,7 +242,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             playerInRange = false;
             agent.stoppingDistance = 0;
-            player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
+            //player.fearVision.ResetFearCo = player.fearVision.StartCoroutine(player.fearVision.ResetFear());
         }
     }
 

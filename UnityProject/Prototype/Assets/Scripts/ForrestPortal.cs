@@ -14,7 +14,7 @@ public class ForestPortal : MonoBehaviour
             inventoryManager.Instance.SaveInventory();
             
             SceneManager.LoadScene(forrestScene);
-            Timer.Instance.startTimer();
+            //Timer.Instance.startTimer();
         }
     }
 }
