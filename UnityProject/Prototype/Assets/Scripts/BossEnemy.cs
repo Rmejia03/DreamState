@@ -81,7 +81,7 @@ public class BossEnemy : MonoBehaviour, IDamage
     public playerControl player;
     private Stage stage;
     private bool shieldActivated;
-
+    
     // Start is called before the first frame update
     void Start()
     {
