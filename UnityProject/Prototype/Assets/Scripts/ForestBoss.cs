@@ -207,8 +207,7 @@ public class ForestBoss : MonoBehaviour, IDamage
     public void takeDamage(float damage, bool slowFlash = false)
     {
         HP -= damage;
-
-        //UpdateEnemyUI();
+        UpdateEnemyUI();
 
         agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -218,9 +217,9 @@ public class ForestBoss : MonoBehaviour, IDamage
         {
             //gameManager.instance.updateGameGoal(-1); 
             StartCoroutine(PlayDeathAnimation());
-            BossManager.instance.BossDefeated();
             healthBarUI.SetActive(false);
             portal.SetActive(true);
+            BossManager.instance.BossDefeated(1);
         }
     }
 
@@ -247,7 +246,5 @@ public class ForestBoss : MonoBehaviour, IDamage
             healthBarFill.fillAmount = HP / HPOrigin;
         }
     }
-
-
 
 }

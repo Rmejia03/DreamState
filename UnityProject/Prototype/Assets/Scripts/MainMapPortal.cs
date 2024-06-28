@@ -15,7 +15,7 @@ public class MainMapPortal : MonoBehaviour
             inventoryManager.Instance.SaveInventory();
             
             SceneManager.LoadScene(mainMap);
-            Timer.Instance.stopTimer();
+            //Timer.Instance.stopTimer();
         }
     }
 }

@@ -164,14 +164,20 @@ public class inventoryManager : MonoBehaviour
 
     public void SelectNextItem()
     {
-        selectedItem = (selectedItem + 1) % inventory.Count;
-        ToolBarUI.SelectSlot(selectedItem);
+        if (inventory.Count > 0)
+        {
+            selectedItem = (selectedItem + 1) % inventory.Count;
+            ToolBarUI.SelectSlot(selectedItem);
+        }  
     }
 
     public void SelectPreviousItem()
     {
-        selectedItem = (selectedItem - 1 + inventory.Count) % inventory.Count;
-        ToolBarUI.SelectSlot(selectedItem);
+        if(inventory.Count > 0)
+        {
+            selectedItem = (selectedItem - 1 + inventory.Count) % inventory.Count;
+            ToolBarUI.SelectSlot(selectedItem);
+        } 
     }
 
     public void UpdateCount()

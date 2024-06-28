@@ -20,6 +20,7 @@ public class BossManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            defeatedBosses = PlayerPrefs.GetInt("DefeatedBosses", 0);
             DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
@@ -28,22 +29,26 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    public void BossDefeated()
+    public void BossDefeated(int num)
     {
-        defeatedBosses += 1;
+        defeatedBosses += num;
+
+        PlayerPrefs.SetInt("DefeatedBosses", defeatedBosses);
+        PlayerPrefs.Save();
+
         UpdateBossUI();
         CheckAllBossesDefeated();
     }
 
     public void UpdateBossUI()
     {
-        if (defeatedBosses == 1)
+        if (defeatedBosses >= 1)
         {
             boss1.SetActive(true);
         }
-        else if (defeatedBosses == 2)
+        else if (defeatedBosses >= 2)
         {
-            boss1.SetActive(true);
+            //boss1.SetActive(true);
             boss2.SetActive(true);
         }
     }
@@ -52,7 +57,7 @@ public class BossManager : MonoBehaviour
     {
         if (defeatedBosses >= totalBosses)
         {
-            finalPortal.SetActive(true);
+           // finalPortal.SetActive(true);
             ShowWinScreen();
         }
     }
