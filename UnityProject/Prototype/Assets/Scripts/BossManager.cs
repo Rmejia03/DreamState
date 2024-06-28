@@ -10,7 +10,7 @@ public class BossManager : MonoBehaviour
     private int defeatedBosses = 0;
 
     public GameObject winScreen;
-    public GameObject finalPortal;
+    //public GameObject finalPortal;
 
     public GameObject boss1;
     public GameObject boss2;
@@ -67,6 +67,7 @@ public class BossManager : MonoBehaviour
         if (winScreen != null)
         {
             winScreen.SetActive(true);
+            gameManager.instance.statePause();
         }
     }
 }

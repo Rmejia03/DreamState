@@ -401,8 +401,9 @@ public class BossEnemy : MonoBehaviour, IDamage
     IEnumerator PlayDeathAnimation()
     {
         animate.SetTrigger("Death");
+        isAttacking = false;
+        faceTargetSpeed = 0;
         yield return new WaitForSeconds(deathAniDuration);
-
         Destroy(gameObject);
     }
 
