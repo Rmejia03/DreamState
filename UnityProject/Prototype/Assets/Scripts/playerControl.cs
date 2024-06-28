@@ -163,10 +163,10 @@ public class playerControl : MonoBehaviour, IDamage
 			 {
 			     fearVision.FearRisingCo = StartCoroutine(fearVision.FearRising());
 			 }
-			 if (fearVision.ResetFearCo == null && !fearVision.rising)
-			 {
-			     fearVision.ResetFearCo = StartCoroutine(fearVision.ResetFear());
-			 }
+			 //if (fearVision.ResetFearCo == null && !fearVision.rising)
+			 //{
+			 //    fearVision.ResetFearCo = StartCoroutine(fearVision.ResetFear());
+			 //}
         }
         else
         {

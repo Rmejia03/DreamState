@@ -239,7 +239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3992058561654064293, guid: 13c990b8270c70b4c9f196019286028c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7594,6 +7594,10 @@ PrefabInstance:
       propertyPath: HP
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 510707564623620724, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
+      propertyPath: portal
+      value: 
+      objectReference: {fileID: 106415433}
     - target: {fileID: 510707564623620724, guid: 29d65770ed378c84db2176dbde16b24d, type: 3}
       propertyPath: bossName
       value: Sporecrusher

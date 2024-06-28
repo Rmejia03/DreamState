@@ -36,6 +36,9 @@ public class ForestBoss : MonoBehaviour, IDamage
     [SerializeField] TMP_Text healthBarNameText;
     [SerializeField] GameObject healthBarUI;
 
+    [Header("portal")]
+    [SerializeField] GameObject portal;
+
     bool isAttacking;
     bool playerInRange;
     bool destinationChosen;
@@ -217,6 +220,7 @@ public class ForestBoss : MonoBehaviour, IDamage
             StartCoroutine(PlayDeathAnimation());
             BossManager.instance.BossDefeated();
             healthBarUI.SetActive(false);
+            portal.SetActive(true);
         }
     }
 
