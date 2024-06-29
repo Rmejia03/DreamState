@@ -385,7 +385,7 @@ public class playerControl : MonoBehaviour, IDamage
 
     void HandleMelee()
     {
-        if (!isMeleeing && Time.time >= nextMeleeTime)
+        if (!isMeleeing && Time.time >= nextMeleeTime && !isDefending)
         {
             if (Input.GetButtonDown("Fire1"))
             {
