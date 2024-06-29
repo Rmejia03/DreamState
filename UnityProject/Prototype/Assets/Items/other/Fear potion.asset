@@ -13,18 +13,19 @@ MonoBehaviour:
   m_Name: Fear potion
   m_EditorClassIdentifier: 
   itemName: Fear potion
+  icon: {fileID: 0}
   itemModel: {fileID: 100000, guid: e873cbc7c65c12b409ffa8b357ef3039, type: 3}
   itemSound: {fileID: 0}
-  healthAmt: 0
-  fearAmt: 0
-  isStackable: 1
-  isKey: 0
-  maxStackSize: 5
   vol: 0
-  icon: {fileID: 0}
-  hitEffect: {fileID: 0}
+  healthAmt: 0
+  fearAmt: -5
+  isStackable: 1
+  maxStackSize: 5
   weaponDmg: 1
   weaponDistance: 1
   weaponSpeed: 0.01
   ammoCur: 0
   ammoMax: 0
+  hitEffect: {fileID: 0}
+  isKey: 0
+  keyID: 0
