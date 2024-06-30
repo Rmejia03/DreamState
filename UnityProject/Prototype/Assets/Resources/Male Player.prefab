@@ -611,7 +611,7 @@ MonoBehaviour:
   verticalCamera: 1.5
   collision:
     serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 128
 --- !u!20 &441692569169876006
 Camera:
   m_ObjectHideFlags: 0
@@ -1242,7 +1242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1913098418618219665
 Transform:
   m_ObjectHideFlags: 0
@@ -1282,13 +1282,16 @@ MonoBehaviour:
   shield: 10
   fear: 10
   regenRate: 0.25
+  maxDefendTime: 5
   fearVision: {fileID: 6071017995779391131}
   weaponRate: 0
   weaponDamage: 0
   weaponDistance: 0
+  hitEffect: {fileID: 0}
   gravity: 20
   jumpSpeed: 8
   jumpMax: 2
+  isMushroom: 0
   speed: 5
   speedOrig: 0
   sprintMod: 2
@@ -1308,6 +1311,10 @@ MonoBehaviour:
   meleeAttackSound: {fileID: 8300000, guid: 2b25c28e8c3b0e940b34d9f1411443a8, type: 3}
   heavyAttackSound: {fileID: 8300000, guid: 823caca11e5bab94bbeda4426c2ba9cc, type: 3}
   defendHitSound: {fileID: 8300000, guid: 3735e89844af53e4eaabef69ee80c151, type: 3}
+  painSounds:
+  - {fileID: 8300000, guid: 470d433904ce8a243892b17bdcb72a87, type: 3}
+  - {fileID: 8300000, guid: 951bd29a2af60474d945ed7b3d859c54, type: 3}
+  - {fileID: 8300000, guid: 8cf455ae1a9bcca47b3d932d383ffa6b, type: 3}
   rayLength: 5
   layerInteract:
     serializedVersion: 2

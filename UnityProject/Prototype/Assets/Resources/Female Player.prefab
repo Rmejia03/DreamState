@@ -845,7 +845,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.013805343, y: 0.022102488, z: 0.00030520812, w: 0.9996603}
   m_LocalPosition: {x: 0.48, y: 2.62, z: -4.04}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 786075277505769068}
@@ -1132,7 +1132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5274867702682255313
 Transform:
   m_ObjectHideFlags: 0
@@ -1200,6 +1200,10 @@ MonoBehaviour:
   meleeAttackSound: {fileID: 8300000, guid: 2b25c28e8c3b0e940b34d9f1411443a8, type: 3}
   heavyAttackSound: {fileID: 8300000, guid: 823caca11e5bab94bbeda4426c2ba9cc, type: 3}
   defendHitSound: {fileID: 8300000, guid: 3735e89844af53e4eaabef69ee80c151, type: 3}
+  painSounds:
+  - {fileID: 8300000, guid: 8de7442299ec52f45b53a2cfe54c9996, type: 3}
+  - {fileID: 8300000, guid: 99f146521603ab7438d06a8f12cced99, type: 3}
+  - {fileID: 8300000, guid: 0f98e050174342d4ba304862a91cbb6c, type: 3}
   rayLength: 5
   layerInteract:
     serializedVersion: 2
