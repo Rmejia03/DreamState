@@ -1287,9 +1287,11 @@ MonoBehaviour:
   weaponRate: 0
   weaponDamage: 0
   weaponDistance: 0
+  hitEffect: {fileID: 0}
   gravity: 20
   jumpSpeed: 8
   jumpMax: 2
+  isMushroom: 0
   speed: 5
   speedOrig: 0
   sprintMod: 2

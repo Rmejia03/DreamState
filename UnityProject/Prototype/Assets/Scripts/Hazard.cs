@@ -17,7 +17,6 @@ public class Hazard : MonoBehaviour
                 if (isMushroom)
                 {
                     playerHP.takeDamage(damagePerSecond * Time.deltaTime, true);
-
                 }
                 else
                 {
