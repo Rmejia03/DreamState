@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1470247, g: 0.36394262, b: 0.5799059, a: 1}
+  m_IndirectSpecularColor: {r: 0.14704241, g: 0.36478925, b: 0.57985795, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7863,9 +7863,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3831895169388327250, guid: c0de8ab773f99a84b8cf70aaa2520bd4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5582666438157743918, guid: c0de8ab773f99a84b8cf70aaa2520bd4, type: 3}
       propertyPath: m_Name
       value: MapBorder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582666438157743918, guid: c0de8ab773f99a84b8cf70aaa2520bd4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915572281236673167, guid: c0de8ab773f99a84b8cf70aaa2520bd4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6263038562773289842, guid: c0de8ab773f99a84b8cf70aaa2520bd4, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6821881196505082771, guid: c0de8ab773f99a84b8cf70aaa2520bd4, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
