@@ -293,7 +293,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         //UpdateEnemyUI();
 
         agent.SetDestination(gameManager.instance.player.transform.position);
-
+        enemyAudio.PlayOneShot(enemyPain);
         StartCoroutine(hitFlash());
 
         if (HP <= 0) 
