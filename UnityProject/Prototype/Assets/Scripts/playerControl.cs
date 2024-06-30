@@ -25,6 +25,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float weaponRate;
     [SerializeField] int weaponDamage;
     [SerializeField] int weaponDistance;
+    [SerializeField] GameObject hitEffect;
 
     [Header("Movement")]
     [SerializeField] int gravity;
@@ -510,7 +511,6 @@ public class playerControl : MonoBehaviour, IDamage
                 if (dmg != null)
                 {
                     dmg.takeDamage(meleeDamage);
-                    
                 }
             }
         }
@@ -542,7 +542,6 @@ public class playerControl : MonoBehaviour, IDamage
         if (isDefending)
         {
             animate.SetTrigger("DefendHit");
-            amount = 1;
             if (!isFlashing)
             {
                 StartCoroutine(FlashWhileDefending());
