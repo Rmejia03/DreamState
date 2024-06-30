@@ -10,6 +10,13 @@ public class MainMapPortal : MonoBehaviour
 
     private void Start()
     {
+        int isPortalDestroyed = PlayerPrefs.GetInt(portalDestroyKey, 0);
+        Debug.Log("Portal Destroyed Key: " + isPortalDestroyed);
+
+        if (isPortalDestroyed == 1)
+        {
+            Destroy(gameObject);
+        }
         if (PlayerPrefs.GetInt(portalDestroyKey, 0) == 1)
         {
             Destroy(gameObject);

@@ -43,6 +43,19 @@ public class gameManager : MonoBehaviour
 
     }
 
+    void Start()
+    {
+        ResetPortalState("TutorialPortal");
+        ResetPortalState("ForestPortal");
+        ResetPortalState("SpiderPortal");
+    }
+
+    public void ResetPortalState(string portalKey)
+    {
+        PlayerPrefs.SetInt(portalKey,0);
+        PlayerPrefs.Save();
+    }
+
     // Update is called once per frame
     void Update()
     {
