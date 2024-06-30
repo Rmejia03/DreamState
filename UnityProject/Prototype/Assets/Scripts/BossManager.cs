@@ -20,7 +20,7 @@ public class BossManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            defeatedBosses = PlayerPrefs.GetInt("DefeatedBosses", 0);
+            defeatedBosses = PlayerPrefs.GetInt("defeatedBosses", 0);
             UpdateBossUI();
             DontDestroyOnLoad(gameObject);
         }
@@ -34,7 +34,7 @@ public class BossManager : MonoBehaviour
     {
         defeatedBosses += num;
 
-        PlayerPrefs.SetInt("DefeatedBosses", defeatedBosses);
+        PlayerPrefs.SetInt("defeatedBosses", defeatedBosses);
         PlayerPrefs.Save();
 
         UpdateBossUI();
