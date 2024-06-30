@@ -31,7 +31,7 @@ public class TutorialManager : MonoBehaviour
                 break;
 
             case 2:
-                tutorialText.text = "Watch out for enemies! Use right click to attack and left to block.";
+                tutorialText.text = "Watch out for enemies! Use right click to attack and left to block.\nYour fear meter will go up while in a fight.";
                 break;
 
             case 3:
