@@ -262,7 +262,7 @@ public class playerControl : MonoBehaviour, IDamage
         //    StartCoroutine(Shoot());
         //}
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < 1)
         {
             jumpCount++;
             playerVelocity.y = jumpSpeed;
@@ -514,7 +514,12 @@ public class playerControl : MonoBehaviour, IDamage
 
                 if (dmg != null)
                 {
-                    dmg.takeDamage(meleeDamage);
+                    dmg.takeDamage(damageDealt);
+                    GameObject hitEffectInstantiate = Instantiate(hitEffect,collider.transform.position,Quaternion.identity);
+
+                    hitEffectInstantiate.transform.parent = collider.transform;
+
+                    Destroy(hitEffectInstantiate,0.5f);
                 }
             }
         }
