@@ -10,16 +10,19 @@ public class MainMapPortal : MonoBehaviour
 
     private void Start()
     {
-        int isPortalDestroyed = PlayerPrefs.GetInt(portalDestroyKey, 0);
-        Debug.Log("Portal Destroyed Key: " + isPortalDestroyed);
+        if(portalDestroyKey != "inForest")
+        {
+            int isPortalDestroyed = PlayerPrefs.GetInt(portalDestroyKey, 0);
+            Debug.Log("Portal Destroyed Key: " + isPortalDestroyed);
 
-        if (isPortalDestroyed == 1)
-        {
-            Destroy(gameObject);
-        }
-        if (PlayerPrefs.GetInt(portalDestroyKey, 0) == 1)
-        {
-            Destroy(gameObject);
+            if (isPortalDestroyed == 1)
+            {
+                Destroy(gameObject);
+            }
+            if (PlayerPrefs.GetInt(portalDestroyKey, 0) == 1)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -29,8 +32,11 @@ public class MainMapPortal : MonoBehaviour
         {
             inventoryManager.Instance.SaveInventory();
 
-            PlayerPrefs.SetInt(portalDestroyKey, 1);
-            PlayerPrefs.Save();
+            if(portalDestroyKey != "inForest")
+            {
+                PlayerPrefs.SetInt(portalDestroyKey, 1);
+                PlayerPrefs.Save();
+            }
 
             SceneManager.LoadScene(mainMap);
             //Timer.Instance.stopTimer();

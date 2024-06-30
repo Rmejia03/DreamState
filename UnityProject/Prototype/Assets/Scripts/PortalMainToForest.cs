@@ -10,6 +10,14 @@ public class PortalMainToForest : MonoBehaviour
 
     private void Start()
     {
+        int isPortalDestroyed = PlayerPrefs.GetInt(portalDestroyKey, 0);
+        Debug.Log("Portal Destroy Key: " + portalDestroyKey + " Value: " + isPortalDestroyed);
+
+        if (isPortalDestroyed == 1)
+        {
+            Debug.Log("Destroying portal: " + gameObject.name);
+            Destroy(gameObject);
+        }
         if (PlayerPrefs.GetInt(portalDestroyKey, 0) == 1)
         {
             Destroy(gameObject);

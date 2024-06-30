@@ -10,9 +10,19 @@ public class ForestPortal : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.GetInt(portalDestroyKey, 0) == 1)
+        if (portalDestroyKey != "inSpider")
         {
-            Destroy(gameObject);
+            int isPortalDestroyed = PlayerPrefs.GetInt(portalDestroyKey, 0);
+            Debug.Log("Portal Destroyed Key: " + isPortalDestroyed);
+
+            if (isPortalDestroyed == 1)
+            {
+                Destroy(gameObject);
+            }
+            if (PlayerPrefs.GetInt(portalDestroyKey, 0) == 1)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -22,11 +32,14 @@ public class ForestPortal : MonoBehaviour
         {
             inventoryManager.Instance.SaveInventory();
 
-            PlayerPrefs.SetInt(portalDestroyKey, 1);
-            PlayerPrefs.Save();
+            if (portalDestroyKey != "inSpider")
+            {
+                PlayerPrefs.SetInt(portalDestroyKey, 1);
+                PlayerPrefs.Save();
+            }
 
             SceneManager.LoadScene(forrestScene);
-            //Timer.Instance.startTimer();
+            //Timer.Instance.stopTimer();
         }
     }
 }

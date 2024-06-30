@@ -92,6 +92,7 @@ public class playerControl : MonoBehaviour, IDamage
     int attackSeq = 0;
     int successfulHits = 0;
     Animator animator;
+    BossManager bossManager;
 
     // Start is called before the first frame update
     void Start()
