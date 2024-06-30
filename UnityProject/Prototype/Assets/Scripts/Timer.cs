@@ -30,6 +30,10 @@ public class Timer : MonoBehaviour
         {
             timerOn = true;
         }
+        else if(SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            timerOn = true;
+        }
         UpdateTimer();
     }
     // Update is called once per frame
