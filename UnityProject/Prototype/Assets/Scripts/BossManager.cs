@@ -20,7 +20,7 @@ public class BossManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             defeatedBosses = PlayerPrefs.GetInt("defeatedBosses", 0);
             Debug.Log("Initial defeatedBosses: " + defeatedBosses);
         }

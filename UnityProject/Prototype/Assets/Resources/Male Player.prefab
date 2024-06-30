@@ -1242,7 +1242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1913098418618219665
 Transform:
   m_ObjectHideFlags: 0
@@ -1291,7 +1291,6 @@ MonoBehaviour:
   gravity: 20
   jumpSpeed: 8
   jumpMax: 2
-  isMushroom: 0
   speed: 5
   speedOrig: 0
   sprintMod: 2
