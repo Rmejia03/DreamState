@@ -21,6 +21,7 @@ public class BossManager : MonoBehaviour
         {
             instance = this;
             defeatedBosses = PlayerPrefs.GetInt("DefeatedBosses", 0);
+            UpdateBossUI();
             DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
