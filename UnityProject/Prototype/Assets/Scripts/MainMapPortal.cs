@@ -5,17 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MainMapPortal : MonoBehaviour
 {
-    // Start is called before the first frame update
     public string mainMap;
+    public string portalDestroyKey;
+
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt(portalDestroyKey, 0) == 1)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             inventoryManager.Instance.SaveInventory();
-            
+
+            PlayerPrefs.SetInt(portalDestroyKey, 1);
+            PlayerPrefs.Save();
+
             SceneManager.LoadScene(mainMap);
-            Destroy(gameObject);
             //Timer.Instance.stopTimer();
         }
     }
