@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public Image shieldBar;
     public Image fearBar;
     public Image enemyHPBar;
+    public Image defendTimer;
 
     public bool isPaused;
     int enemyCount;
