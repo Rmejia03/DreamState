@@ -31,6 +31,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int gravity;
     [SerializeField] int jumpSpeed;
     [SerializeField] int jumpMax;
+    [SerializeField] private bool isMushroom = false;
 	public int speed;
     public int speedOrig;
 	public int sprintMod;
@@ -556,7 +557,7 @@ public class playerControl : MonoBehaviour, IDamage
                 fearVision.FearRisingCo = fearVision.StartCoroutine(fearVision.FearRising());
             }
 
-            if(slowFlash)
+            if(slowFlash && isMushroom)
             {
                 StartCoroutine(flashScreenSlow());
             }
@@ -570,7 +571,7 @@ public class playerControl : MonoBehaviour, IDamage
             shield -= amount;
             //updateHPBarUI();
             updateShieldUI();
-            if(slowFlash)
+            if(slowFlash && isMushroom)
             {
                 StartCoroutine(flashShieldSlow());
             }
