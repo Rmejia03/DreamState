@@ -17,6 +17,8 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] float shield;
     [SerializeField] int fear;
     [SerializeField] float regenRate;
+    [SerializeField] float maxDefendTime = 5f;
+    private float currentDefendTime;
 	public FearVision fearVision;
 
 	[Header("Attack")]
@@ -97,6 +99,7 @@ public class playerControl : MonoBehaviour, IDamage
         fearOrig = fear;
         speedOrig = speed;
         sprintOrig = sprintMod;
+        currentDefendTime = maxDefendTime;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
@@ -116,6 +119,7 @@ public class playerControl : MonoBehaviour, IDamage
         updateHPBarUI();
         updateShieldUI();
         updateFearUI();
+        UpdateDefendTimerUI();
     }
 
     // Update is called once per frame
@@ -145,6 +149,7 @@ public class playerControl : MonoBehaviour, IDamage
             Movement();
             HandleMelee();
             PlayerDefend();
+            UpdateDefendTimer();
             //selectItem();
             useItem();
             
@@ -182,6 +187,7 @@ public class playerControl : MonoBehaviour, IDamage
 			}
 			
 		}
+        UpdateDefendTimerUI();
     }
 
     void Movement()
@@ -632,16 +638,34 @@ public class playerControl : MonoBehaviour, IDamage
 
     void PlayerDefend()
     {
-        if (Input.GetButtonDown("Defend"))
+        if (Input.GetButtonDown("Defend") && currentDefendTime > 0)
         {
             isDefending = true;
             animate.SetBool("isDefending", true);
             audioSource.PlayOneShot(defendHitSound, 1f );
         }
-        else if(Input.GetButtonUp("Defend"))
+        else if(Input.GetButtonUp("Defend") || currentDefendTime <= 0)
         {
             isDefending = false;
             animate.SetBool("isDefending", false);
+        }
+
+    }
+
+    void UpdateDefendTimer()
+    {
+        if (isDefending)
+        {
+            currentDefendTime -= Time.deltaTime;
+            if (currentDefendTime <= 0)
+            {
+                isDefending = false;
+                animate.SetBool("isDefending", false);
+            }
+        }
+        else if (currentDefendTime < maxDefendTime)
+        {
+            currentDefendTime += Time.deltaTime;
         }
 
     }
@@ -709,6 +733,11 @@ public class playerControl : MonoBehaviour, IDamage
     {
         gameManager.instance.fearBar.fillAmount = fearVision.intensity;
 	}
+
+    void UpdateDefendTimerUI()
+    {
+        gameManager.instance.defendTimer.fillAmount = currentDefendTime / maxDefendTime;
+    }
 
     public void spawnPlayer()
     {
