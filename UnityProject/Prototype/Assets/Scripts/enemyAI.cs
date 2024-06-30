@@ -48,6 +48,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject miniEnemyPrefab;
     [SerializeField] int numberOfSpawns;
     [SerializeField] float spawnRange;
+    
+    [Header("Audio")]
+	public AudioSource enemyAudio;
+    public AudioClip enemyPain;
 
     bool isAttacking;
     bool playerInRange;
@@ -70,7 +74,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
-        
+        enemyAudio = GetComponent<AudioSource>();
         //player = gameManager.instance.player.GetComponent<playerControl>();
         //UpdateEnemyUI();
 
@@ -289,7 +293,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         //UpdateEnemyUI();
 
         agent.SetDestination(gameManager.instance.player.transform.position);
-
+        enemyAudio.PlayOneShot(enemyPain);
         StartCoroutine(hitFlash());
 
         if (HP <= 0) 
