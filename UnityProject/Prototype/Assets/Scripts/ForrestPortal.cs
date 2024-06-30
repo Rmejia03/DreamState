@@ -12,8 +12,9 @@ public class ForestPortal : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             inventoryManager.Instance.SaveInventory();
-            
+           
             SceneManager.LoadScene(forrestScene);
+            Destroy(gameObject);
             //Timer.Instance.startTimer();
         }
     }

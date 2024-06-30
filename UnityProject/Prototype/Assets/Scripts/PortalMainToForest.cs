@@ -13,8 +13,8 @@ public class PortalMainToForest : MonoBehaviour
         {
             inventoryManager.Instance.SaveInventory();
 
-
             SceneManager.LoadScene(mainToForest);
+            Destroy(gameObject);
         }
     }
 }
