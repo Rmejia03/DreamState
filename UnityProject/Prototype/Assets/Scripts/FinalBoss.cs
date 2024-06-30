@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class FinalBpss : MonoBehaviour, IDamage
+public class FinalBoss : MonoBehaviour, IDamage
 {
     [Header("Enemy Info")]
     [SerializeField] NavMeshAgent agent;

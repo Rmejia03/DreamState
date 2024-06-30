@@ -320,7 +320,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -10
+  m_BaseOffset: -11
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!136 &160357776
@@ -4628,7 +4628,7 @@ Transform:
   m_GameObject: {fileID: 3639404418018104677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: 55.19, y: -2.41, z: 67.27}
+  m_LocalPosition: {x: 55.19, y: -3.04, z: 67.27}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4663,7 +4663,7 @@ MonoBehaviour:
   meleeDamage: 5
   meleeAnimDur: 3
   deathAnimation: {fileID: 0}
-  deathAniDuration: 0
+  deathAniDuration: 3
   healthBarFill: {fileID: 0}
   healthBarNameText: {fileID: 0}
   healthBarUI: {fileID: 0}
