@@ -531,7 +531,7 @@ public class playerControl : MonoBehaviour, IDamage
         DealMeleeDamage(true);
     }
 
-    public void takeDamage(float amount, bool slowFlash = false)
+    public void takeDamage(float amount, bool slowFlash = false, bool isMushroom = false)
     {
         if (isDefending)
         {

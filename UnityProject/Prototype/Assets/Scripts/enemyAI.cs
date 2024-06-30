@@ -282,7 +282,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         }
     }
 
-    public void takeDamage(float damage, bool slowFlash = false)
+    public void takeDamage(float damage, bool slowFlash = false, bool isMushroom = false)
     {
         HP -= damage;
 
