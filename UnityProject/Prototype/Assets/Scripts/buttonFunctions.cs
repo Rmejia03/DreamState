@@ -9,16 +9,30 @@ public class buttonFunctions : MonoBehaviour
     public Animator animator;
     public float transition = 1f;
 
-	void Start()
-	{
-		if (Application.platform == RuntimePlatform.WebGLPlayer)
-		{
-			quitGame.gameObject.SetActive(false);
-		}
-	}
+    BossManager bossManager;
 
-	public void PlayGame()
+    void Start()
     {
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            quitGame.gameObject.SetActive(false);
+        }
+
+        bossManager = BossManager.instance;
+    }
+
+    public void PlayGame()
+    {
+        if (bossManager != null)
+        {
+            if(bossManager.defeatedBosses > 0)
+            {
+                bossManager.defeatedBosses = 0;
+                PlayerPrefs.SetInt("defeatedBosses", 0);
+                PlayerPrefs.Save();
+                bossManager.UpdateBossUI();
+            }
+        }
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
     public void resume()

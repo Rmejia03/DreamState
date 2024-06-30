@@ -7,7 +7,7 @@ public class BossManager : MonoBehaviour
     public static BossManager instance;
 
     public int totalBosses = 2;
-    private int defeatedBosses = 0;
+    public int defeatedBosses = 0;
 
     public GameObject winScreen;
     //public GameObject finalPortal;
@@ -19,15 +19,25 @@ public class BossManager : MonoBehaviour
     {
         if (instance == null)
         {
+            if (defeatedBosses >= 2)
+            {
+                defeatedBosses = 0;
+                PlayerPrefs.SetInt("defeatedBosses", defeatedBosses);
+                PlayerPrefs.Save();
+            }
+
             instance = this;
-            //DontDestroyOnLoad(gameObject);
             defeatedBosses = PlayerPrefs.GetInt("defeatedBosses", 0);
             Debug.Log("Initial defeatedBosses: " + defeatedBosses);
+            DontDestroyOnLoad(gameObject);
+
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
+       
+
     }
 
     private void Start()
@@ -64,7 +74,8 @@ public class BossManager : MonoBehaviour
     {
         if (defeatedBosses >= totalBosses)
         {
-           // finalPortal.SetActive(true);
+            // finalPortal.SetActive(true);
+            defeatedBosses = 0;
             ShowWinScreen();
         }
     }

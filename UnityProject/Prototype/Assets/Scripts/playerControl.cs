@@ -522,8 +522,8 @@ public class playerControl : MonoBehaviour, IDamage
 
                     Destroy(hitEffectInstantiate,0.5f);
 
-                    GameObject damageText = Instantiate(damageTextPrefab, collider.transform.position, Quaternion.identity);
-                    damageText.GetComponent<DamageTextMelee>().SetDamage(damageDealt);
+                    //GameObject damageText = Instantiate(damageTextPrefab, collider.transform.position, Quaternion.identity);
+                    //damageText.GetComponent<DamageTextMelee>().SetDamage(damageDealt);
                 }
             }
         }
