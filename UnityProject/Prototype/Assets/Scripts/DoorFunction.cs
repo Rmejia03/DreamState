@@ -16,6 +16,7 @@ public class DoorFunction : MonoBehaviour
     public float interactDistance = 3f;
 
     private Transform playerTransform;
+    private bool isAnimating = false;
 
     // Start is called before the first frame update
     void Start()
@@ -63,15 +64,16 @@ public class DoorFunction : MonoBehaviour
     {
         if (playerTransform != null && Action && Vector3.Distance(playerTransform.position, transform.position) <= interactDistance)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !isAnimating)
             {
-                DoorInteraction();    
+                StartCoroutine(DoorInteraction());    
             }
         }
     }
 
-    public void DoorInteraction()
+    private IEnumerator DoorInteraction()
     {
+        isAnimating = true;
         if (!doorOpen)
         {
             Trigger.SetActive(true);
@@ -93,5 +95,7 @@ public class DoorFunction : MonoBehaviour
             Instructions.SetActive(true);
         }
         InstructionText();
+        yield return new WaitForSeconds(Animation.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        isAnimating = false;
     }
 }
