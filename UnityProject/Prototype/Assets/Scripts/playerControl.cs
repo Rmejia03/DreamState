@@ -57,8 +57,11 @@ public class playerControl : MonoBehaviour, IDamage
     public AudioClip meleeAttackSound;
     public AudioClip heavyAttackSound;
     public AudioClip defendHitSound;
+	public AudioClip[] painSounds;
+    
 
-    [Header("Doors")]
+
+	[Header("Doors")]
     [SerializeField] int rayLength = 5;
     [SerializeField] LayerMask layerInteract;
     [SerializeField] string excludeLayerName = "Player";
@@ -552,7 +555,10 @@ public class playerControl : MonoBehaviour, IDamage
         {
             HP -= amount;
             updateHPBarUI();
-            if (!fearVision.rising)
+			int painIndex = Random.Range(0, painSounds.Length);
+			audioSource.PlayOneShot(painSounds[painIndex]);
+
+			if (!fearVision.rising)
             {
                 fearVision.FearRisingCo = fearVision.StartCoroutine(fearVision.FearRising());
             }
