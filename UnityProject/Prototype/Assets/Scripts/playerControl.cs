@@ -83,6 +83,7 @@ public class playerControl : MonoBehaviour, IDamage
     //bool inHazard = false;
     bool isFlashing = false;
     //float hazardFlashDelay = 1f;
+    bool isBlockingAndTakingDamage = false;
 
     float nextMeleeTime;
     int attackSeq = 0;
@@ -537,7 +538,10 @@ public class playerControl : MonoBehaviour, IDamage
         {
             animate.SetTrigger("DefendHit");
             amount = 0;
-            StartCoroutine(FlashWhileDefending());
+            if (!isBlockingAndTakingDamage)
+            {
+                StartCoroutine(FlashWhileDefending());
+            }
         }
         if(shield <= 0)
         {
@@ -602,15 +606,21 @@ public class playerControl : MonoBehaviour, IDamage
 
     IEnumerator FlashWhileDefending()
     {
-        if(!isFlashing)
+        isBlockingAndTakingDamage = true;
+        while (isDefending && shield > 0) ;//!isFlashing)
         {
-            isFlashing = true;
             gameManager.instance.flashDamage.SetActive(true);
             yield return new WaitForSeconds(.1f);
             gameManager.instance.flashDamage.SetActive(false);
             yield return new WaitForSeconds(.1f);
-            isFlashing = false;
+            //isFlashing = true;
+            //gameManager.instance.flashDamage.SetActive(true);
+            //yield return new WaitForSeconds(.1f);
+            //gameManager.instance.flashDamage.SetActive(false);
+            //yield return new WaitForSeconds(.1f);
+            //isFlashing = false;
         }
+        isBlockingAndTakingDamage = false;
     }
     IEnumerator HandlePlayerDeath()
     {
