@@ -18,6 +18,7 @@ public class playerControl : MonoBehaviour, IDamage
     [SerializeField] int fear;
     [SerializeField] float regenRate;
     [SerializeField] float maxDefendTime = 5f;
+    [SerializeField] private GameObject damageTextPrefab;
     private float currentDefendTime;
 	public FearVision fearVision;
 
@@ -520,6 +521,9 @@ public class playerControl : MonoBehaviour, IDamage
                     hitEffectInstantiate.transform.parent = collider.transform;
 
                     Destroy(hitEffectInstantiate,0.5f);
+
+                    GameObject damageText = Instantiate(damageTextPrefab, collider.transform.position, Quaternion.identity);
+                    damageText.GetComponent<DamageTextMelee>().SetDamage(damageDealt);
                 }
             }
         }
