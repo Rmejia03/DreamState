@@ -54,7 +54,11 @@ public class BossEnemy : MonoBehaviour, IDamage
     [SerializeField] TMP_Text healthBarNameText;
     [SerializeField] GameObject healthBarUI;
 
-    [Header("portal")]
+	[Header("Audio")]
+	public AudioSource bossAudio;
+	public AudioClip bossPain;
+
+	[Header("portal")]
     [SerializeField] GameObject portal;
 
     [Header("Poison Bubble")]
@@ -88,8 +92,9 @@ public class BossEnemy : MonoBehaviour, IDamage
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
+		bossAudio = GetComponent<AudioSource>();
 
-        if(healthBarUI  != null)
+		if (healthBarUI  != null)
         {
             healthBarUI.SetActive(false);
         }
@@ -326,8 +331,9 @@ public class BossEnemy : MonoBehaviour, IDamage
         HP -= damage;
         OnDamage();
         UpdateEnemyUI();
+		bossAudio.PlayOneShot(bossPain);
 
-        agent.SetDestination(gameManager.instance.player.transform.position);
+		agent.SetDestination(gameManager.instance.player.transform.position);
 
         StartCoroutine(hitFlash());
 

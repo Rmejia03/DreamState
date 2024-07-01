@@ -35,7 +35,11 @@ public class ForestBoss : MonoBehaviour, IDamage
     [SerializeField] Image healthBarFill;
     [SerializeField] TMP_Text healthBarNameText;
     [SerializeField] GameObject healthBarUI;
-
+	
+    [Header("Audio")]
+	public AudioSource forestBossAudio;
+	public AudioClip forestBossPain;
+	
     [Header("portal")]
     [SerializeField] GameObject portal;
 
@@ -60,10 +64,10 @@ public class ForestBoss : MonoBehaviour, IDamage
         startingPosition = transform.position;
         stoppingDistanceOrigin = agent.stoppingDistance;
         HPOrigin = HP;
-
-        //player = gameManager.instance.player.GetComponent<playerControl>();
-        //UpdateEnemyUI();
-        if (healthBarUI != null)
+		forestBossAudio = GetComponent<AudioSource>();
+		//player = gameManager.instance.player.GetComponent<playerControl>();
+		//UpdateEnemyUI();
+		if (healthBarUI != null)
         {
             healthBarUI.SetActive(false);
         }
@@ -208,8 +212,9 @@ public class ForestBoss : MonoBehaviour, IDamage
     {
         HP -= damage;
         UpdateEnemyUI();
+		forestBossAudio.PlayOneShot(forestBossPain);
 
-        agent.SetDestination(gameManager.instance.player.transform.position);
+		agent.SetDestination(gameManager.instance.player.transform.position);
 
         StartCoroutine(hitFlash());
 
