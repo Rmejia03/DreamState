@@ -522,8 +522,26 @@ public class playerControl : MonoBehaviour, IDamage
 
                     Destroy(hitEffectInstantiate,0.5f);
 
+
                     //GameObject damageText = Instantiate(damageTextPrefab, collider.transform.position, Quaternion.identity);
                     //damageText.GetComponent<DamageTextMelee>().SetDamage(damageDealt);
+
+                    //GameObject damageText = Instantiate(damageTextPrefab, collider.transform.position, Quaternion.identity);
+                    //Debug.Log("Instantiated damageText: " + damageText.name);
+                    //DamageTextMelee damageTextMelee = damageText.GetComponent<DamageTextMelee>();
+
+                    //if(damageTextMelee != null)
+                    //{
+                    //    damageTextMelee.SetDamage(damageDealt);
+                    //    Debug.Log("DamageTextMelee component found" + damageDealt);
+
+                    //}
+                    //else
+                    //{
+                    //    Debug.Log("DamageTextMelee component not found.");
+                    //}
+
+
                 }
             }
         }

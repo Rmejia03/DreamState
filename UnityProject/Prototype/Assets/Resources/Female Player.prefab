@@ -1173,7 +1173,7 @@ MonoBehaviour:
   fear: 0
   regenRate: 0.25
   maxDefendTime: 5
-  damageTextPrefab: {fileID: 4930984787145635799, guid: e1918740d3ab1c047a3438db1fad8a51, type: 3}
+  damageTextPrefab: {fileID: 0}
   fearVision: {fileID: 5170875549578296172}
   weaponRate: 0
   weaponDamage: 0
@@ -1182,7 +1182,6 @@ MonoBehaviour:
   gravity: 20
   jumpSpeed: 8
   jumpMax: 2
-  isMushroom: 0
   speed: 5
   speedOrig: 0
   sprintMod: 2
